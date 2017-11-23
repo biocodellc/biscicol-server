@@ -14,15 +14,15 @@ Currently, this service is running under the name http://www.dev.plantphenology.
 
 # Get list of indices:
 ```
-http://www.dev.plantphenology.org/api/_cat/indices?pretty
+curl 'http://www.dev.plantphenology.org/api/_cat/indices?pretty'
 ```
 
-# Simple Query genus equals quercus
+# Query for genus = Quercus
 ```
 curl 'http://www.dev.plantphenology.org/api/_search?pretty&q=genus:Quercus'
 ```
 
-# Query genus and year by sending JSON
+# Query by sending JSON request
 ```
 curl -XGET 'http://www.dev.plantphenology.org/api/_search?pretty' -H 'Content-Type: application/json' -d'
 {
@@ -38,8 +38,7 @@ curl -XGET 'http://www.dev.plantphenology.org/api/_search?pretty' -H 'Content-Ty
 '
 ```
 
-# Query genus and Senescing true leaves present (PPO_0002317) 
-# return a specified set of fields and from 0 to 1000
+# Specifying particular fields using _source
 ```
 curl -XGET 'http://www.dev.plantphenology.org/api/_search?pretty&scroll=1m' -H 'Content-Type: application/json' -d'
 {
@@ -58,16 +57,17 @@ curl -XGET 'http://www.dev.plantphenology.org/api/_search?pretty&scroll=1m' -H '
 '
 ```
 
-# Example of fetching a large number of records using es2csv 
+# Fetch a large number of records using es2csv
 
 es2csv (https://github.com/taraslayshchuk/es2csv) is a useful tool writtin in python for fetching
 records from ES.  es2csv implements ES scrolling (https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html#scroll-scan)
-for working with large results sets.
+for working with large results sets.  The following tells the script to use a scrolling size of 10,000 records, 
+write output to database.csv and read the query from file.json using raw format, and using all available indices:
 ```
-es2csv -u http://www.dev.plantphenology.org:80/api -i _all -r -q @'file2.json'  -o database.csv
+es2csv -u http://www.dev.plantphenology.org:80/api -i _all -r -q @'file.json'  -s 10000 -o database.csv
 ```
 
-In the above example, file.json can be something like the following, fetching all Quercus with senescing true leaves present:
+Here is a sample input file (file.json)
 
 ```
 {
@@ -75,12 +75,11 @@ In the above example, file.json can be something like the following, fetching al
   "query": {
     "bool": {
       "must": [
-        { "match": { "genus":  "Quercus" }},
-        { "match": { "plantStructurePresenceTypes":  "obo:PPO_0002317" }}
+        { "match": { "genus":  "Acer" }},
+        { "match": { "plantStructurePresenceTypes":  "obo:PPO_0002313" }}
       ]
     }
   }
 }
 ```
-
 
