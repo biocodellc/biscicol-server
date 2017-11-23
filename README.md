@@ -96,3 +96,17 @@ Or, another example for lilacs with floral structures present:
   }
 }
 ```
+Output looks like:
+
+```
+latitude,source,dayOfYear,longitude,year
+47.65,NPN,138,-110.67,1956
+45.92,NPN,140,-108.25,1956
+45.48,NPN,152,-108.97,1956
+45.92,NPN,154,-104.08,1956
+45.63,NPN,143,-106.65,1956
+48.4,NPN,155,-115.53,1956
+44.65,NPN,154,-112.58,1956
+44.65,NPN,160,-112.58,1956
+45.3,NPN,157,-107.37,1956
+```
