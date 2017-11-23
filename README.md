@@ -67,7 +67,7 @@ write output to database.csv and read the query from file.json using raw format,
 es2csv -u http://www.dev.plantphenology.org:80/api -i _all -r -q @'file.json'  -s 10000 -o database.csv
 ```
 
-Here is a sample input file (file.json)
+Here is a sample input file  for maples with  true leaves present:
 
 ```
 {
@@ -82,4 +82,17 @@ Here is a sample input file (file.json)
   }
 }
 ```
-
+Or, another example for lilacs with floral structures present:
+```
+{
+  "_source": ["latitude", "longitude", "dayOfYear", "year", "source"],
+  "query": {
+    "bool": {
+      "must": [
+        { "match": { "genus":  "Syringa" }},
+        { "match": { "plantStructurePresenceTypes":  "obo:PPO_0002324" }}
+      ]
+    }
+  }
+}
+```
