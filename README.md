@@ -110,3 +110,37 @@ latitude,source,dayOfYear,longitude,year
 44.65,NPN,160,-112.58,1956
 45.3,NPN,157,-107.37,1956
 ```
+
+# Group by with counts (using curl)
+```
+curl -XGET 'http://www.dev.plantphenology.org/api/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "size": 0,
+    "aggs": {
+       "group_by_genus": {
+           "terms": {
+               "field": "genus.keyword",
+               "size": 1000
+       }
+    }
+  }
+}
+'
+```
+
+# Group by scientific name with counts (using curl)
+```
+curl -XGET 'http://www.dev.plantphenology.org/api/_search?pretty' -H 'Content-Type: application/json' -d'
+{
+    "size": 0,
+    "aggs": {
+       "group_by_genus": {
+           "terms": {
+	       "field": "scientificName.keyword",
+	       "size": 10000
+       }
+    }
+  }
+}
+'
+```
