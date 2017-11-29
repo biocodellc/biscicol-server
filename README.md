@@ -1,23 +1,23 @@
-# Installing
-The ppo-data-service relies on a node.js front-end which in turn uses pm2 to start the es_proxy.js script.
-The es_proxy.js runs on port 3100, and reverse proxied by apache to port 80.  The es_proxy.js script limits the 
-types of requests sent to elasticsearch so users may only run queries.  
+# About ppo-data-server
+The PPO data server is a machine level interface to the elasticsearch database back-end storing all indexed results
+from the ppo-data-pipeline (https://github.com/biocodellc/ppo-data-pipeline).  There is a front-end in development
+which calls the ppo-data-server, called ppo-data-interface (https://github.com/biocodellc/ppo-data-interface).  
 
-Sample usage for pm2:
-```
-pm2 startup centos6 -u user --hp /home/user
-pm2 start es_proxy.js
-pm2 list
-pm2 stop es_proxy.js
-```
-Currently, this service is running under the name http://www.dev.plantphenology.org/
+In technical speak, the ppo-data-service is a node.js reverse proxy to the elasticsearch database service, which is run
+on a different server, secured by an opening through a firewall via a dedicated port.
+
+Currently, the ppo-data-server running under the name http://www.dev.plantphenology.org/api/
+To interact with this service, elasticsearch style GET and POST requests can be sent to this endpoint. 
+Following are some examples of interacting with the endpoint using curl.  
 
 # Get list of indices:
+Can be executed from the browser simply as: http://www.dev.plantphenology.org/api/_cat/indices?pretty
 ```
 curl 'http://www.dev.plantphenology.org/api/_cat/indices?pretty'
 ```
 
 # Query for genus = Quercus
+Can be executed from the browser simply as: http://www.dev.plantphenology.org/api/_search?pretty&q=genus:Quercus
 ```
 curl 'http://www.dev.plantphenology.org/api/_search?pretty&q=genus:Quercus'
 ```
