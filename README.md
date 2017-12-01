@@ -69,15 +69,13 @@ curl -XGET 'http://www.dev.plantphenology.org/api/_search?pretty&scroll=1m' -H '
 
 # Fetch a large number of records using es2csv
 
-[es2csv](https://github.com/taraslayshchuk/es2csv) is a useful tool writtin in python for fetching
-records from ES.  es2csv implements [ES scrolling](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html#scroll-scan)
-for working with large results sets.  The following tells the script to use a scrolling size of 10,000 records, 
-write output to database.csv and read the query from file.json using raw format, and using all available indices:
+For cases where you wish to fetch a larger number of records or you want to retrieve responses as CSV, download and run the [es2csv tool](https://github.com/taraslayshchuk/es2csv).  Es2csv is a command line tool and runs in python so you will need to have some knowledge of running command line commands to use it.  The following example tells the script to use a scrolling size of 10,000 records, 
+write output to database.csv and read the query from file.json using raw format, and use all available indices:
 ```
 es2csv -u http://www.dev.plantphenology.org:80/api -i _all -r -q @'file.json'  -s 10000 -o database.csv
 ```
 
-Here is a sample input file  for maples with  true leaves present:
+Here is a sample input file, which is referenced in the above command as 'file.json' to query for maples with  true leaves present:
 
 ```
 {
@@ -92,21 +90,8 @@ Here is a sample input file  for maples with  true leaves present:
   }
 }
 ```
-Or, another example for lilacs with floral structures present:
-```
-{
-  "_source": ["latitude", "longitude", "dayOfYear", "year", "source"],
-  "query": {
-    "bool": {
-      "must": [
-        { "match": { "genus":  "Syringa" }},
-        { "match": { "plantStructurePresenceTypes":  "obo:PPO_0002324" }}
-      ]
-    }
-  }
-}
-```
-Output looks like:
+
+If we looked at the database.csv file, the contents would look something like the following:
 
 ```
 latitude,source,dayOfYear,longitude,year
