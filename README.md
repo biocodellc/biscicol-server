@@ -1,7 +1,9 @@
 # About ppo-data-server
+
+[I'm an inline-style link](https://www.google.com)
 The PPO data server is a machine level interface to the elasticsearch database back-end storing all indexed results
-from the [https://github.com/biocodellc/ppo-data-pipeline] (ppo-data-pipeline).  There is a front-end in development
-which calls the ppo-data-server, called the [https://github.com/biocodellc/ppo-data-interface] (ppo-data-interface)
+from the [ppo-data-pipeline](https://github.com/biocodellc/ppo-data-pipeline).  There is a front-end in development
+which calls the ppo-data-server, called the [ppo-data-interface](https://github.com/biocodellc/ppo-data-interface).
 
 In technical speak, the ppo-data-service is a node.js reverse proxy to the elasticsearch database service, which is run
 on a different server, secured by an opening through a firewall via a dedicated port.
@@ -9,11 +11,11 @@ on a different server, secured by an opening through a firewall via a dedicated 
 Currently, the ppo-data-server is running under the name http://www.dev.plantphenology.org/api/ .
 To interact with this service, elasticsearch style GET and POST requests can be sent to this endpoint. 
 Note that most requests and all responses to this service require packaging in JSON formatted text.
-Following are some examples of interacting with the endpoint using [https://curl.haxx.se/] (curl).  
+Following are some examples of interacting with the endpoint using [curl](https://curl.haxx.se/).  
 
 Finally, note that the requests below mainly offer methods of retrieving results of less than 10,000 records.  
 See the section on es2csv to retrieve more than 10,000 records or implement elasticsearch style 
-[https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html] (scrolling)
+[scrolling](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html)
 
 # Get list of indices:
 This query shows the available indices at this endpoint
@@ -68,8 +70,8 @@ curl -XGET 'http://www.dev.plantphenology.org/api/_search?pretty&scroll=1m' -H '
 
 # Fetch a large number of records using es2csv
 
-es2csv (https://github.com/taraslayshchuk/es2csv) is a useful tool writtin in python for fetching
-records from ES.  es2csv implements ES scrolling (https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html#scroll-scan)
+[es2csv](https://github.com/taraslayshchuk/es2csv) is a useful tool writtin in python for fetching
+records from ES.  es2csv implements [ES scrolling](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html#scroll-scan)
 for working with large results sets.  The following tells the script to use a scrolling size of 10,000 records, 
 write output to database.csv and read the query from file.json using raw format, and using all available indices:
 ```
