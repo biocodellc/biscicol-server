@@ -1,6 +1,5 @@
 # About ppo-data-server
 
-[I'm an inline-style link](https://www.google.com)
 The PPO data server is a machine level interface to the elasticsearch database back-end storing all indexed results
 from the [ppo-data-pipeline](https://github.com/biocodellc/ppo-data-pipeline).  There is a front-end in development
 which calls the ppo-data-server, called the [ppo-data-interface](https://github.com/biocodellc/ppo-data-interface).
