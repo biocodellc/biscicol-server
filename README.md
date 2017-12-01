@@ -9,12 +9,9 @@ on a different server, secured by an opening through a firewall via a dedicated 
 
 Currently, the ppo-data-server is running under the name http://www.dev.plantphenology.org/api/ .
 To interact with this service, elasticsearch style GET and POST requests can be sent to this endpoint. 
-Note that most requests and all responses to this service require packaging in JSON formatted text.
-Following are some examples of interacting with the endpoint using [curl](https://curl.haxx.se/).  
+Note that most requests and all responses to this service require packaging in JSON formatted text.  The ElasticSearch website offers some help on [Query Syntax])(https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html).
 
-Finally, note that the requests below mainly offer methods of retrieving results of less than 10,000 records.  
-See the section on es2csv to retrieve more than 10,000 records or implement elasticsearch style 
-[scrolling](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html)
+Following are some examples of interacting with the endpoint using [curl](https://curl.haxx.se/).   Note that the requests below mainly offer methods of retrieving results of less than 10,000 records.   See the [section on es2csv](https://github.com/biocodellc/ppo-data-server#fetch-a-large-number-of-records-using-es2csv) to retrieve more than 10,000 records or to return results as CSV.
 
 # Get list of indices:
 This query shows the available indices at this endpoint
