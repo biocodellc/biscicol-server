@@ -1,12 +1,18 @@
 var express = require('express');
 var request = require('request');
+var cors = require('cors');
+
 var app = express();
 
 var port = Number(process.env.PORT || 3001);
 var apiServerHost = (process.env.ELASTIC_URL || 'http://128.196.254.92:80')
 
 // Listen for requests on all endpoints
-app.use('/', function(req, res, body) {
+//app.use('/', function(req, res, body) {
+app.use(cors({origin: '*'}), function(req, res, body) {
+	// allow connections from JS applications
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	//
 	// short-circuit favicon requests for easier debugging
 	if (req.url != '/favicon.ico') {
 		console.log('req.method: ' + req.method);
@@ -21,9 +27,9 @@ app.use('/', function(req, res, body) {
 			return;
 		}
 
+         
 		// pass the request to elasticsearch
-	  var url = apiServerHost + req.url;
-	    console.log(url);
+                var url = apiServerHost + req.url;
 		req.pipe(request({
 		    uri  : url,
 		    auth : {
