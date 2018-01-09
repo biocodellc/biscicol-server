@@ -16,6 +16,7 @@ for q= and source requests are handled looking at _source= variable
 
 
 // load required libraries
+var prependFile = require('prepend-file');
 var fs = require('fs');
 // for creating short unique names to use in temp directory
 var shortid = require('shortid')
@@ -40,49 +41,51 @@ var port = Number(process.env.PORT || 3003);
 // @see https://github.com/evilpacket/helmet
 // you should activate even more headers provided by helmet
 app.use(csp({
-  directives: {
-    defaultSrc: ["'self'",'www.biscicol.org'],
-    scriptSrc: ["'self'"],
-    styleSrc: ["'self'"],
-    imgSrc: ["'self'"],
-    connectSrc: ["'self'"],
-    fontSrc: ["'self'"],
-    objectSrc: ["'none'"],
-    mediaSrc: ["'self'"],
-    frameSrc: ["'none'"],
-  }
+    directives: {
+        defaultSrc: ["'self'", 'www.biscicol.org'],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'"],
+        imgSrc: ["'self'"],
+        connectSrc: ["'self'"],
+        fontSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        mediaSrc: ["'self'"],
+        frameSrc: ["'none'"],
+    }
 }));
 
 /* The main entry point for application, recognizing requests from client */
-app.use(cors({origin: '*'}), function(req, res,body) {
+app.use(cors({
+    origin: '*'
+}), function(req, res, body) {
     // allow connections from JS applications
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     console.log(req.url)
-/*
-    // The following will be input commands, sent from client
-    var source = ['genus', 'dayOfYear', 'year', 'species', 'latitude']
-    var body = {
-        query: {
-            match: {
-                "genus": "Zinnia"
+    /*
+        // The following will be input commands, sent from client
+        var source = ['genus', 'dayOfYear', 'year', 'species', 'latitude']
+        var body = {
+            query: {
+                match: {
+                    "genus": "Zinnia"
+                }
             }
         }
-    }
-*/
-var source = req.query.source
-var query = req.query.q
+    */
+    var source = req.query.source
+    var query = req.query.q
 
     // run the search function, which queries elasticsearch
-    runSearch(source, query,  function(outputFile) {
+    runSearch(source, query, trait, function(outputFile) {
         // run download option send as attachment
         res.download(outputFile, 'ppo_download.csv.gz', function(err) {
             if (err) {
-                console.log('err:'+err)
+                console.log('err:' + err)
             } else {
                 console.log('sent:', outputFile);
                 // clean up
-                fs.unlinkSync(outputFile);
+                //                fs.unlinkSync(outputFile);
             }
         });
     });
@@ -90,20 +93,20 @@ var query = req.query.q
 
 
 /* runSearch command calls elasticsearch */
-function runSearch(source, query, callback) {
+function runSearch(source, query, trait, callback) {
     var writer = csvWriter()
     writer.pipe(fs.createWriteStream(outputFile))
     // Counter
     var countRecords = 0
     //  Execute client search with scrolling
     client.search({
-        index: '_all',   
+        index: '_all',
         size: 10000,
-//        size: 10000,    // set to max search buffer size, fastest execution for large sets
+        //        size: 10000,    // set to max search buffer size, fastest execution for large sets
         scroll: '60s', // keep the search results "scrollable" for 30 seconds
-//        _source: source, // filter the source to only include the title field
-//        body: body
-          q: query
+        //        _source: source, // filter the source to only include the title field
+        //        body: body
+        q: query
     }, function getMoreUntilDone(error, response) {
         if (error) {
             console.log("search error: " + error)
@@ -119,13 +122,15 @@ function runSearch(source, query, callback) {
                 if (typeof hit._source.genus !== 'undefined')
                     writerRequestObject.genus = hit._source.genus
                 if (typeof hit._source.specificEpithet !== 'undefined')
-                    writerRequestObject.specificEpithet = hit._source.specificEpithet 
+                    writerRequestObject.specificEpithet = hit._source.specificEpithet
                 if (typeof hit._source.latitude !== 'undefined')
                     writerRequestObject.latitude = hit._source.latitude
                 if (typeof hit._source.longitude !== 'undefined')
                     writerRequestObject.longitude = hit._source.longitude
                 if (typeof hit._source.source !== 'undefined')
                     writerRequestObject.source = hit._source.source
+                if (typeof hit._source.eventId !== 'undefined')
+                    writerRequestObject.eventId = hit._source.eventId
 
                 // Use csv-write-stream tool to convert JSON to CSV
                 writer.write(writerRequestObject)
@@ -137,31 +142,50 @@ function runSearch(source, query, callback) {
                 // Ask elasticsearch for the next set of hits from this search
                 client.scroll({
                     scrollId: response._scroll_id,
-                    scroll: '30s'
+                    scroll: '60s'
                 }, getMoreUntilDone);
             } else {
                 // Close Stream
                 writer.end()
-                // Compress File
-                var gzip = zlib.createGzip();
-                var r = fs.createReadStream(outputFile);
-                var w = fs.createWriteStream(outputFile + '.gz');
-                r.pipe(gzip).pipe(w);
-                fs.unlinkSync(outputFile);
-                // This is a bit of hack, however, i spent awhile debugging
-                // why file was not finished closing before return.  Apparently,
-                // there is a slight delay in the OS before the file is done 
-                // closing which takes longer than Node returning the file 
-                // itself.  So, we wait 1 second before the response.
-                setTimeout(function() {
-                    return callback(outputFile + '.gz')
-                }, 1000);
+
+                // wait for writer to finish before calling everything here
+                writer.on('finish', function() {
+
+                    // turn obo: into a hyperlink so users can click through to 
+                    // figure out what we are talking about by "obo:"
+                    //query = query.replace(/obo:/g,'http://purl.obolibrary.org/obo/')
+                    query = query + " (trait=" + trait + ")";
+
+                    // Pre-pend the query to the CSV file that was just written
+                    prependFile(outputFile, 'query=' + query + '\n', function(err) {
+                        if (err) throw err;
+                        console.log('Header text prepended!');
+
+                        // Compress File
+                        var gzip = zlib.createGzip();
+                        var r = fs.createReadStream(outputFile);
+                        var w = fs.createWriteStream(outputFile + '.gz');
+
+                        r.pipe(gzip).pipe(w);
+                        fs.unlinkSync(outputFile);
+                        // This is a bit of hack, however, i spent awhile debugging
+                        // why file was not finished closing before return.  Apparently,
+                        // there is a slight delay in the OS before the file is done 
+                        // closing which takes longer than Node returning the file 
+                        // itself.  So, we wait 4 second before the response.
+                        setTimeout(function() {
+                            return callback(outputFile + '.gz')
+                        }, 4000);
+
+                    });
+
+                });
             }
         }
     });
 }
 
 // Server Listen
-app.listen(port, function () {
+app.listen(port, function() {
     console.log('App server is running on http://localhost:' + port);
 });
