@@ -77,7 +77,7 @@ app.use(cors({
     var query = req.query.q
 
     // run the search function, which queries elasticsearch
-    runSearch(source, query, trait, function(outputFile) {
+    runSearch(source, query, function(outputFile) {
         // run download option send as attachment
         res.download(outputFile, 'ppo_download.csv.gz', function(err) {
             if (err) {
@@ -93,7 +93,7 @@ app.use(cors({
 
 
 /* runSearch command calls elasticsearch */
-function runSearch(source, query, trait, callback) {
+function runSearch(source, query, callback) {
     var writer = csvWriter()
     writer.pipe(fs.createWriteStream(outputFile))
     // Counter
@@ -153,8 +153,7 @@ function runSearch(source, query, trait, callback) {
 
                     // turn obo: into a hyperlink so users can click through to 
                     // figure out what we are talking about by "obo:"
-                    //query = query.replace(/obo:/g,'http://purl.obolibrary.org/obo/')
-                    query = query + " (trait=" + trait + ")";
+                    query = query.replace(/obo:/g,'http://purl.obolibrary.org/obo/')
 
                     // Pre-pend the query to the CSV file that was just written
                     prependFile(outputFile, 'query=' + query + '\n', function(err) {
