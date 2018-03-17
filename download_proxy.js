@@ -78,8 +78,12 @@ app.use(cors({
 
     // run the search function, which queries elasticsearch
     runSearch(source, query, function(outputFile) {
-        // run download option send as attachment
-        res.download(outputFile, 'ppo_download.csv.gz', function(err) {
+        if (outputFile == null) {
+            console.log("no results, return 204")
+            res.json(204, { error: 'no results found' })
+        } else {
+          // run download option send as attachment
+          res.download(outputFile, 'ppo_download.csv.gz', function(err) {
             if (err) {
                 console.log('err:' + err)
             } else {
@@ -87,7 +91,8 @@ app.use(cors({
                 // clean up
                 //                fs.unlinkSync(outputFile);
             }
-        });
+          });
+        }
     });
 });
 
@@ -141,6 +146,9 @@ function runSearch(source, query, callback) {
                 countRecords++;
             });
 
+            if (countRecords < 1) {
+                return callback(null);//, createResponse(204, "no results"))
+            }
             // While the count of records is less than the total hits, continue
             if (countRecords < response.hits.total) {
                 // Ask elasticsearch for the next set of hits from this search
@@ -187,7 +195,15 @@ function runSearch(source, query, callback) {
         }
     });
 }
-
+function createResponse(status, body) {
+  return {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+    statusCode: status,
+    body: JSON.stringify(body)
+  }
+}
 // Server Listen
 app.listen(port, function() {
     console.log('App server is running on http://localhost:' + port);
