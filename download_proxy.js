@@ -132,6 +132,8 @@ function runSearch(source, query, callback) {
                     writerRequestObject.latitude = hit._source.latitude
                 if (typeof hit._source.longitude !== 'undefined')
                     writerRequestObject.longitude = hit._source.longitude
+                if (typeof hit._source.plantStructurePresenceTypes !== 'undefined') 
+                    writerRequestObject.plantStructurePresenceTypes = hit._source.plantStructurePresenceTypes
                 if (typeof hit._source.source !== 'undefined') {
                     var source = hit._source.source
                     // quick hack to change NPN to USA-NPN until pipeline code is updated
