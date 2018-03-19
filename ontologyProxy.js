@@ -45,11 +45,11 @@ app.use(cors({origin: '*'}), function(req, res, body) {
                     if (req.url.includes("present")) {
                         $rdf.parse(rdfData,store,baseUrl,contentType);
                         presentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020',"present")
-                        res.write(JSON.stringify(deDuplicate(presentClasses,'stageID')));
+                        res.write(JSON.stringify(deDuplicate(presentClasses,'termID')));
                     } else if (req.url.includes("absent")) {
                         $rdf.parse(rdfData,store,baseUrl,contentType);
                         absentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020','absent')
-                        res.write(JSON.stringify(deDuplicate(absentClasses,'stageID')));
+                        res.write(JSON.stringify(deDuplicate(absentClasses,'termID')));
                     } else { 
 			res.write("[{'message':'call either /present/ or /absent/ services'}]");
                     }
@@ -74,8 +74,8 @@ function classWalker(results, startingClass,filter) {
     allTriples = store.statementsMatching(undefined, rdfsSubClassOf, rootClass)
     
     allTriples.forEach(function(triple) {
-        var stageID = triple.subject.uri
-        if (stageID) {
+        var termID = triple.subject.uri
+        if (termID) {
             // populate a labelTriple to hold the information for the rdfsLabel
             var labelTriple = store.any($rdf.sym(triple.subject.uri), rdfsLabel, undefined )
             // populate a definitionTriple to hold the information for the definition
@@ -83,7 +83,7 @@ function classWalker(results, startingClass,filter) {
             // Create a plantStage object to hold the JSON attributes for each stage
             var plantStage = {}
             // the default URI will be the abbreviated version, this is because this is what is stored in ES datastore
-            plantStage.stageID =  triple.subject.uri.replace('http://purl.obolibrary.org/obo/','obo:')
+            plantStage.termID =  triple.subject.uri.replace('http://purl.obolibrary.org/obo/','obo:')
             plantStage.label = labelTriple.value
             plantStage.definition = definitionTriple.value
             plantStage.uri =  triple.subject.uri
