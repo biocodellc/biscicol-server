@@ -16,6 +16,6 @@ Following are some examples of interacting with the endpoint using [curl](https:
 Following are the services:
 
   *  [es_proxy](docs/es_proxy.md)
-  *  [download](docs/download.md)
-  *  [ontologyProxy](docs/ontologyProxy.md)
+  *  [download_proxy](docs/download_proxy.md)
+  *  [ontology_proxy](docs/ontology_proxy.md)
 

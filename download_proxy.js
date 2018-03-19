@@ -75,9 +75,14 @@ app.use(cors({
     */
     var source = req.query.source
     var query = req.query.q
+    var limit = req.query.limit
+    // setting limit to 0 means there is no limit
+    if (limit == null || limit == 'undefined') {
+        limit = 0;
+    } 
 
     // run the search function, which queries elasticsearch
-    runSearch(source, query, function(outputFile) {
+    runSearch(source, query, limit, function(outputFile) {
         if (outputFile == null) {
             console.log("no results, return 204")
             res.json(204, { error: 'no results found' })
@@ -98,16 +103,20 @@ app.use(cors({
 
 
 /* runSearch command calls elasticsearch */
-function runSearch(source, query, callback) {
+function runSearch(source, query, limit, callback) {
     var writer = csvWriter()
     writer.pipe(fs.createWriteStream(outputFile))
     // Counter
     var countRecords = 0
+    var fetchSize = 10000      // size should be set to a large value.. by default is 10,0000
+    if (limit > 0 && fetchSize > limit) {
+        fetchSize = limit
+    }
+
     //  Execute client search with scrolling
     client.search({
         index: '_all',
-        size: 10000,
-        //        size: 10000,    // set to max search buffer size, fastest execution for large sets
+        size: fetchSize,   
         scroll: '60s', // keep the search results "scrollable" for 30 seconds
         //        _source: source, // filter the source to only include the title field
         //        body: body
@@ -153,7 +162,8 @@ function runSearch(source, query, callback) {
                 return callback(null);//, createResponse(204, "no results"))
             }
             // While the count of records is less than the total hits, continue
-            if (countRecords < response.hits.total) {
+            // OR the limit is less than the response hits 
+            if ((countRecords < response.hits.total && limit == 0) || (countRecords < limit && limit < response.hits.total)) {
                 // Ask elasticsearch for the next set of hits from this search
                 client.scroll({
                     scrollId: response._scroll_id,
@@ -169,6 +179,9 @@ function runSearch(source, query, callback) {
                     // turn obo: into a hyperlink so users can click through to 
                     // figure out what we are talking about by "obo:"
                     query = query.replace(/obo:/g,'http://purl.obolibrary.org/obo/')
+                    if (limit != 0) {
+                        query = query + "&limit="+limit
+                    } 
 
                     // Pre-pend the query to the CSV file that was just written
                     prependFile(outputFile, 'query=' + query + '\n', function(err) {

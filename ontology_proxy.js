@@ -44,12 +44,18 @@ app.use(cors({origin: '*'}), function(req, res, body) {
                 try{
                     if (req.url.includes("present")) {
                         $rdf.parse(rdfData,store,baseUrl,contentType);
-                        presentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020',"present")
+                        presentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020','present')
                         res.write(JSON.stringify(deDuplicate(presentClasses,'termID')));
                     } else if (req.url.includes("absent")) {
                         $rdf.parse(rdfData,store,baseUrl,contentType);
                         absentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020','absent')
                         res.write(JSON.stringify(deDuplicate(absentClasses,'termID')));
+                    } else if (req.url.includes("all")) {
+                        $rdf.parse(rdfData,store,baseUrl,contentType);
+                        presentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020','present')
+                        absentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020','absent')
+                        allClasses = presentClasses.concat(absentClasses)
+                        res.write(JSON.stringify(deDuplicate(allClasses,'termID')));
                     } else { 
 			res.write("[{'message':'call either /present/ or /absent/ services'}]");
                     }
@@ -89,7 +95,8 @@ function classWalker(results, startingClass,filter) {
             plantStage.uri =  triple.subject.uri
             // If the filter statement is present and includes the filter string in the given literal value
             // we push the object onto our stack
-            if (!filter || (filter && labelTriple.value.includes(filter))) {
+            //if (!filter || (filter && labelTriple.value.includes(filter))) {
+            if (labelTriple.value.includes(filter)) {
                 results.push(plantStage)
             }
             classWalker(results,triple.subject,filter)
