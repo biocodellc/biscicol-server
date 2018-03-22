@@ -4,7 +4,7 @@ Following are some examples of interacting with the endpoint using [curl](https:
 
 # Get list of indices:
 This query shows the available indices at this endpoint
-Can be executed from the browser simply as: http://api.plantphenology.org/api/_cat/indices?pretty
+Can be executed from the browser simply as: https://www.plantphenology.org/api/v1/query/_cat/indices?pretty
 ```
 curl 'http://api.plantphenology.org/v1/query/_cat/indices?pretty'
 ```
@@ -13,14 +13,14 @@ curl 'http://api.plantphenology.org/v1/query/_cat/indices?pretty'
 A very simple query to return results for a particular genus, limiting to just one record.
 The attribute size can be adjusted up to 10,000 records.
 
-Can be executed from the browser simply as: http://api.plantphenology.org/api/_search?pretty&size=1&q=genus:Quercus
+Can be executed from the browser simply as: https://www.plantphenology.org/api/v1/query/_search?pretty&size=1&q=genus:Quercus
 ```
 curl 'http://api.plantphenology.org/v1/query/_search?pretty&size=1&q=genus:Quercus'
 ```
 
 # Query by sending JSON request
 ```
-curl -XGET 'http://api.plantphenology.org/v1/query/_search?pretty' -H 'Content-Type: application/json' -d'
+curl -XGET 'https://www.plantphenology.org/api/v1/query/_search?pretty' -H 'Content-Type: application/json' -d'
 {
   "query": {
     "bool": {
@@ -36,7 +36,7 @@ curl -XGET 'http://api.plantphenology.org/v1/query/_search?pretty' -H 'Content-T
 
 # Specifying particular fields using _source
 ```
-curl -XGET 'http://api.plantphenology.org/v1/query/_search?pretty&scroll=1m' -H 'Content-Type: application/json' -d'
+curl -XGET 'https://www.plantphenology.org/api/v1/query/_search?pretty&scroll=1m' -H 'Content-Type: application/json' -d'
 {
   "from" : 0, "size" : 10,
   "_source": ["latitude", "longitude", "dayOfYear", "year", "source"],
@@ -58,7 +58,7 @@ curl -XGET 'http://api.plantphenology.org/v1/query/_search?pretty&scroll=1m' -H 
 For cases where you wish to fetch a larger number of records or you want to retrieve responses as CSV, download and run the [es2csv tool](https://github.com/taraslayshchuk/es2csv).  Es2csv is a command line tool and runs in python so you will need to have some knowledge of running command line commands to use it.  The following example tells the script to use a scrolling size of 10,000 records, 
 write output to database.csv and read the query from file.json using raw format, and use all available indices:
 ```
-es2csv -u http://api.plantphenology.org:80/api -i _all -r -q @'file.json'  -s 10000 -o database.csv
+es2csv -u https://www.plantphenology.org/api/v1/query/ -i _all -r -q @'file.json'  -s 10000 -o database.csv
 ```
 
 Here is a sample input file, which is referenced in the above command as 'file.json' to query for maples with  true leaves present:
@@ -94,7 +94,7 @@ latitude,source,dayOfYear,longitude,year
 
 # Group by with counts (using curl)
 ```
-curl -XGET 'http://api.plantphenology.org/v1/query/_search?pretty' -H 'Content-Type: application/json' -d'
+curl -XGET 'https://www.plantphenology.org/api/v1/query/_search?pretty' -H 'Content-Type: application/json' -d'
 {
     "size": 0,
     "aggs": {
@@ -111,7 +111,7 @@ curl -XGET 'http://api.plantphenology.org/v1/query/_search?pretty' -H 'Content-T
 
 # Group by scientific name with counts (using curl)
 ```
-curl -XGET 'http://api.plantphenology.org/v1/query/_search?pretty' -H 'Content-Type: application/json' -d'
+curl -XGET 'https://www.plantphenology.org/api/v1/query/_search?pretty' -H 'Content-Type: application/json' -d'
 {
     "size": 0,
     "aggs": {
