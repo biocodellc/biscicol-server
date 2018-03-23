@@ -196,7 +196,7 @@ function runSearch(source, query, limit, callback) {
                    // closing which takes longer than Node returning the file 
                    // itself.  So, we wait 4 second before the response.
                    setTimeout(function() {
-                       tar.create({gzip:true, file:compressedArchiveLocation, cwd:outputDir },[dataFile,dataDownloadMetadataFile, citationAndDataUsePoliciesFile]).then(function(result) {
+                       tar.create({gzip:true, file:compressedArchiveLocation, cwd:outputDir, prefix:'ppo_download' },[dataFile,dataDownloadMetadataFile, citationAndDataUsePoliciesFile]).then(function(result) {
                             return callback(compressedArchiveLocation)
                        }).catch(function(err) {
                            console.log('unable to write compressed archive')
