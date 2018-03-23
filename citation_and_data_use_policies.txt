@@ -1,0 +1,21 @@
+The Global PPO data store contains data from member networks.
+Please refer to the following data usage and citation policies for each data source when using this data in your research.
+
+# PEP725 
+# The Pan European Phenology Project
+Data Policy: http://www.pep725.eu/downloads/PEP725_DataUsePolicy_201304.pdf
+License: (see data policy statement)
+Citation: PEP725 Pan European Phenology Data. Data set accessed YYYY-MM-DD at http://www.pep725.eu
+
+# USA-NPN
+# USA National Phenology Network
+Data Policy: https://www.usanpn.org/terms
+License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/legalcode
+Citation: https://www.usanpn.org/terms
+
+# NEON
+# National Ecological Observatory Network
+Data Policy: http://data.neonscience.org/data-policy
+License: See http://data.neonscience.org/data-policy
+Citation: See http://data.neonscience.org/data-policy
+
