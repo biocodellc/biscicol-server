@@ -1,5 +1,6 @@
 The Global PPO data store contains data from member networks.
 Please refer to the following data usage and citation policies for each data source when using this data in your research.
+Also note that in the examples of below, the dates mentioned in the citations are the most recent date of data harvest by the PPO data portal from each source and should be referenced in the citation and NOT the date downloaded by the user of the PPO data portal.
 
 # PEP725 
 # The Pan European Phenology Project
