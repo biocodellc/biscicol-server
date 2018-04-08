@@ -9,13 +9,11 @@ Citation: PEP725 Pan European Phenology Data. Data set accessed YYYY-MM-DD at ht
 
 # USA-NPN
 # USA National Phenology Network
-Data Policy: https://www.usanpn.org/terms
+Data Policy:  https://www.usanpn.org/terms#DataUse
 License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/legalcode
-Citation: https://www.usanpn.org/terms
+Citation: https://www.usanpn.org/terms#DataAttribution
+Metadata: https://data.usanpn.org:3002/pop/fgdc 
 
 # NEON
 # National Ecological Observatory Network
-Data Policy: http://data.neonscience.org/data-policy
-License: See http://data.neonscience.org/data-policy
-Citation: See http://data.neonscience.org/data-policy
-
+Data, License, and Citation Information: http://data.neonscience.org/data-policy
