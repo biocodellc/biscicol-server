@@ -6,7 +6,7 @@ Also note that in the examples of below, the dates mentioned in the citations ar
 # The Pan European Phenology Project
 Data Policy: http://www.pep725.eu/downloads/PEP725_DataUsePolicy_201304.pdf
 License: (see data policy statement)
-Citation: PEP725 Pan European Phenology Data. Data set accessed 2018-04-04 at http://www.pep725.eu
+Citation: PEP725 Pan European Phenology Data. Data set accessed 2017-04-04 at http://www.pep725.eu
 
 # USA-NPN
 # USA National Phenology Network
