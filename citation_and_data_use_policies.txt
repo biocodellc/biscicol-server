@@ -4,12 +4,14 @@ Also note that in the examples of below, the dates mentioned in the citations ar
 
 # PEP725 
 # The Pan European Phenology Project
+Date of Last Refresh: 2017-04-04
 Data Policy: http://www.pep725.eu/downloads/PEP725_DataUsePolicy_201304.pdf
 License: (see data policy statement)
 Citation: PEP725 Pan European Phenology Data. Data set accessed 2017-04-04 at http://www.pep725.eu
 
 # USA-NPN
 # USA National Phenology Network
+Date of Last Refresh: 2018-04-08
 Data Policy:  https://www.usanpn.org/terms#DataUse
 License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/legalcode
 Metadata: https://data.usanpn.org:3002/pop/fgdc 
@@ -17,6 +19,7 @@ Citation: https://www.usanpn.org/terms#DataAttribution
 
 # NEON
 # National Ecological Observatory Network
+Date of Last Refresh: 2018-04-08
 Metadata: http://data.neonscience.org/data-policy
 Citation: National Ecological Observatory Network. 2016. Data Product NEON.DP1.10055.  Provisional data downloaded from http://data.neonscience.org April 8, 2018. Battelle, Boulder, CO, USA
 
