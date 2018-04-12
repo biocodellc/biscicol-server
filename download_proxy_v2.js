@@ -115,6 +115,7 @@ app.use(cors({
 
 /* runSearch command calls elasticsearch */
 function runSearch(source, query, limit, callback) {
+console.log(source)
     var writer = csvWriter()
     writer.pipe(fs.createWriteStream(outputDataFile))
     // Counter
@@ -154,7 +155,7 @@ function runSearch(source, query, limit, callback) {
                     writerRequestObject.longitude = hit._source.longitude
                 // Turning this off.... this returns ALOT of data, need a better way to handle all of the inferred types
                 //if (typeof hit._source.plantStructurePresenceTypes !== 'undefined') 
-                //    writerRequestObject.plantStructurePresenceTypes = hit._source.plantStructurePresenceTypes
+                 //   writerRequestObject.plantStructurePresenceTypes = hit._source.plantStructurePresenceTypes
                 if (typeof hit._source.source !== 'undefined') {
                     var source = hit._source.source
                     // quick hack to change NPN to USA-NPN until pipeline code is updated
@@ -232,9 +233,10 @@ function createDownloadMetadataFile(query,limit,totalPossible,totalReturned,sour
     // figure out what we are talking about by "obo:"
     query = query.replace(/obo:/g,'http://purl.obolibrary.org/obo/')
     dataDownloadMetadataText = "data file = "+dataFile + "\n";
-    dataDownloadMetadataText += "data query ran = " + new Date() + "\n"
+    dataDownloadMetadataText += "date query ran = " + new Date() + "\n"
     dataDownloadMetadataText += "query = " + query + "\n"
-    dataDownloadMetadataText += "fields returned = " + source + "\n"
+    //dataDownloadMetadataText += "fields returned = " + source + "\n"
+    dataDownloadMetadataText += "fields returned = dayOfYear,year,genus,specificEpithet,latitude,longitude,source,eventId\n"
     if (limit != 0)     {
         dataDownloadMetadataText += "user specified limit = "+limit + "\n"
     } 

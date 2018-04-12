@@ -1,6 +1,10 @@
 # Administration tasks 
 A file containing various admin task protocols
 
+# Update pm2 startup list 
+
+Visit instructions at http://pm2.keymetrics.io/docs/usage/startup/
+
 # Logging queries
 Queries can be logged using the "slowlog".  You turn the slowlog on for each index
 and appears to be required to be done using PUT statements for each index and setting

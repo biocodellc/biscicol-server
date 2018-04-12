@@ -4,5 +4,3 @@ file for important information about data usage policies, licensing, and
 citation protocols for each dataset.  This file contains summary information 
 about the query that was run.  
 
-
-
