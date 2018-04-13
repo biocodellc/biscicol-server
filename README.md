@@ -1,17 +1,12 @@
 # About ppo-data-server
 
-The PPO data server is a machine level interface to the elasticsearch database back-end storing all indexed results
-from the [ppo-data-pipeline](https://github.com/biocodellc/ppo-data-pipeline).  There is a front-end in development
-which calls the ppo-data-server, called the [ppo-data-interface](https://github.com/biocodellc/ppo-data-interface).
+The PPO data server is a machine level interface to the database back-end storing all indexed results
+from the [ppo-data-pipeline](https://github.com/biocodellc/ppo-data-pipeline).  Front end interfaces which call the ppo-data-server are the [global PPO data portal](https://github.com/biocodellc/ppo-data-interface) and the [rppo R package](https://github.com/biocodellc/rppo).
 
-In technical speak, the ppo-data-service is a node.js reverse proxy to the elasticsearch database service, which is run
-on a different server, secured by an opening through a firewall via a dedicated port.
+Query functions that return instance data run through a node.js reverse proxy to the elasticsearch database service, which is run
+on a different server, secured by an opening through a firewall via a dedicated port.  Query functions that return trait data elements from the Plant Phenology Ontology utilize the [rdflib.js](https://github.com/linkeddata/rdflib.js/) library for parsing the ontology, and cache elements on the server to be returned for requests.  A cronjob is utilized to update cache results once per night so any changes in the PPO itself will take up to 24 hours to register.  The purpose of the cacheing is to improve speed of responses.
 
-Currently, the ppo-data-server is running under the name https://www.plantphenology.org/api/v1/query (sub download or ppo for query to access those services).
-To interact with this service, elasticsearch style GET and POST requests can be sent to this endpoint. 
-Note that most requests and all responses to this service require packaging in JSON formatted text.  The ElasticSearch website offers some help on [Query Syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html).
-
-The URL endpoint prefix is: `https://plantphenology.org/api/`  Following are the services that live below this endpoint:
+The URL endpoint prefix for all services is at `https://plantphenology.org/api/`.  Following are the services that live below this endpoint.  Please note the versions of the service endpoints below which contain different current versions, indicated by `v1` or `v2`.  It is important to reference the correct version for each service to return the documented responses:
 
   *  [v1/query](docs/es_proxy.md) Query the PPO data store 
   *  [v2/download](docs/download_proxy.md) Downlaod results as a package from data store
