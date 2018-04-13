@@ -11,7 +11,7 @@ Currently, the ppo-data-server is running under the name https://www.plantphenol
 To interact with this service, elasticsearch style GET and POST requests can be sent to this endpoint. 
 Note that most requests and all responses to this service require packaging in JSON formatted text.  The ElasticSearch website offers some help on [Query Syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html).
 
-The URL endpoint prefix is: `https://plantphenology.org/api/`  Following are the services:
+The URL endpoint prefix is: `https://plantphenology.org/api/`  Following are the services that live below this endpoint:
 
   *  [v1/query](docs/es_proxy.md) Query the PPO data store 
   *  [v2/download](docs/download_proxy.md) Downlaod results as a package from data store
