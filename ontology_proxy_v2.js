@@ -13,8 +13,8 @@ var port = Number(process.env.PORT || 3008);
 // Spin up application and handle requests
 app.use(cors({origin: '*'}), function(req, res, body) {
 	// allow connections from JS applications
-	res.setHeader('Access-Control-Allow-Origin', '*');
-	// short-circuit favicon requests for easier debugging
+        // short-circuit favicon requests for easier debugging
+	res.setHeader('Access-Control-Allow-Origin', '*'); 
 	if (req.url != '/favicon.ico') {
 		console.log('req.url: ' + req.url);
 

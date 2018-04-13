@@ -93,7 +93,7 @@ function classWalker(results, startingClass,filter) {
             // If the filter statement is present and includes the filter string in the given literal value
             // we push the object onto our stack
             //if (!filter || (filter && labelTriple.value.includes(filter))) {
-            if (labelTriple.value.includes(filter)) {
+            if (labelTriple.value.includes(filter) && !labelTriple.value.includes("plant structures")) {
                 results.push(plantStage)
             }
             classWalker(results,triple.subject,filter)
