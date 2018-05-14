@@ -59,6 +59,9 @@ app.use(cors({origin: '*'}), function(req, res, body) {
                     } else { 
 			res.write("[{'message':'call either /present/ or /absent/ services'}]");
                     }
+                    presentClasses = null;
+                    absentClasses = null;
+                    allClasses = null;
 		    res.end();
                     return;
                 } catch(err){
@@ -99,9 +102,11 @@ function classWalker(results, startingClass,filter) {
             if (labelTriple.value.includes(filter)) {
                 results.push(plantStage)
             }
+            plantStage = null;
             classWalker(results,triple.subject,filter)
         }
     });
+    allTriples = null;
     return results;
 }
 

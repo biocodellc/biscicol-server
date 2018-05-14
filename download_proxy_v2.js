@@ -78,6 +78,10 @@ app.use(cors({
     var source = req.query.source
     var query = req.query.q
     var limit = req.query.limit
+
+    // replace incoming termID request with plantStructurePresenceTypes
+    query = query.replace('termID', 'plantStructurePresenceTypes')
+    
     // setting limit to 0 means there is no limit
     if (limit == null || limit == 'undefined') {
         limit = 0;
@@ -107,6 +111,9 @@ app.use(cors({
                         }
                     });
                 }
+                source= null;
+                query = null;
+                limit = null;
             });
         }
     });
@@ -115,7 +122,7 @@ app.use(cors({
 
 /* runSearch command calls elasticsearch */
 function runSearch(source, query, limit, callback) {
-console.log(source)
+    console.log(source)
     var writer = csvWriter()
     writer.pipe(fs.createWriteStream(outputDataFile))
     // Counter
@@ -153,9 +160,9 @@ console.log(source)
                     writerRequestObject.latitude = hit._source.latitude
                 if (typeof hit._source.longitude !== 'undefined')
                     writerRequestObject.longitude = hit._source.longitude
-                // Turning this off.... this returns ALOT of data, need a better way to handle all of the inferred types
-                //if (typeof hit._source.plantStructurePresenceTypes !== 'undefined') 
-                 //   writerRequestObject.plantStructurePresenceTypes = hit._source.plantStructurePresenceTypes
+                // Re-write plantStructurePresenceTypes to termID, to match usage
+                if (typeof hit._source.plantStructurePresenceTypes !== 'undefined') 
+                    writerRequestObject.termID = hit._source.plantStructurePresenceTypes
                 if (typeof hit._source.source !== 'undefined') {
                     var source = hit._source.source
                     // quick hack to change NPN to USA-NPN until pipeline code is updated
@@ -168,6 +175,7 @@ console.log(source)
                 // Use csv-write-stream tool to convert JSON to CSV
                 writer.write(writerRequestObject)
                 countRecords++;
+                writeRequestObject = null;
             });
 
             if (countRecords < 1) {
@@ -184,6 +192,7 @@ console.log(source)
             } else {
                 // Close Stream
                 writer.end()
+                countRecords = null;
 
                 // wait for writer to finish before calling everything here
                 writer.on('finish', function() {
