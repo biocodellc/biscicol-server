@@ -11,11 +11,11 @@ Citation: PEP725 Pan European Phenology Data. Data set accessed 2017-04-04 at ht
 
 # USA-NPN
 # USA National Phenology Network
-Date of Last Refresh: 2018-04-08
+Date of Last Refresh: 2018-04-04
 Data Policy:  https://www.usanpn.org/terms#DataUse
 License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/legalcode
 Metadata: https://data.usanpn.org:3002/pop/fgdc 
-Citation: USA National Phenology Network. 2018.  Plant and Animal Phenology Data. Data type: Status and Intensity. [Date range of data used] for Region: [Coordinates]. USA-NPN, Tucson, Arizona, USA. Data set accessed April 8, 2018 at http://doi.org/10.5066/F78S4N1V
+Citation: USA National Phenology Network. 2018.  Plant and Animal Phenology Data. Data type: Status and Intensity. [Date range of data used] for Region: [Coordinates]. USA-NPN, Tucson, Arizona, USA. Data set accessed April 4, 2018 at http://doi.org/10.5066/F78S4N1V
 Other Attribution: The acknowledgment “Data were provided by the USA National Phenology Network and the many participants who contribute to its Nature’s Notebook program.” must be included either in the main text or Acknowledgments section of all publications.
 
 # NEON
