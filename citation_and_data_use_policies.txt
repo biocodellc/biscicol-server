@@ -22,5 +22,5 @@ Other Attribution: The acknowledgment “Data were provided by the USA National 
 # National Ecological Observatory Network
 Date of Last Refresh: 2018-04-08
 Metadata: http://data.neonscience.org/data-policy
-Citation: National Ecological Observatory Network. 2016. Data Product NEON.DP1.10055.  Provisional data downloaded from http://data.neonscience.org April 8, 2018. Battelle, Boulder, CO, USA
+Citation: National Ecological Observatory Network. 2018. Data Product NEON.DP1.10055.  Provisional data downloaded from http://data.neonscience.org April 8, 2018. Battelle, Boulder, CO, USA
 
