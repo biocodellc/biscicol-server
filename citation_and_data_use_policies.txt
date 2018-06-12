@@ -4,23 +4,23 @@ Also note that in the examples of below, the dates mentioned in the citations ar
 
 # PEP725 
 # The Pan European Phenology Project
-Date of Last Refresh: 2017-04-04
+Date of Last Refresh: 2018-06-09
 Data Policy: http://www.pep725.eu/downloads/PEP725_DataUsePolicy_201304.pdf
 License: (see data policy statement)
-Citation: PEP725 Pan European Phenology Data. Data set accessed 2017-04-04 at http://www.pep725.eu
+Citation: PEP725 Pan European Phenology Data. Data set accessed 2018-06-09 at http://www.pep725.eu
 
 # USA-NPN
 # USA National Phenology Network
-Date of Last Refresh: 2018-04-04
+Date of Last Refresh: 2018-06-11
 Data Policy:  https://www.usanpn.org/terms#DataUse
 License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/legalcode
 Metadata: https://data.usanpn.org:3002/pop/fgdc 
-Citation: USA National Phenology Network. 2018.  Plant and Animal Phenology Data. Data type: Status and Intensity. [Date range of data used] for Region: [Coordinates]. USA-NPN, Tucson, Arizona, USA. Data set accessed April 4, 2018 at http://doi.org/10.5066/F78S4N1V
+Citation: USA National Phenology Network. 2018.  Plant and Animal Phenology Data. Data type: Status and Intensity. [Date range of data used] for Region: [Coordinates]. USA-NPN, Tucson, Arizona, USA. Data set accessed June 11, 2018 at http://doi.org/10.5066/F78S4N1V
 Other Attribution: The acknowledgment “Data were provided by the USA National Phenology Network and the many participants who contribute to its Nature’s Notebook program.” must be included either in the main text or Acknowledgments section of all publications.
 
 # NEON
 # National Ecological Observatory Network
-Date of Last Refresh: 2018-04-08
+Date of Last Refresh: 2018-06-11
 Metadata: http://data.neonscience.org/data-policy
-Citation: National Ecological Observatory Network. 2018. Data Product NEON.DP1.10055.  Provisional data downloaded from http://data.neonscience.org April 8, 2018. Battelle, Boulder, CO, USA
+Citation: National Ecological Observatory Network. 2018. Data Product NEON.DP1.10055.  Provisional data downloaded from http://data.neonscience.org June 11, 2018. Battelle, Boulder, CO, USA
 
