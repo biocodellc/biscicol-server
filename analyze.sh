@@ -14,12 +14,12 @@ do
     mod_date=$(date +%F -r $i)
     diff_days=$(( ($mod_date_seconds - $creation_date_seconds)/(60*60*24) ))
     files_sent=$(cat $i |  grep "_search" | wc -l)
-    echo "                    file: $i"
-    echo "           creation date: $creation_date"
-    echo "           last mod date: $mod_date"
-    echo "            days counted: $diff_days"
-    echo "         search requests: $files_sent"
-    echo "   search requests/month: $(( $files_sent / ($diff_days/30) ))"
+    echo "file: $i"
+    echo "creation date: $creation_date"
+    echo "last mod date: $mod_date"
+    echo "days counted: $diff_days"
+    echo "search requests: $files_sent"
+    echo "search requests/month: $(( $files_sent / ($diff_days/30) ))"
 done
 
 echo ""
@@ -38,11 +38,11 @@ do
     mod_date=$(date +%F -r $i)
     diff_days=$(( ($mod_date_seconds - $creation_date_seconds)/(60*60*24) ))
     files_sent=$(cat $i |  grep sent: | sort | uniq | wc -l)
-    echo "                    file: $i"
-    echo "           creation date: $creation_date"
-    echo "           last mod date: $mod_date"
-    echo "            days counted: $diff_days"
-    echo "       download requests: $files_sent"
-    echo " download requests/month: $(( $files_sent / ($diff_days/30) ))"
+    echo "file: $i"
+    echo "creation date: $creation_date"
+    echo "last mod date: $mod_date"
+    echo "days counted: $diff_days"
+    echo "download requests: $files_sent"
+    echo "download requests/month: $(( $files_sent / ($diff_days/30) ))"
 done
 
