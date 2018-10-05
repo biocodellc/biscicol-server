@@ -17,7 +17,7 @@ var store=$rdf.graph();
 
 // This is the ontology file to read. To save IO i've checked out the file
 // to the local filesystem, poining to a specific release
-var rdfData=fs.readFileSync('../ppo/releases/2017-10-20/ppo.owl').toString();
+var rdfData=fs.readFileSync('../ppo/releases/2018-07-31/ppo.owl').toString();
 
 var contentType='application/rdf+xml';
 var baseUrl="http://plantphenology.org/";

@@ -29,7 +29,7 @@ var app = express()
 var helmet = require('helmet');
 var csp = require('helmet-csp');
 // for compression
-var zlib = require('zlib')
+//var zlib = require('zlib')
 // for trrning JSON into CSV
 var csvWriter = require('csv-write-stream')
 // Create output diretory to hold contents of this processing
