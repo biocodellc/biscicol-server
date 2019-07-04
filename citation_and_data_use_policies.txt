@@ -24,3 +24,11 @@ Date of Last Refresh: 2019-07-01
 Metadata: http://data.neonscience.org/data-policy
 Citation: National Ecological Observatory Network. 2018. Data Product NEON.DP1.10055.  Provisional data downloaded from http://data.neonscience.org June 20, 2018. Battelle, Boulder, CO, USA
 
+# HERBARIUM
+# Herbarium sources harvested from the Guralnick Lab at University of Florida
+Date of Last Refresh: 2019-06-01
+
+# IMAGE_SCORING
+# Image Scoring data using iNaturalist Sources from the Guralnick Lab at University of Florida
+Date of Last Refresh: 2019-07-01
+
