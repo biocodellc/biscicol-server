@@ -27,7 +27,8 @@ app.use(cors({origin: '*'}), function(req, res, body) {
 			return;
 		}
 
-         
+		// The incoming requesting string now contains a reference that should be removed
+		req.url = req.url.replace('api/v1/query/','')
 		// pass the request to elasticsearch
                 var url = apiServerHost + req.url;
 		req.pipe(request({
@@ -49,6 +50,5 @@ app.use(cors({origin: '*'}), function(req, res, body) {
 // Server Listen
 app.listen(port, function () {
 	console.log('App server is running on http://localhost:' + port);
-	console.log('Heroku config variable - ELASTIC_URL: ' + process.env.ELASTIC_URL);
 	console.log('apiServerHost: ' + apiServerHost);
 });
