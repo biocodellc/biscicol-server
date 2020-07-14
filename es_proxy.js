@@ -16,7 +16,7 @@ app.use(cors({origin: '*'}), function(req, res, body) {
 	// short-circuit favicon requests for easier debugging
 	if (req.url != '/favicon.ico') {
 		console.log('req.method: ' + req.method);
-		console.log('req.url: ' + req.url);
+		//console.log('req.url: ' + req.url);
 
 		// Request method handling: exit if not GET or POST
 		if ( ! (req.method == 'GET' || req.method == 'POST') ) {
@@ -30,7 +30,8 @@ app.use(cors({origin: '*'}), function(req, res, body) {
 		// The incoming requesting string now contains a reference that should be removed
 		req.url = req.url.replace('api/v1/query/','')
 		// pass the request to elasticsearch
-                var url = apiServerHost + req.url;
+        var url = apiServerHost + req.url;
+        console.log(url)
 		req.pipe(request({
 		    uri  : url,
 		    auth : {

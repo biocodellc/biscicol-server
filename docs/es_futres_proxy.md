@@ -1,4 +1,4 @@
-# query instructions
+# Futres API query instructions
 
 To interact with this service, elasticsearch style GET and POST requests can be sent to this endpoint. 
 Note that most requests and all responses to this service require packaging in JSON formatted text.  The ElasticSearch website offers some help on [Query Syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html).
@@ -12,14 +12,18 @@ Can be executed from the browser simply as: https://www.plantphenology.org/api/v
 curl 'http://plantphenology.org/futresapi/v1/query/_cat/indices?pretty'
 ```
 
-# Query for genus = Quercus
-A very simple query to return results for a particular genus, limiting to just one record.
-The attribute size can be adjusted up to 10,000 records.
+# Query examples
+Note that the attribute size can be adjusted up to 10,000 records.
 
-Can be executed from the browser simply as: https://www.plantphenology.org/api/v1/query/_search?pretty&size=1&q=genus:Quercus
+Can be executed from the browser or curl:
 ```
+# query on genus example
+http://plantphenology.org/futresapi/v1/query/_search?pretty&from=0&size=5&q=scientificName=Puma+concolor
+OR
 curl 'http://plantphenology.org/futresapi/v1/query/_search?pretty&from=0&size=5&q=scientificName=Puma+concolor'
 
+# query on yearCollected example
+https://www.plantphenology.org/futresapi/v1/query/_search?from=0&size=5&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName&q=++yearCollected:>=1868+AND++yearCollected:<=2019
 curl 'https://www.plantphenology.org/futresapi/v1/query/_search?from=0&size=5&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName&q=++yearCollected:>=1868+AND++yearCollected:<=2019'
 ```
 
