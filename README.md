@@ -8,7 +8,8 @@ on a different server, secured by an opening through a firewall via a dedicated 
 
 The URL endpoint prefix for all services is at `https://www.plantphenology.org/api/`.  Following are the services that live below this endpoint.  Please note the versions of the service endpoints below which contain different current versions, indicated by `v1` or `v2`.  It is important to reference the correct version for each service to return the documented responses:
 
-  *  [v1/query](docs/es_proxy.md) Query the PPO data store 
-  *  [v2/download](docs/download_proxy.md) Downlaod results as a package from data store
-  *  [v2/ppo](docs/ontology_proxy.md)  Lookup terms from the ontology proxy
+  *  [api/v1/query](docs/es_proxy.md) Query the PPO data store 
+  *  [api/v2/download](docs/download_proxy.md) Downlaod results as a package from data store
+  *  [api/v2/ppo](docs/ontology_proxy.md)  Lookup terms from the ontology proxy
+  *  [futresapi/v1/query](docs/es_futres_proxy.md) Query the Futres data store 
 
