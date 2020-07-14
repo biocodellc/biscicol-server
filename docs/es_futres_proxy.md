@@ -1,4 +1,4 @@
-# Futres DATA API query instructions
+# Futres DATA SERVICE query instructions
 
 *BETA SOFTWARE*
 This services is a dynamic interface for fetching FuTRES data. 
