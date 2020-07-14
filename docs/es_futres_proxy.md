@@ -1,4 +1,7 @@
-# Futres API query instructions
+# Futres DATA API query instructions
+
+*BETA SOFTWARE*
+This services is a dynamic interface for fetching FuTRES data. 
 
 To interact with this service, elasticsearch style GET and POST requests can be sent to this endpoint. 
 Note that most requests and all responses to this service require packaging in JSON formatted text.  The ElasticSearch website offers some help on [Query Syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html).
