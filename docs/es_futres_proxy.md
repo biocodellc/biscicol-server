@@ -1,5 +1,6 @@
 # Futres DATA SERVICE query instructions
 
+See temporary netlify site at: https://musing-northcutt-ceb5ba.netlify.app/
 *BETA SOFTWARE*
 This services is a dynamic interface for fetching FuTRES data. 
 
