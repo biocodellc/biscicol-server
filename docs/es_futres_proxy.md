@@ -21,10 +21,9 @@ Note that the attribute size can be adjusted up to 10,000 records.
 
 Can be executed from the browser or curl:
 ```
-# query on genus example
-https://plantphenology.org/futresapi/v1/query/_search?pretty&from=0&size=5&q=scientificName=Puma+concolor
-OR
-curl 'https://plantphenology.org/futresapi/v1/query/_search?pretty&from=0&size=5&q=scientificName=Puma+concolor'
+# query on genus & sex & year example
+curl 'https://www.plantphenology.org/futresapi/v1/query/_search?from=0&size=25&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName,sex,measurementType,country,measurementUnit,measurementValue&q=++yearCollected:%3E=1868+AND++yearCollected:%3C=2020++AND++scientificName:Puma+concolor+AND++sex:male&pretty'
+
 
 # query on yearCollected example
 https://www.plantphenology.org/futresapi/v1/query/_search?from=0&size=5&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName&q=++yearCollected:>=1868+AND++yearCollected:<=2019
