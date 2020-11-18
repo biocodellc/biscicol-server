@@ -1,5 +1,6 @@
-# Futres DATA API query instructions
+# Futres DATA SERVICE query instructions
 
+See temporary netlify site at: https://musing-northcutt-ceb5ba.netlify.app/
 *BETA SOFTWARE*
 This services is a dynamic interface for fetching FuTRES data. 
 
@@ -12,7 +13,7 @@ Following are some examples of interacting with the endpoint using [curl](https:
 This query shows the available indices at this endpoint
 Can be executed from the browser simply as: https://www.plantphenology.org/api/v1/query/_cat/indices?pretty
 ```
-curl 'http://plantphenology.org/futresapi/v1/query/_cat/indices?pretty'
+curl 'https://plantphenology.org/futresapi/v1/query/_cat/indices?pretty'
 ```
 
 # Query examples
@@ -20,10 +21,9 @@ Note that the attribute size can be adjusted up to 10,000 records.
 
 Can be executed from the browser or curl:
 ```
-# query on genus example
-http://plantphenology.org/futresapi/v1/query/_search?pretty&from=0&size=5&q=scientificName=Puma+concolor
-OR
-curl 'http://plantphenology.org/futresapi/v1/query/_search?pretty&from=0&size=5&q=scientificName=Puma+concolor'
+# query on genus & sex & year example
+curl 'https://www.plantphenology.org/futresapi/v1/query/_search?from=0&size=25&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName,sex,measurementType,country,measurementUnit,measurementValue&q=++yearCollected:%3E=1868+AND++yearCollected:%3C=2020++AND++scientificName:Puma+concolor+AND++sex:male&pretty'
+
 
 # query on yearCollected example
 https://www.plantphenology.org/futresapi/v1/query/_search?from=0&size=5&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName&q=++yearCollected:>=1868+AND++yearCollected:<=2019
