@@ -13,13 +13,21 @@ do
     creation_date=$(date -d "2018-04-02" +%F)
     mod_date=$(date +%F -r $i)
     diff_days=$(( ($mod_date_seconds - $creation_date_seconds)/(60*60*24) ))
-    files_sent=$(cat $i |  grep "_search" | wc -l)
+    total_files_sent=$(cat $i |  grep "_search" | wc -l)
+    neon_files_sent=$(cat $i |  grep "_search" | grep NEON | wc -l)
+    herbarium_files_sent=$(cat $i |  grep "_search" | grep HERBARIUM | wc -l)
+    npn_files_sent=$(cat $i |  grep "_search" | grep NPN | wc -l)
+    pep725_files_sent=$(cat $i |  grep "_search" | grep PEP725 | wc -l)
     echo "file: $i"
     echo "creation date: $creation_date"
     echo "last mod date: $mod_date"
     echo "days counted: $diff_days"
-    echo "search requests: $files_sent"
-    echo "search requests/month: $(( $files_sent / ($diff_days/30) ))"
+    echo "total search requests: $total_files_sent"
+    echo "neon search requests: $neon_files_sent"
+    echo "herbarium search requests: $herbarium_files_sent"
+    echo "npn search requests: $npn_files_sent"
+    echo "pep725 search requests: $pep725_files_sent"
+    echo "average search requests/month: $(( $total_files_sent / ($diff_days/30) ))"
 done
 
 echo ""
@@ -43,6 +51,6 @@ do
     echo "last mod date: $mod_date"
     echo "days counted: $diff_days"
     echo "download requests: $files_sent"
-    echo "download requests/month: $(( $files_sent / ($diff_days/30) ))"
+    echo "average download requests/month: $(( $files_sent / ($diff_days/30) ))"
 done
 
