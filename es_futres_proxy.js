@@ -8,10 +8,15 @@ var port = Number(process.env.PORT || 3020);
 var apiServerHost = (process.env.ELASTIC_URL || 'http://128.196.254.92:80')
 
 // Listen for requests on all endpoints
+//var cors = require('cors');
+// use it before all route definitions
+//app.use(cors({origin: 'http://localhost:8888'}));
 //app.use('/', function(req, res, body) {
 app.use(cors({origin: '*'}), function(req, res, body) {
 	// allow connections from JS applications
 	res.setHeader('Access-Control-Allow-Origin', '*');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
 	//
 	// short-circuit favicon requests for easier debugging
 	if (req.url != '/favicon.ico') {
