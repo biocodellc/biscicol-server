@@ -183,8 +183,12 @@ function runSearch(source, query, limit, callback) {
                     writerRequestObject.decimalLatitude = hit._source.decimalLatitude
                 if (typeof hit._source.decimalLongitude !== 'undefined')
                     writerRequestObject.decimalLongitude = hit._source.decimalLongitude
-                if (typeof hit._source.projectId !== 'undefined') 
-                    writerRequestObject.projectId = hit._source.projectId 
+                if (typeof hit._source.projectId !== 'undefined') {
+                    if (hit._source.projectId == "Vertnet")
+                        writerRequestObject.projectId = hit._source.projectId 
+                    else   
+                        writerRequestObject.projectId = "https://geome-db.org/workbench/project-overview?projectId="+hit._source.projectId 
+                }
 
                 // Use csv-write-stream tool to convert JSON to CSV
                 writer.write(writerRequestObject)
