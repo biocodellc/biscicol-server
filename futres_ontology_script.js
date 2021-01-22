@@ -27,16 +27,19 @@ var definitionLabel = $rdf.sym('http://purl.obolibrary.org/obo/IAO_0000115')
 
 $rdf.parse(rdfData,store,baseUrl,contentType);
 
-// walk all classes and sort
-presentClasses = classWalker([],'http://purl.obolibrary.org/obo/PATO_0001708','present').sort(sortBy('label'))
+// walk 1-d size
+sizeClasses = classWalker([],'http://purl.obolibrary.org/obo/PATO_0001708','present').sort(sortBy('label'))
+// walk force (parent of weight)
+allClasses = classWalker(sizeClasses,'http://purl.obolibrary.org/obo/PATO_0001035','present').sort(sortBy('label'))
+
 // deDuplicate
-presentClasses = deDuplicate(presentClasses,'termID');
+allClasses = deDuplicate(allClasses,'termID');
 
 // Write long form of JSON files
-writeFile("futres_data/all.json",presentClasses);
+writeFile("futres_data/all.json",allClasses);
 
 // Write short form of JSON files
-writeFile("futres_data/all_short.json",createShortFile(presentClasses))
+writeFile("futres_data/all_short.json",createShortFile(allClasses))
 
 // Create short form of classes (just label and ID)
 function createShortFile(traitClass) {
