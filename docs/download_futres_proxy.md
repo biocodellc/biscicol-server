@@ -1,6 +1,6 @@
 # FuTRES download API instructions
 
-The download_proxy parameters are the same as the [es_futres_proxy](docs/es_futres_proxy.js) service function calls (see docs for details).
+The download_proxy parameters are the same as the [es_futres_proxy](docs/es_futres_proxy.md)  service function calls (see docs for details).
 The download_proxy bundles thre files in response: 
  * citation file includes information on how to cite date
  * README file which contains information on the query that was ran and number of results
