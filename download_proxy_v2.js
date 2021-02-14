@@ -88,11 +88,13 @@ app.use(cors({
     }
 
     // Create the output Directory
+    console.log('output directory '+outputDir)
     mkdirp(outputDir, function(err) {
         if (err) {
             console.error(err)
         } else {
             // Run the Search Function
+            console.log('running search function')
             runSearch(source, query, limit, function(compressedArchiveResult) {
                 if (compressedArchiveResult == null) {
                     console.log("no results, return 204")
@@ -101,6 +103,7 @@ app.use(cors({
                     })
                 } else {
                     // run download option send as attachment
+                    console.log('running download option send as attachment')
                     res.download(compressedArchiveResult, returnedArchiveFile, function(err) {
                         if (err) {
                             console.log('err:' + err)
@@ -124,7 +127,7 @@ app.use(cors({
 
 /* runSearch command calls elasticsearch */
 function runSearch(source, query, limit, callback) {
-    console.log(source)
+    //console.log(source)
     var writer = csvWriter()
     var writeStream = fs.createWriteStream(outputDataFile)
     writer.pipe(writeStream)
@@ -147,6 +150,7 @@ function runSearch(source, query, limit, callback) {
         if (error) {
             console.log("search error: " + error)
         } else {
+            console.log("fetching data...")
             // Loop the response (the number of loops equals the size request)
             response.hits.hits.forEach(function(hit) {
                 var writerRequestObject = new Object()
@@ -187,6 +191,7 @@ function runSearch(source, query, limit, callback) {
             // While the count of records is less than the total hits, continue
             // OR the limit is less than the response hits
             if ((countRecords < response.hits.total && limit == 0) || (countRecords < limit && limit < response.hits.total)) {
+                //console.log(countRecords + " of " + response.hits.total)
                 // Ask elasticsearch for the next set of hits from this search
                 client.scroll({
                     scrollId: response._scroll_id,
