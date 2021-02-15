@@ -179,6 +179,8 @@ function runSearch(source, query, limit, callback) {
                     writerRequestObject.lifeStage = hit._source.lifeStage
                 if (typeof hit._source.sex !== 'undefined')
                     writerRequestObject.sex = hit._source.sex
+                if (typeof hit._source.mapped_project !== 'undefined')
+                    writerRequestObject.mapped_project = hit._source.mapped_project
                 if (typeof hit._source.decimalLatitude !== 'undefined')
                     writerRequestObject.decimalLatitude = hit._source.decimalLatitude
                 if (typeof hit._source.decimalLongitude !== 'undefined')
@@ -211,7 +213,7 @@ function runSearch(source, query, limit, callback) {
             } else {
                 writer.end()
                 // Close Stream
-                countRecords = null;
+                //countRecords = null;
 
                 // wait for writeStream to finish before calling everything here
                 writeStream.on('finish', function() {
