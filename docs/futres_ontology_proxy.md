@@ -3,6 +3,10 @@ Get information from ontology in a digestible format.  This service is useful in
 to R functions and web services that want to learn about FOVT traits without going through the work
 of inspecting the ontology
 
+ontology lookup links:
+ * https://www.plantphenology.org/futresapi/v2/fovt
+ * https://www.plantphenology.org/futresapi/v2/fovt/all_short
+ 
 ## LONG FORM RESPONSES (traitID, Label, definition, URI)
 ```
 # get all classes under 1-d extent:
