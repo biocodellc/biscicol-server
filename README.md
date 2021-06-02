@@ -18,4 +18,4 @@ Plant Phenology Endpoints
   *  [api/v2/download](docs/download_proxy.md) Downlaod results as a package from data store
   *  [api/v2/ppo](docs/ontology_proxy.md)  Lookup terms from the PPO ontology
 
-
+.
