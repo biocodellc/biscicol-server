@@ -15,6 +15,7 @@ app.use(cors({origin: '*'}), function(req, res, body) {
 	// allow connections from JS applications
         // short-circuit favicon requests for easier debugging
 	res.setHeader('Access-Control-Allow-Origin', '*'); 
+	res.setHeader('Content-Type', 'application/json');
 	if (req.url != '/favicon.ico') {
 		console.log('req.url: ' + req.url);
 

@@ -137,7 +137,7 @@ function runSearch(source, query, limit, callback) {
 
     //  Execute client search with scrolling
     client.search({
-        index: '_all',
+        index: 'futres',
         size: fetchSize,
         scroll: '60s', // keep the search results "scrollable" for 30 seconds
         //        _source: source, // filter the source to only include the title field
