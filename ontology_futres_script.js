@@ -28,16 +28,37 @@ var definitionLabel = $rdf.sym('http://purl.obolibrary.org/obo/IAO_0000115')
 $rdf.parse(rdfData,store,baseUrl,contentType);
 
 // walk all classes and sort
-presentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020','present').sort(sortBy('label'))
+console.log('walking presentClasses')
+//presentClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020','present').sort(sortBy('label'))
 // deDuplicate
-presentClasses = deDuplicate(presentClasses,'termID');
-allClasses = presentClasses.sort(sortBy('label'))
+//presentClasses = deDuplicate(presentClasses,'termID');
+allClasses = classWalker([],'http://purl.obolibrary.org/obo/BFO_0000020').sort(sortBy('label'))
+allClasses = deDuplicate(allClasses,'termID');
+allClasses = allClasses.sort(sortBy('label'))
 
 // Write long form of JSON files
+console.log('writing data/all.json');
 writeFile("data/all.json",allClasses);
 
 // Write short form of JSON files
+console.log('writing data/all_short.json');
 writeFile("data/all_short.json",createShortFile(allClasses))
+
+writeFile("data/all_geome.json",createGEOMEFile(allClasses))
+
+// Create short form of classes (just label and ID)
+function createGEOMEFile(traitClass) {
+    var traits = []
+    for(var item of traitClass) { 
+	var trait= {}
+        trait['value'] = item.label
+        trait['definedBy'] = item.uri
+	traits.push(trait)
+    }
+    var fields = {}
+    fields['fields'] = traits;
+    return fields;
+}
 
 // Create short form of classes (just label and ID)
 function createShortFile(traitClass) {
@@ -50,7 +71,7 @@ function createShortFile(traitClass) {
 
 // Write file out
 function writeFile(path,traitClass) {
-    jsonText = JSON.stringify(traitClass)
+    jsonText = JSON.stringify(traitClass,null,'\t')
     fs.writeFile(path,jsonText,function(err) {
         if (err) {
             console.log("error writing file: " + err)   
@@ -61,7 +82,7 @@ function writeFile(path,traitClass) {
 // Iterate all subclasses from a node, returning the rdfs:label
 // and class uri in an array of JSON objects
 // This function is meant to be called recursively
-function classWalker(results, startingClass,filter) {
+function classWalker(results, startingClass) {
     rootClass = $rdf.sym(startingClass)
     // find all triples that are a subClass of the passed in root class
     // I couldn't find a way to get rdflib to match all matching subClasses for the given root
@@ -82,15 +103,15 @@ function classWalker(results, startingClass,filter) {
             // the default URI will be the abbreviated version, this is because this is what is stored in ES datastore
             plantStage.termID =  triple.subject.uri.replace('http://purl.obolibrary.org/obo/','obo:')
             plantStage.label = labelTriple.value
-            plantStage.definition = definitionTriple.value
+            //plantStage.definition = definitionTriple.value
             plantStage.uri =  triple.subject.uri
             // If the filter statement is present and includes the filter string in the given literal value
             // we push the object onto our stack
             //if (!filter || (filter && labelTriple.value.includes(filter))) {
-            if (labelTriple.value.includes(filter) && !labelTriple.value.includes("plant structures")) {
+            //if (labelTriple.value.includes(filter) && !labelTriple.value.includes("plant structures")) {
                 results.push(plantStage)
-            }
-            classWalker(results,triple.subject,filter)
+            //}
+            classWalker(results,triple.subject)
         }
     });
     return results;
