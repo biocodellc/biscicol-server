@@ -190,7 +190,7 @@ function runSearch(source, query, limit, callback) {
             }
             // While the count of records is less than the total hits, continue
             // OR the limit is less than the response hits
-            if ((countRecords < response.hits.total && limit == 0) || (countRecords < limit && limit < response.hits.total)) {
+            if ((countRecords < response.hits.total.value && limit == 0) || (countRecords < limit && limit < response.hits.total.value)) {
                 //console.log(countRecords + " of " + response.hits.total)
                 // Ask elasticsearch for the next set of hits from this search
                 client.scroll({
@@ -205,7 +205,7 @@ function runSearch(source, query, limit, callback) {
                 // wait for writeStream to finish before calling everything here
                 writeStream.on('finish', function() {
                     // Create Policies Files
-                    createDownloadMetadataFile(query, limit, response.hits.total, countRecords, source);
+                    createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords, source);
                     createCitationAndDataUsePoliciesFile();
 
                     tar.c({
