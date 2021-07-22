@@ -41,16 +41,18 @@ var outputDataFile = outputDir + dataFile
 // copied to temporary directory that is archived and returned to client)
 var dataDownloadMetadataFile = 'FUTRES_README.txt'
 var citationAndDataUsePoliciesFile = 'futres_citation_and_data_use_policies.txt'
+var archiver = require('archiver');
+
 
 //var returnedArchiveFile = 'futres_download.tar.gz'
-var returnedArchiveFile = 'futres_download.tar.zip'
+var returnedArchiveFile = 'futres.zip'
 //var compressedArchiveLocation = '/tmp/' + shortID + '.tar.gz'
-var compressedArchiveLocation = '/tmp/' + shortID + '.tar.zip'
+var compressedArchiveLocation = '/tmp/' + shortID + '.zip'
 
 // The client connection parameter, reading settings from connection.js
 var client = require('./connection.js');
 // set the default port
-var port = Number(process.env.PORT || 3024);
+var port = Number(process.env.PORT || 3026);
 
 // @see https://github.com/evilpacket/helmet
 // you should activate even more headers provided by helmet
@@ -68,68 +70,10 @@ app.use(csp({
     }
 }));
 
-/* The main entry point for application, recognizing requests from client */
-app.use(cors({
-    origin: '*'
-}), function(req, res, body) {
-    // allow connections from JS applications
-    res.setHeader('Access-Control-Allow-Origin', '*');
-
-    // handle request parameters
-    console.log(req.url)
-    var source = req.query.source
-    var query = req.query.q
-    var limit = req.query.limit
-
-    // replace incoming termID request with plantStructurePresenceTypes
-    //query = query.replace('termID', 'plantStructurePresenceTypes')
-
-    // setting limit to 0 means there is no limit
-    if (limit == null || limit == 'undefined') {
-        limit = 0;
-    }
-
-    // Create the output Directory
-    mkdirp(outputDir, function(err) {
-        if (err) {
-            console.error(err)
-        } else {
-            // Run the Search Function
-            runSearch(source, query, limit, function(compressedArchiveResult) {
-                if (compressedArchiveResult == null) {
-                    console.log("no results, return 204")
-                    res.json(204, {
-                        error: 'no results found'
-                    })
-                } else {
-                    // run download option send as attachment
-                    res.download(compressedArchiveResult, returnedArchiveFile, function(err) {
-                        if (err) {
-                            console.log('err:' + err)
-                            // If there is some error, we don't remove files
-                        } else {
-                            console.log('sent:' + compressedArchiveResult);
-                            // Clean up files
-                            fs.removeSync(outputDir);
-                            fs.removeSync(compressedArchiveLocation);
-                        }
-                    });
-                }
-                source = null;
-                query = null;
-                limit = null;
-            });
-        }
-    });
-});
-
-
 /* runSearch command calls elasticsearch */
-function runSearch(source, query, limit, callback) {
-    console.log(source)
+var search = function runSearch(source, query, limit, callback) {
     var writer = csvWriter()
     var writeStream = fs.createWriteStream(outputDataFile)
-
 
     writer.pipe(writeStream)
     // Counter
@@ -216,34 +160,87 @@ function runSearch(source, query, limit, callback) {
                 }, getMoreUntilDone);
             } else {
                 writer.end()
-                // Close Stream
-                //countRecords = null;
-
+		    //
                 // wait for writeStream to finish before calling everything here
                 writeStream.on('finish', function() {
                     // Create Policies Files
                     createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords, source);
                     createCitationAndDataUsePoliciesFile();
 
-                    tar.c({
-		        // JBD commented this out on 7/19/21
-                        //gzip: true,
-                        file: compressedArchiveLocation,
-                        cwd: outputDir,
-                        prefix: 'futres_download',
-                        sync: true
-                    }, [dataFile, dataDownloadMetadataFile, citationAndDataUsePoliciesFile]);
+		    const archive = archiver('zip', {
+  			zlib: { level: 9 } // Sets the compression level.
+		    });
+ 		    const output = fs.createWriteStream(compressedArchiveLocation);
+			
+		    // listen for all archive data to be written 'close' event is fired only when a file descriptor is involved
+		    output.on('close', function() {
+  		        console.log(archive.pointer() + ' total bytes');
+  		        console.log('archiver has been finalized and the output file descriptor has closed.');
+                        return callback(compressedArchiveLocation);
+		    });
 
-		    // JBD Added this on 7/19/21
-    	            const zip = new JSZip();
-   	            zip.file(compresedArchivelocation, fs.readFileSync(compressedArchiveLocation, "utf-8"));
-
-                    return callback(compressedArchiveLocation);
+		    archive.pipe(output);
+		    archive.directory(outputDir, false);
+		    archive.finalize();
                 });
             }
         }
     });
 }
+
+/* The main entry point for application, recognizing requests from client */
+app.use(cors({
+    origin: '*'
+}), function(req, res, body) {
+    // allow connections from JS applications
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Content-Disposition', "attachment; filename=\""+returnedArchiveFile+"\"");
+    // handle request parameters
+    console.log('req.url ' + req.url)
+    var source = req.query.source
+    var query = req.query.q
+    var limit = req.query.limit
+
+    // setting limit to 0 means there is no limit
+    if (limit == null || limit == 'undefined') {
+        limit = 0;
+    }
+
+    // Create the output Directory
+    mkdirp(outputDir, function(err) {
+        if (err) {
+            console.error(err)
+        } else {
+            // Run the Search Function
+            search(source, query, limit, function(compressedArchiveResult) {
+                if (compressedArchiveResult == null) {
+                    console.log("no results, return 204")
+                    res.json(204, {
+                        error: 'no results found'
+                    })
+                } else {
+                    // run download option send as attachment
+                        res.download(compressedArchiveResult, returnedArchiveFile, function(err) {
+                        if (err) {
+                            console.log('err:' + err)
+                            // If there is some error, we don't remove files
+                        } else {
+                            console.log('sent:' + compressedArchiveResult + ' as ' +returnedArchiveFile);
+                            // Clean up files
+                            fs.removeSync(outputDir);
+                            fs.removeSync(compressedArchiveLocation);
+                        }
+                    });
+                }
+                source = null;
+                query = null;
+                limit = null;
+            });
+        }
+    });
+});
+
+
 
 function createResponse(status, body) {
     return {
