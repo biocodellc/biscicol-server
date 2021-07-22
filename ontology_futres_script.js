@@ -37,14 +37,14 @@ allClasses = deDuplicate(allClasses,'termID');
 allClasses = allClasses.sort(sortBy('label'))
 
 // Write long form of JSON files
-console.log('writing data/all.json');
-writeFile("data/all.json",allClasses);
+console.log('writing futres_data/all.json');
+writeFile("futres_data/all.json",allClasses);
 
 // Write short form of JSON files
-console.log('writing data/all_short.json');
-writeFile("data/all_short.json",createShortFile(allClasses))
+console.log('writing futres_data/all_short.json');
+writeFile("futres_data/all_short.json",createShortFile(allClasses))
 
-writeFile("data/all_geome.json",createGEOMEFile(allClasses))
+writeFile("futres_data/all_geome.json",createGEOMEFile(allClasses))
 
 // Create short form of classes (just label and ID)
 function createGEOMEFile(traitClass) {
