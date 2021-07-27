@@ -24,6 +24,6 @@ curl 'https://biscicol.org/futresapi/v1/query/_search?from=0&size=25&_source=dec
 
 # query on yearCollected example
 https://biscicol.org/futresapi/v1/query/_search?from=0&size=5&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName&q=++yearCollected:>=1868+AND++yearCollected:<=2019
-curl 'https://www.plantphenology.org/futresapi/v1/query/_search?from=0&size=5&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName&q=++yearCollected:>=1868+AND++yearCollected:<=2019'
+curl 'https://biscicol.org/futresapi/v1/query/_search?from=0&size=5&_source=decimalLatitude,decimalLongitude,yearCollected,scientificName&q=++yearCollected:>=1868+AND++yearCollected:<=2019'
 ```
 
