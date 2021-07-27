@@ -7,7 +7,7 @@ The download_proxy bundles thre files in response:
  * data.csv file which contains the data in comma separated value format with the first line being column headers.
 
 ```
-curl 'https://www.plantphenology.org/api/v2/download/_search?pretty&size=1&q=genus:Acacia+AND+source:USA-NPN' > download.tar.gz
+curl 'https://biscicol.org/api/v2/download/_search?pretty&size=1&q=genus:Acacia+AND+source:USA-NPN' > download.tar.gz
 gunzip download.tar.gz
 tar xvf download.tar
 ```
