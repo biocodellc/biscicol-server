@@ -28,6 +28,7 @@ var tar = require('tar');
 var app = express()
 var helmet = require('helmet');
 var csp = require('helmet-csp');
+var archiver = require('archiver');
 // for compression
 //var zlib = require('zlib')
 // for trrning JSON into CSV
@@ -39,16 +40,16 @@ var dataFile = 'data.csv'
 var outputDataFile = outputDir + dataFile
 // Location of data and citation policies files (stored in repository and
 // copied to temporary directory that is archived and returned to client)
-var dataDownloadMetadataFile = 'FUTRES_README.txt'
-var citationAndDataUsePoliciesFile = 'futres_citation_and_data_use_policies.txt'
+var dataDownloadMetadataFile = 'README.txt'
+var citationAndDataUsePoliciesFile = 'citation_and_data_use_policies.txt'
 
-var returnedArchiveFile = 'futres_download.tar.gz'
-var compressedArchiveLocation = '/tmp/' + shortID + '.tar.gz'
+var returnedArchiveFile = 'ppo_download.zip'
+var compressedArchiveLocation = '/tmp/' + shortID + '.zip'
 
 // The client connection parameter, reading settings from connection.js
 var client = require('./connection.js');
 // set the default port
-var port = Number(process.env.PORT || 3024);
+var port = Number(process.env.PORT || 3011);
 
 // @see https://github.com/evilpacket/helmet
 // you should activate even more headers provided by helmet
@@ -80,7 +81,7 @@ app.use(cors({
     var limit = req.query.limit
 
     // replace incoming termID request with plantStructurePresenceTypes
-    //query = query.replace('termID', 'plantStructurePresenceTypes')
+    query = query.replace('termID', 'plantStructurePresenceTypes')
 
     // setting limit to 0 means there is no limit
     if (limit == null || limit == 'undefined') {
@@ -88,11 +89,13 @@ app.use(cors({
     }
 
     // Create the output Directory
+    console.log('output directory '+outputDir)
     mkdirp(outputDir, function(err) {
         if (err) {
             console.error(err)
         } else {
             // Run the Search Function
+            console.log('running search function')
             runSearch(source, query, limit, function(compressedArchiveResult) {
                 if (compressedArchiveResult == null) {
                     console.log("no results, return 204")
@@ -101,6 +104,7 @@ app.use(cors({
                     })
                 } else {
                     // run download option send as attachment
+                    console.log('running download option send as attachment')
                     res.download(compressedArchiveResult, returnedArchiveFile, function(err) {
                         if (err) {
                             console.log('err:' + err)
@@ -124,7 +128,7 @@ app.use(cors({
 
 /* runSearch command calls elasticsearch */
 function runSearch(source, query, limit, callback) {
-    console.log(source)
+    //console.log(source)
     var writer = csvWriter()
     var writeStream = fs.createWriteStream(outputDataFile)
     writer.pipe(writeStream)
@@ -137,62 +141,46 @@ function runSearch(source, query, limit, callback) {
 
     //  Execute client search with scrolling
     client.search({
-        index: 'futres',
+        index: '_all',
         size: fetchSize,
         scroll: '60s', // keep the search results "scrollable" for 30 seconds
         //        _source: source, // filter the source to only include the title field
         //        body: body
         q: query
     }, function getMoreUntilDone(error, response) {
-	    // JBD
-	    console.log(response)
         if (error) {
             console.log("search error: " + error)
         } else {
+            console.log("fetching data...")
             // Loop the response (the number of loops equals the size request)
             response.hits.hits.forEach(function(hit) {
                 var writerRequestObject = new Object()
-                // Handle expected field names from FOVT server
-                if (typeof hit._source.materialSampleID !== 'undefined')
-                    writerRequestObject.materialSampleID = hit._source.materialSampleID
-                if (typeof hit._source.individualID !== 'undefined')
-                    writerRequestObject.individualID = hit._source.individualID
-                if (typeof hit._source.country !== 'undefined')
-                    writerRequestObject.country = hit._source.country
-                if (typeof hit._source.locality !== 'undefined')
-                    writerRequestObject.locality = hit._source.locality
-                if (typeof hit._source.yearCollected !== 'undefined')
-                    writerRequestObject.yearCollected = hit._source.yearCollected
-                if (typeof hit._source.samplingProtocol !== 'undefined')
-                    writerRequestObject.samplingProtocol = hit._source.samplingProtocol
-                if (typeof hit._source.basisOfRecord !== 'undefined')
-                    writerRequestObject.basisOfRecord = hit._source.basisOfRecord
-                if (typeof hit._source.scientificName !== 'undefined')
-                    writerRequestObject.scientificName = hit._source.scientificName
-                if (typeof hit._source.measurementMethod !== 'undefined')
-                    writerRequestObject.measurementMethod = hit._source.measurementMethod 
-                if (typeof hit._source.measurementUnit !== 'undefined')
-                    writerRequestObject.measurementUnit = hit._source.measurementUnit
-                if (typeof hit._source.measurementType !== 'undefined')
-                    writerRequestObject.measurementType = hit._source.measurementType
-                if (typeof hit._source.measurementValue !== 'undefined')
-                    writerRequestObject.measurementValue = hit._source.measurementValue
-                if (typeof hit._source.lifeStage !== 'undefined')
-                    writerRequestObject.lifeStage = hit._source.lifeStage
-                if (typeof hit._source.sex !== 'undefined')
-                    writerRequestObject.sex = hit._source.sex
-                if (typeof hit._source.mapped_project !== 'undefined')
-                    writerRequestObject.mapped_project = hit._source.mapped_project
-                if (typeof hit._source.decimalLatitude !== 'undefined')
-                    writerRequestObject.decimalLatitude = hit._source.decimalLatitude
-                if (typeof hit._source.decimalLongitude !== 'undefined')
-                    writerRequestObject.decimalLongitude = hit._source.decimalLongitude
-                if (typeof hit._source.projectID !== 'undefined') {
-                    if (hit._source.projectID == "Vertnet")
-                        writerRequestObject.projectID = hit._source.projectID 
-                    else   
-                        writerRequestObject.projectID = "https://geome-db.org/workbench/project-overview?projectId="+hit._source.projectID 
+                // Handle expected field names from PPO server
+                if (typeof hit._source.dayOfYear !== 'undefined')
+                    writerRequestObject.dayOfYear = hit._source.dayOfYear
+                if (typeof hit._source.year !== 'undefined')
+                    writerRequestObject.year = hit._source.year
+                if (typeof hit._source.genus !== 'undefined')
+                    writerRequestObject.genus = hit._source.genus
+                if (typeof hit._source.specificEpithet !== 'undefined')
+                    writerRequestObject.specificEpithet = hit._source.specificEpithet
+                if (typeof hit._source.eventRemarks!== 'undefined')
+                    writerRequestObject.eventRemarks= hit._source.eventRemarks
+                if (typeof hit._source.latitude !== 'undefined')
+                    writerRequestObject.latitude = hit._source.latitude
+                if (typeof hit._source.longitude !== 'undefined')
+                    writerRequestObject.longitude = hit._source.longitude
+                // Re-write plantStructurePresenceTypes to termID, to match usage
+                if (typeof hit._source.plantStructurePresenceTypes !== 'undefined')
+                    writerRequestObject.termID = hit._source.plantStructurePresenceTypes
+                if (typeof hit._source.source !== 'undefined') {
+                    var source = hit._source.source
+                    // quick hack to change NPN to USA-NPN until pipeline code is updated
+                    if (source == "NPN") source = "USA-NPN"
+                    writerRequestObject.source = source
                 }
+                if (typeof hit._source.eventId !== 'undefined')
+                    writerRequestObject.eventId = hit._source.eventId
 
                 // Use csv-write-stream tool to convert JSON to CSV
                 writer.write(writerRequestObject)
@@ -206,7 +194,7 @@ function runSearch(source, query, limit, callback) {
             // While the count of records is less than the total hits, continue
             // OR the limit is less than the response hits
             if ((countRecords < response.hits.total.value && limit == 0) || (countRecords < limit && limit < response.hits.total.value)) {
-                console.log(countRecords + " of " + response.hits.total.value)
+                //console.log(countRecords + " of " + response.hits.total)
                 // Ask elasticsearch for the next set of hits from this search
                 client.scroll({
                     scrollId: response._scroll_id,
@@ -214,24 +202,30 @@ function runSearch(source, query, limit, callback) {
                 }, getMoreUntilDone);
             } else {
                 writer.end()
-                // Close Stream
-                //countRecords = null;
 
-                // wait for writeStream to finish before calling everything here
+		// wait for writeStream to finish before calling everything here
                 writeStream.on('finish', function() {
                     // Create Policies Files
                     createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords, source);
                     createCitationAndDataUsePoliciesFile();
 
-                    tar.c({
-                        gzip: true,
-                        file: compressedArchiveLocation,
-                        cwd: outputDir,
-                        prefix: 'futres_download',
-                        sync: true
-                    }, [dataFile, dataDownloadMetadataFile, citationAndDataUsePoliciesFile]);
-                    return callback(compressedArchiveLocation);
+                    const archive = archiver('zip', {
+                        zlib: { level: 9 } // Sets the compression level.
+                    });
+                    const output = fs.createWriteStream(compressedArchiveLocation);
+
+                    // listen for all archive data to be written 'close' event is fired only when a file descriptor is involved
+                    output.on('close', function() {
+                        console.log(archive.pointer() + ' total bytes');
+                        console.log('archiver has been finalized and the output file descriptor has closed.');
+                        return callback(compressedArchiveLocation);
+                    });
+
+                    archive.pipe(output);
+                    archive.directory(outputDir, false);
+                    archive.finalize();
                 });
+
             }
         }
     });
@@ -249,7 +243,7 @@ function createResponse(status, body) {
 
 // Create the citation file
 function createCitationAndDataUsePoliciesFile() {
-    fs.copySync(citationAndDataUsePoliciesFile, outputDir + citationAndDataUsePoliciesFile);
+    fs.copySync('data/' + citationAndDataUsePoliciesFile, outputDir + citationAndDataUsePoliciesFile);
 }
 
 // Create the metadata File
@@ -257,18 +251,19 @@ function createDownloadMetadataFile(query, limit, totalPossible, totalReturned, 
     // Create the data-download_metadata file
     // turn obo: into a hyperlink so users can click through to
     // figure out what we are talking about by "obo:"
-    //query = query.replace(/obo:/g, 'http://purl.obolibrary.org/obo/')
+    query = query.replace(/obo:/g, 'http://purl.obolibrary.org/obo/')
     dataDownloadMetadataText = "data file = " + dataFile + "\n";
     dataDownloadMetadataText += "date query ran = " + new Date() + "\n"
     dataDownloadMetadataText += "query = " + query + "\n"
-    //dataDownloadMetadataText += "fields returned = dayOfYear,year,genus,specificEpithet,latitude,longitude,source,eventId\n"
+    //dataDownloadMetadataText += "fields returned = " + source + "\n"
+    dataDownloadMetadataText += "fields returned = dayOfYear,year,genus,specificEpithet,eventRemarks,latitude,longitude,source,eventId\n"
     if (limit != 0) {
         dataDownloadMetadataText += "user specified limit = " + limit + "\n"
     }
     dataDownloadMetadataText += "total results possible = " + Number(totalPossible).toLocaleString() + "\n"
     dataDownloadMetadataText += "total results returned = " + Number(totalReturned).toLocaleString() + "\n"
     // copy file to outputDir
-    fs.copySync(dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
+    fs.copySync('data/' + dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
     // append file synchronously
     fs.appendFileSync(outputDir + dataDownloadMetadataFile, dataDownloadMetadataText);
 }

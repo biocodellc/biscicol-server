@@ -41,18 +41,14 @@ var outputDataFile = outputDir + dataFile
 // copied to temporary directory that is archived and returned to client)
 var dataDownloadMetadataFile = 'FUTRES_README.txt'
 var citationAndDataUsePoliciesFile = 'futres_citation_and_data_use_policies.txt'
-var archiver = require('archiver');
 
-
-//var returnedArchiveFile = 'futres_download.tar.gz'
-var returnedArchiveFile = 'futres.zip'
-//var compressedArchiveLocation = '/tmp/' + shortID + '.tar.gz'
-var compressedArchiveLocation = '/tmp/' + shortID + '.zip'
+var returnedArchiveFile = 'futres_download.tar.gz'
+var compressedArchiveLocation = '/tmp/' + shortID + '.tar.gz'
 
 // The client connection parameter, reading settings from connection.js
 var client = require('./connection.js');
 // set the default port
-var port = Number(process.env.PORT || 3026);
+var port = Number(process.env.PORT || 3024);
 
 // @see https://github.com/evilpacket/helmet
 // you should activate even more headers provided by helmet
@@ -70,11 +66,67 @@ app.use(csp({
     }
 }));
 
+/* The main entry point for application, recognizing requests from client */
+app.use(cors({
+    origin: '*'
+}), function(req, res, body) {
+    // allow connections from JS applications
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // handle request parameters
+    console.log(req.url)
+    var source = req.query.source
+    var query = req.query.q
+    var limit = req.query.limit
+
+    // replace incoming termID request with plantStructurePresenceTypes
+    //query = query.replace('termID', 'plantStructurePresenceTypes')
+
+    // setting limit to 0 means there is no limit
+    if (limit == null || limit == 'undefined') {
+        limit = 0;
+    }
+
+    // Create the output Directory
+    mkdirp(outputDir, function(err) {
+        if (err) {
+            console.error(err)
+        } else {
+            // Run the Search Function
+            runSearch(source, query, limit, function(compressedArchiveResult) {
+                if (compressedArchiveResult == null) {
+                    console.log("no results, return 204")
+                    res.json(204, {
+                        error: 'no results found'
+                    })
+                } else {
+                    // run download option send as attachment
+                    res.download(compressedArchiveResult, returnedArchiveFile, function(err) {
+                        if (err) {
+                            console.log('err:' + err)
+                            // If there is some error, we don't remove files
+                        } else {
+                            console.log('sent:' + compressedArchiveResult);
+                            // Clean up files
+                            fs.removeSync(outputDir);
+                            fs.removeSync(compressedArchiveLocation);
+                        }
+                    });
+                }
+                source = null;
+                query = null;
+                limit = null;
+            });
+        }
+    });
+});
+
+
 /* runSearch command calls elasticsearch */
-var search = function runSearch(source, query, limit, callback) {
+function runSearch(source, query, limit, callback) {
+    console.log(source)
     var writer = csvWriter()
     var writeStream = fs.createWriteStream(outputDataFile)
-
     writer.pipe(writeStream)
     // Counter
     var countRecords = 0
@@ -92,6 +144,8 @@ var search = function runSearch(source, query, limit, callback) {
         //        body: body
         q: query
     }, function getMoreUntilDone(error, response) {
+	    // JBD
+	    console.log(response)
         if (error) {
             console.log("search error: " + error)
         } else {
@@ -160,87 +214,28 @@ var search = function runSearch(source, query, limit, callback) {
                 }, getMoreUntilDone);
             } else {
                 writer.end()
-		    //
+                // Close Stream
+                //countRecords = null;
+
                 // wait for writeStream to finish before calling everything here
                 writeStream.on('finish', function() {
                     // Create Policies Files
                     createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords, source);
                     createCitationAndDataUsePoliciesFile();
 
-		    const archive = archiver('zip', {
-  			zlib: { level: 9 } // Sets the compression level.
-		    });
- 		    const output = fs.createWriteStream(compressedArchiveLocation);
-			
-		    // listen for all archive data to be written 'close' event is fired only when a file descriptor is involved
-		    output.on('close', function() {
-  		        console.log(archive.pointer() + ' total bytes');
-  		        console.log('archiver has been finalized and the output file descriptor has closed.');
-                        return callback(compressedArchiveLocation);
-		    });
-
-		    archive.pipe(output);
-		    archive.directory(outputDir, false);
-		    archive.finalize();
+                    tar.c({
+                        gzip: true,
+                        file: compressedArchiveLocation,
+                        cwd: outputDir,
+                        prefix: 'futres_download',
+                        sync: true
+                    }, [dataFile, dataDownloadMetadataFile, citationAndDataUsePoliciesFile]);
+                    return callback(compressedArchiveLocation);
                 });
             }
         }
     });
 }
-
-/* The main entry point for application, recognizing requests from client */
-app.use(cors({
-    origin: '*'
-}), function(req, res, body) {
-    // allow connections from JS applications
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Content-Disposition', "attachment; filename=\""+returnedArchiveFile+"\"");
-    // handle request parameters
-    console.log('req.url ' + req.url)
-    var source = req.query.source
-    var query = req.query.q
-    var limit = req.query.limit
-
-    // setting limit to 0 means there is no limit
-    if (limit == null || limit == 'undefined') {
-        limit = 0;
-    }
-
-    // Create the output Directory
-    mkdirp(outputDir, function(err) {
-        if (err) {
-            console.error(err)
-        } else {
-            // Run the Search Function
-            search(source, query, limit, function(compressedArchiveResult) {
-                if (compressedArchiveResult == null) {
-                    console.log("no results, return 204")
-                    res.json(204, {
-                        error: 'no results found'
-                    })
-                } else {
-                    // run download option send as attachment
-                        res.download(compressedArchiveResult, returnedArchiveFile, function(err) {
-                        if (err) {
-                            console.log('err:' + err)
-                            // If there is some error, we don't remove files
-                        } else {
-                            console.log('sent:' + compressedArchiveResult + ' as ' +returnedArchiveFile);
-                            // Clean up files
-                            fs.removeSync(outputDir);
-                            fs.removeSync(compressedArchiveLocation);
-                        }
-                    });
-                }
-                source = null;
-                query = null;
-                limit = null;
-            });
-        }
-    });
-});
-
-
 
 function createResponse(status, body) {
     return {
@@ -254,7 +249,7 @@ function createResponse(status, body) {
 
 // Create the citation file
 function createCitationAndDataUsePoliciesFile() {
-    fs.copySync(citationAndDataUsePoliciesFile, outputDir + citationAndDataUsePoliciesFile);
+    fs.copySync('futres_data' + citationAndDataUsePoliciesFile, outputDir + citationAndDataUsePoliciesFile);
 }
 
 // Create the metadata File
@@ -273,7 +268,7 @@ function createDownloadMetadataFile(query, limit, totalPossible, totalReturned, 
     dataDownloadMetadataText += "total results possible = " + Number(totalPossible).toLocaleString() + "\n"
     dataDownloadMetadataText += "total results returned = " + Number(totalReturned).toLocaleString() + "\n"
     // copy file to outputDir
-    fs.copySync(dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
+    fs.copySync('futres_data' + dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
     // append file synchronously
     fs.appendFileSync(outputDir + dataDownloadMetadataFile, dataDownloadMetadataText);
 }
