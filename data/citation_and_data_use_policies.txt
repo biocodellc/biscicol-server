@@ -1,0 +1,34 @@
+The Global PPO data store contains data from member networks.
+Please refer to the following data usage and citation policies for each data source when using this data in your research.
+Also note that in the examples of below, the dates mentioned in the citations are the most recent date of data harvest by the PPO data portal from each source and should be referenced in the citation and NOT the date downloaded by the user of the PPO data portal.
+
+# PEP725 
+# The Pan European Phenology Project
+Date of Last Refresh: 2019-07-01
+Data Policy: http://www.pep725.eu/downloads/PEP725_DataUsePolicy_201304.pdf
+License: (see data policy statement)
+Citation: PEP725 Pan European Phenology Data. Data set accessed 2018-06-09 at http://www.pep725.eu
+
+# USA-NPN
+# USA National Phenology Network
+Date of Last Refresh: 2019-07-01
+Data Policy:  https://www.usanpn.org/terms#DataUse
+License: CC BY 4.0 https://creativecommons.org/licenses/by/4.0/legalcode
+Metadata: https://data.usanpn.org:3002/pop/fgdc 
+Citation: USA National Phenology Network. 2018.  Plant and Animal Phenology Data. Data type: Status and Intensity. [Date range of data used] for Region: [Coordinates]. USA-NPN, Tucson, Arizona, USA. Data set accessed June 11, 2018 at http://doi.org/10.5066/F78S4N1V
+Other Attribution: The acknowledgment “Data were provided by the USA National Phenology Network and the many participants who contribute to its Nature’s Notebook program.” must be included either in the main text or Acknowledgments section of all publications.
+
+# NEON
+# National Ecological Observatory Network
+Date of Last Refresh: 2019-07-01
+Metadata: http://data.neonscience.org/data-policy
+Citation: National Ecological Observatory Network. 2018. Data Product NEON.DP1.10055.  Provisional data downloaded from http://data.neonscience.org June 20, 2018. Battelle, Boulder, CO, USA
+
+# HERBARIUM
+# Herbarium sources harvested from the Guralnick Lab at University of Florida
+Date of Last Refresh: 2019-06-01
+
+# IMAGE_SCORING
+# Image Scoring data using iNaturalist Sources from the Guralnick Lab at University of Florida
+Date of Last Refresh: 2019-07-01
+

@@ -1,0 +1,1356 @@
+{
+	"fields": [
+		{
+			"value": "1-D extent",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0001708"
+		},
+		{
+			"value": "ambidextrous handedness",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0002204"
+		},
+		{
+			"value": "anatomical structure size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0000015"
+		},
+		{
+			"value": "appendage girdle complex size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002373"
+		},
+		{
+			"value": "appendage morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0015071"
+		},
+		{
+			"value": "appendicular skeleton morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010091"
+		},
+		{
+			"value": "autopod morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000572"
+		},
+		{
+			"value": "behavioral quality",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0000186"
+		},
+		{
+			"value": "body height",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001253"
+		},
+		{
+			"value": "body length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001256"
+		},
+		{
+			"value": "body length with tail",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000001"
+		},
+		{
+			"value": "body length without tail",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000002"
+		},
+		{
+			"value": "body mass",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001259"
+		},
+		{
+			"value": "body size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0100005"
+		},
+		{
+			"value": "body width",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0015039"
+		},
+		{
+			"value": "bone element size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1000138"
+		},
+		{
+			"value": "bone mass",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000111"
+		},
+		{
+			"value": "bone morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010003"
+		},
+		{
+			"value": "bone of appendage girdle complex morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003695"
+		},
+		{
+			"value": "bone of reproductive structure length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0006104"
+		},
+		{
+			"value": "bone of reproductive structure morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0006101"
+		},
+		{
+			"value": "bone of reproductive structure width",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0006103"
+		},
+		{
+			"value": "breadth of calcaneal body",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001078"
+		},
+		{
+			"value": "buccopharyngeal membrane morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005679"
+		},
+		{
+			"value": "calcaneus distal breadth (non-plantigrade)",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000023"
+		},
+		{
+			"value": "calcaneus distal depth (non-plantigrade)",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001048"
+		},
+		{
+			"value": "calcaneus length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000022"
+		},
+		{
+			"value": "calcaneus morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002265"
+		},
+		{
+			"value": "calcaneus proximal breadth (non-plantigrade)",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001080"
+		},
+		{
+			"value": "calcaneus proximal depth (non-plantigrade)",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001081"
+		},
+		{
+			"value": "calcaneus proximal length (non-plantigrade)",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001047"
+		},
+		{
+			"value": "calcaneus size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003330"
+		},
+		{
+			"value": "calcaneus width",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001079"
+		},
+		{
+			"value": "cannon bone circumference",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000361"
+		},
+		{
+			"value": "carpal bone morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003518"
+		},
+		{
+			"value": "carpal bone size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002213"
+		},
+		{
+			"value": "carpus morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000554"
+		},
+		{
+			"value": "cartilage element morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002355"
+		},
+		{
+			"value": "circumference",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0001648"
+		},
+		{
+			"value": "connective tissue morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001248"
+		},
+		{
+			"value": "craniofacial bone morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002116"
+		},
+		{
+			"value": "dentition size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002134"
+		},
+		{
+			"value": "depth of calcaneal body",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001082"
+		},
+		{
+			"value": "diameter",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0001334"
+		},
+		{
+			"value": "diastema between upper central incisors length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002225"
+		},
+		{
+			"value": "ear length to notch",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000005"
+		},
+		{
+			"value": "ear length to tragus",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001003"
+		},
+		{
+			"value": "ear morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002102"
+		},
+		{
+			"value": "ear size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003439"
+		},
+		{
+			"value": "ectoderm morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1001050"
+		},
+		{
+			"value": "embryo morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1001076"
+		},
+		{
+			"value": "embryo size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001697"
+		},
+		{
+			"value": "embryo weight",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004725"
+		},
+		{
+			"value": "embryonic tissue morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003689"
+		},
+		{
+			"value": "endochondral bone morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1000066"
+		},
+		{
+			"value": "endoderm morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1001074"
+		},
+		{
+			"value": "endoderm size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003657"
+		},
+		{
+			"value": "external ear length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003426"
+		},
+		{
+			"value": "external ear morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002845"
+		},
+		{
+			"value": "external ectoderm morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005690"
+		},
+		{
+			"value": "external female genitalia morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003774"
+		},
+		{
+			"value": "external female genitalia size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003331"
+		},
+		{
+			"value": "external genitalia size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002407"
+		},
+		{
+			"value": "external male genitalia morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004644"
+		},
+		{
+			"value": "external male genitalia size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004645"
+		},
+		{
+			"value": "face length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002056"
+		},
+		{
+			"value": "face size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002055"
+		},
+		{
+			"value": "facial morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003743"
+		},
+		{
+			"value": "facial skeleton size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002546"
+		},
+		{
+			"value": "female reproductive organ morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004650"
+		},
+		{
+			"value": "female reproductive system morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001119"
+		},
+		{
+			"value": "femur caput depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001026"
+		},
+		{
+			"value": "femur circumference",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010014"
+		},
+		{
+			"value": "femur diaphysis breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001027"
+		},
+		{
+			"value": "femur diaphysis circumference",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001028"
+		},
+		{
+			"value": "femur diaphysis depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001033"
+		},
+		{
+			"value": "femur distal breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001029"
+		},
+		{
+			"value": "femur distal depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001031"
+		},
+		{
+			"value": "femur length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0004348"
+		},
+		{
+			"value": "femur length from caput to lateral condyle",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001070"
+		},
+		{
+			"value": "femur length from caput to medial condyle",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000007"
+		},
+		{
+			"value": "femur length from greater trochanter to medial condyle",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000006"
+		},
+		{
+			"value": "femur morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000559"
+		},
+		{
+			"value": "femur proximal breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001024"
+		},
+		{
+			"value": "femur proximal depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001030"
+		},
+		{
+			"value": "femur size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000369"
+		},
+		{
+			"value": "femur trochanter breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001025"
+		},
+		{
+			"value": "femur trochlea breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001032"
+		},
+		{
+			"value": "femur width",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000666"
+		},
+		{
+			"value": "footplate morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004019"
+		},
+		{
+			"value": "force",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0001035"
+		},
+		{
+			"value": "foregut morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000474"
+		},
+		{
+			"value": "forelimb bud morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005746"
+		},
+		{
+			"value": "forelimb bud size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005748"
+		},
+		{
+			"value": "forelimb length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010023"
+		},
+		{
+			"value": "forelimb long bone morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010104"
+		},
+		{
+			"value": "forelimb mass",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000687"
+		},
+		{
+			"value": "forelimb morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000550"
+		},
+		{
+			"value": "forelimb stylopod morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003854"
+		},
+		{
+			"value": "forelimb zeugopod bone length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003005"
+		},
+		{
+			"value": "forelimb zeugopod bone morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002478"
+		},
+		{
+			"value": "forelimb zeugopod bone size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002657"
+		},
+		{
+			"value": "forelimb zeugopod morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003855"
+		},
+		{
+			"value": "gastrointestinal system morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000462"
+		},
+		{
+			"value": "germ layer morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1001060"
+		},
+		{
+			"value": "gonad length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001060"
+		},
+		{
+			"value": "gonad mesenchyme morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004165"
+		},
+		{
+			"value": "gonad rudiment morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005651"
+		},
+		{
+			"value": "gonad size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002017"
+		},
+		{
+			"value": "gutted and skinned body mass",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001056"
+		},
+		{
+			"value": "gutted body mass",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001053"
+		},
+		{
+			"value": "handedness",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0002201"
+		},
+		{
+			"value": "head circumference",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000047"
+		},
+		{
+			"value": "head length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000038"
+		},
+		{
+			"value": "head mass",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000420"
+		},
+		{
+			"value": "head mesenchyme morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005369"
+		},
+		{
+			"value": "head mesenchyme size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005765"
+		},
+		{
+			"value": "head morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000432"
+		},
+		{
+			"value": "head size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000002"
+		},
+		{
+			"value": "head width",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000027"
+		},
+		{
+			"value": "height",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0000119"
+		},
+		{
+			"value": "hind foot length with nail",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000003"
+		},
+		{
+			"value": "hind foot length without nail",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000004"
+		},
+		{
+			"value": "hind paw size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000573"
+		},
+		{
+			"value": "hindlimb bud morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005749"
+		},
+		{
+			"value": "hindlimb bud size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005751"
+		},
+		{
+			"value": "hindlimb length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010024"
+		},
+		{
+			"value": "hindlimb long bone morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010105"
+		},
+		{
+			"value": "hindlimb mass",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000689"
+		},
+		{
+			"value": "hindlimb morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000556"
+		},
+		{
+			"value": "hindlimb stylopod morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003856"
+		},
+		{
+			"value": "hindlimb zeugopod morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003857"
+		},
+		{
+			"value": "humerus diaphysis breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001034"
+		},
+		{
+			"value": "humerus diaphysis depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001040"
+		},
+		{
+			"value": "humerus distal breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001039"
+		},
+		{
+			"value": "humerus distal depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001037"
+		},
+		{
+			"value": "humerus length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0004350"
+		},
+		{
+			"value": "humerus length from trochlea to caput",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000008"
+		},
+		{
+			"value": "humerus length from trochlea to ventral tubercle",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000009"
+		},
+		{
+			"value": "humerus medial trochlear height",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001068"
+		},
+		{
+			"value": "humerus morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005296"
+		},
+		{
+			"value": "humerus proximal breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001035"
+		},
+		{
+			"value": "humerus proximal depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001038"
+		},
+		{
+			"value": "humerus proximal depth at median tubercle",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001066"
+		},
+		{
+			"value": "humerus size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0100000"
+		},
+		{
+			"value": "humerus trochlea breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001036"
+		},
+		{
+			"value": "humerus trochlear height at sagittal crest",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001069"
+		},
+		{
+			"value": "humerus trochlear sulcus height",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001067"
+		},
+		{
+			"value": "humerus width",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000280"
+		},
+		{
+			"value": "hypodermis morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003705"
+		},
+		{
+			"value": "hypodermis size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003916"
+		},
+		{
+			"value": "incisor morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005358"
+		},
+		{
+			"value": "incisor size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1000113"
+		},
+		{
+			"value": "incisor tooth length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004075"
+		},
+		{
+			"value": "information carrier",
+			"definedBy": "http://purl.obolibrary.org/obo/IAO_0000015"
+		},
+		{
+			"value": "integumentary system morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0100020"
+		},
+		{
+			"value": "jaw morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000454"
+		},
+		{
+			"value": "jaw skeleton size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003722"
+		},
+		{
+			"value": "left handedness",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0002202"
+		},
+		{
+			"value": "left ovary length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001064"
+		},
+		{
+			"value": "left testis length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001059"
+		},
+		{
+			"value": "leg size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003150"
+		},
+		{
+			"value": "length",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0000122"
+		},
+		{
+			"value": "length of talus along the midline",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001077"
+		},
+		{
+			"value": "limb bud morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005650"
+		},
+		{
+			"value": "limb bud size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004018"
+		},
+		{
+			"value": "limb length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000548"
+		},
+		{
+			"value": "limb long bone morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005468"
+		},
+		{
+			"value": "limb mesenchyme morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005370"
+		},
+		{
+			"value": "limb morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002109"
+		},
+		{
+			"value": "long bone length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002381"
+		},
+		{
+			"value": "long bone morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003723"
+		},
+		{
+			"value": "long bone size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002651"
+		},
+		{
+			"value": "male reproductive organ morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004643"
+		},
+		{
+			"value": "male reproductive system morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001145"
+		},
+		{
+			"value": "manufacturer role",
+			"definedBy": "http://purl.obolibrary.org/obo/OBI_0000571"
+		},
+		{
+			"value": "manus length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1000048"
+		},
+		{
+			"value": "manus size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002188"
+		},
+		{
+			"value": "material supplier role",
+			"definedBy": "http://purl.obolibrary.org/obo/OBI_0000018"
+		},
+		{
+			"value": "material target of observation role",
+			"definedBy": "http://purl.obolibrary.org/obo/BCO_0000046"
+		},
+		{
+			"value": "maxillary prominence morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005277"
+		},
+		{
+			"value": "mesenchyme morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004221"
+		},
+		{
+			"value": "mesoderm morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1001061"
+		},
+		{
+			"value": "metacarpal bone length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003047"
+		},
+		{
+			"value": "metacarpal bone morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003763"
+		},
+		{
+			"value": "metacarpal bone of digit 1 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003043"
+		},
+		{
+			"value": "metacarpal bone of digit 1 size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003040"
+		},
+		{
+			"value": "metacarpal bone of digit 2 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002676"
+		},
+		{
+			"value": "metacarpal bone of digit 3 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003044"
+		},
+		{
+			"value": "metacarpal bone of digit 4 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003045"
+		},
+		{
+			"value": "metacarpal bone of digit 5 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003046"
+		},
+		{
+			"value": "metacarpal bone size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002195"
+		},
+		{
+			"value": "metacarpus length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010022"
+		},
+		{
+			"value": "metacarpus morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003073"
+		},
+		{
+			"value": "metatarsal bone length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004033"
+		},
+		{
+			"value": "metatarsal bone of digit 1 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003066"
+		},
+		{
+			"value": "metatarsal bone of digit 1 size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003053"
+		},
+		{
+			"value": "metatarsal bone of digit 2 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003272"
+		},
+		{
+			"value": "metatarsal bone of digit 3 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002565"
+		},
+		{
+			"value": "metatarsal bone of digit 4 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002567"
+		},
+		{
+			"value": "metatarsal bone of digit 5 length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002569"
+		},
+		{
+			"value": "metatarsal bone size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002251"
+		},
+		{
+			"value": "metatarsus mass",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000688"
+		},
+		{
+			"value": "metatarsus morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003072"
+		},
+		{
+			"value": "midface length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003500"
+		},
+		{
+			"value": "midface morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003499"
+		},
+		{
+			"value": "molar morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002689"
+		},
+		{
+			"value": "molar tooth size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004257"
+		},
+		{
+			"value": "morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0000051"
+		},
+		{
+			"value": "mouth morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000452"
+		},
+		{
+			"value": "mouth mucosa morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003745"
+		},
+		{
+			"value": "mouth size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002024"
+		},
+		{
+			"value": "neural crest morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004874"
+		},
+		{
+			"value": "neural fold morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005365"
+		},
+		{
+			"value": "neural plate morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005657"
+		},
+		{
+			"value": "odontogenic mesenchyme morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1001075"
+		},
+		{
+			"value": "olecranon depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001074"
+		},
+		{
+			"value": "olecranon length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001071"
+		},
+		{
+			"value": "organismal quality",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0001995"
+		},
+		{
+			"value": "outer ear cartilage morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003737"
+		},
+		{
+			"value": "outer ear size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000017"
+		},
+		{
+			"value": "ovary diameter",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0010375"
+		},
+		{
+			"value": "ovary length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001062"
+		},
+		{
+			"value": "ovary mass",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000641"
+		},
+		{
+			"value": "ovary morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001126"
+		},
+		{
+			"value": "ovary size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001127"
+		},
+		{
+			"value": "paw/hand/foot/hoof morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0004271"
+		},
+		{
+			"value": "pectoral complex size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003148"
+		},
+		{
+			"value": "pelvic complex length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002715"
+		},
+		{
+			"value": "perimeter",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0001711"
+		},
+		{
+			"value": "pes length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1000049"
+		},
+		{
+			"value": "pharyngeal arch 1 morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004228"
+		},
+		{
+			"value": "pharyngeal arch 1 size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004232"
+		},
+		{
+			"value": "pharyngeal arch mesenchymal region morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005371"
+		},
+		{
+			"value": "pharyngeal arch morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003750"
+		},
+		{
+			"value": "pharyngeal arch size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003881"
+		},
+		{
+			"value": "physical object quality",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0001241"
+		},
+		{
+			"value": "physical quality",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0001018"
+		},
+		{
+			"value": "prechordal plate morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0004387"
+		},
+		{
+			"value": "premolar tooth morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003215"
+		},
+		{
+			"value": "premolar tooth size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002710"
+		},
+		{
+			"value": "quality",
+			"definedBy": "http://purl.obolibrary.org/obo/BFO_0000019"
+		},
+		{
+			"value": "radius bone size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002374"
+		},
+		{
+			"value": "radius length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0004355"
+		},
+		{
+			"value": "radius morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000552"
+		},
+		{
+			"value": "realizable entity",
+			"definedBy": "http://purl.obolibrary.org/obo/BFO_0000017"
+		},
+		{
+			"value": "regulator role",
+			"definedBy": "http://purl.obolibrary.org/obo/OBI_0000014"
+		},
+		{
+			"value": "regulatory role",
+			"definedBy": "http://purl.obolibrary.org/obo/OBI_0000017"
+		},
+		{
+			"value": "reproductive system morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002160"
+		},
+		{
+			"value": "reproductive system size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002007"
+		},
+		{
+			"value": "respiratory conducting tube morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0004391"
+		},
+		{
+			"value": "respiratory mucosa morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002277"
+		},
+		{
+			"value": "respiratory system epithelium morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0003297"
+		},
+		{
+			"value": "respiratory system morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002132"
+		},
+		{
+			"value": "respiratory tract epithelium morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005279"
+		},
+		{
+			"value": "respiratory tract epithelium size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005281"
+		},
+		{
+			"value": "right handedness",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0002203"
+		},
+		{
+			"value": "right ovary length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001063"
+		},
+		{
+			"value": "right testis length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001058"
+		},
+		{
+			"value": "role",
+			"definedBy": "http://purl.obolibrary.org/obo/BFO_0000023"
+		},
+		{
+			"value": "service provider role",
+			"definedBy": "http://purl.obolibrary.org/obo/OBI_0000947"
+		},
+		{
+			"value": "shoulder bone morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004002"
+		},
+		{
+			"value": "size",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0000117"
+		},
+		{
+			"value": "skeletal body mass",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001055"
+		},
+		{
+			"value": "skeletal system morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004155"
+		},
+		{
+			"value": "skeleton of pes length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002250"
+		},
+		{
+			"value": "skin layer morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT4000009"
+		},
+		{
+			"value": "skin of body size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002168"
+		},
+		{
+			"value": "skinned body mass",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001054"
+		},
+		{
+			"value": "skull morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000438"
+		},
+		{
+			"value": "skull size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003104"
+		},
+		{
+			"value": "snout-vent length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000032"
+		},
+		{
+			"value": "specimen role",
+			"definedBy": "http://purl.obolibrary.org/obo/OBI_0000112"
+		},
+		{
+			"value": "surface structure morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0015066"
+		},
+		{
+			"value": "tail diameter",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000588"
+		},
+		{
+			"value": "tail length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002758"
+		},
+		{
+			"value": "tail morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002111"
+		},
+		{
+			"value": "tail size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0003456"
+		},
+		{
+			"value": "talus breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000021"
+		},
+		{
+			"value": "talus distal articular breadth (non-plantigrade)",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000017"
+		},
+		{
+			"value": "talus distal articular depth (non-plantigrade)",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000018"
+		},
+		{
+			"value": "talus distal breadth (non-plantigrade)",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001044"
+		},
+		{
+			"value": "talus lateral depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001042"
+		},
+		{
+			"value": "talus lateral length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000013"
+		},
+		{
+			"value": "talus length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000020"
+		},
+		{
+			"value": "talus medial depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001043"
+		},
+		{
+			"value": "talus medial length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000016"
+		},
+		{
+			"value": "talus morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005109"
+		},
+		{
+			"value": "talus size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005110"
+		},
+		{
+			"value": "talus trochlea breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001046"
+		},
+		{
+			"value": "talus width",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001041"
+		},
+		{
+			"value": "tarsal bone morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002810"
+		},
+		{
+			"value": "tarsal bone size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002564"
+		},
+		{
+			"value": "tarsal region size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002382"
+		},
+		{
+			"value": "tarsus morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005104"
+		},
+		{
+			"value": "testes morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001146"
+		},
+		{
+			"value": "testes size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0001148"
+		},
+		{
+			"value": "testis length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001057"
+		},
+		{
+			"value": "testis weight",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0004079"
+		},
+		{
+			"value": "tibia diaphysis breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001008"
+		},
+		{
+			"value": "tibia diaphysis circumference",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001023"
+		},
+		{
+			"value": "tibia diaphysis depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001009"
+		},
+		{
+			"value": "tibia diaphysis width",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000026"
+		},
+		{
+			"value": "tibia distal breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001004"
+		},
+		{
+			"value": "tibia distal depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001005"
+		},
+		{
+			"value": "tibia distal width",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000028"
+		},
+		{
+			"value": "tibia lateral length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000025"
+		},
+		{
+			"value": "tibia length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0004357"
+		},
+		{
+			"value": "tibia medial length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001021"
+		},
+		{
+			"value": "tibia morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0000558"
+		},
+		{
+			"value": "tibia proximal breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001006"
+		},
+		{
+			"value": "tibia proximal depth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001007"
+		},
+		{
+			"value": "tibia proximal width",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000027"
+		},
+		{
+			"value": "tibia size trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0100001"
+		},
+		{
+			"value": "tibia width",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT1000289"
+		},
+		{
+			"value": "tooth enamel organ morphology",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0005184"
+		},
+		{
+			"value": "tooth morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0002100"
+		},
+		{
+			"value": "tooth row length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0000030"
+		},
+		{
+			"value": "tooth size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1000112"
+		},
+		{
+			"value": "tracheal tube diameter",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0000166"
+		},
+		{
+			"value": "tracheal tube length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0000167"
+		},
+		{
+			"value": "tracheal tube size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0000168"
+		},
+		{
+			"value": "trochlea tali length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001045"
+		},
+		{
+			"value": "tube diameter",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0000171"
+		},
+		{
+			"value": "tube size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0000172"
+		},
+		{
+			"value": "ulna depth across the process anaconaeus",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001076"
+		},
+		{
+			"value": "ulna lateral length",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001075"
+		},
+		{
+			"value": "ulna length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0004370"
+		},
+		{
+			"value": "ulna morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005108"
+		},
+		{
+			"value": "ulna proximal articular breadth",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001072"
+		},
+		{
+			"value": "ulna size",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002379"
+		},
+		{
+			"value": "ulna width",
+			"definedBy": "https://purl.obolibrary.org/obo/FOVT_0001073"
+		},
+		{
+			"value": "upper arm circumference",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1000030"
+		},
+		{
+			"value": "upper leg circumference",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_1000033"
+		},
+		{
+			"value": "viscerocranium morphology trait",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_VT0005274"
+		},
+		{
+			"value": "weight",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0000128"
+		},
+		{
+			"value": "width",
+			"definedBy": "http://purl.obolibrary.org/obo/PATO_0000921"
+		},
+		{
+			"value": "zeugopod length",
+			"definedBy": "http://purl.obolibrary.org/obo/OBA_0002720"
+		}
+	]
+}
