@@ -249,7 +249,7 @@ function createResponse(status, body) {
 
 // Create the citation file
 function createCitationAndDataUsePoliciesFile() {
-    fs.copySync('futres_data' + citationAndDataUsePoliciesFile, outputDir + citationAndDataUsePoliciesFile);
+    fs.copySync('futres_data/' + citationAndDataUsePoliciesFile, outputDir + citationAndDataUsePoliciesFile);
 }
 
 // Create the metadata File
@@ -268,7 +268,7 @@ function createDownloadMetadataFile(query, limit, totalPossible, totalReturned, 
     dataDownloadMetadataText += "total results possible = " + Number(totalPossible).toLocaleString() + "\n"
     dataDownloadMetadataText += "total results returned = " + Number(totalReturned).toLocaleString() + "\n"
     // copy file to outputDir
-    fs.copySync('futres_data' + dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
+    fs.copySync('futres_data/' + dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
     // append file synchronously
     fs.appendFileSync(outputDir + dataDownloadMetadataFile, dataDownloadMetadataText);
 }
