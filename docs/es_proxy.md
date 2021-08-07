@@ -9,7 +9,7 @@ Following are some examples of interacting with the endpoint using [curl](https:
 This query shows the available indices at this endpoint
 Can be executed from the browser simply as: https://biscicol.org/api/v1/query/_cat/indices?pretty
 ```
-curl 'http://biscicol.org/v1/query/_cat/indices?pretty'
+curl 'http://biscicol.org/api/v1/query/_cat/indices?pretty'
 ```
 
 # Query for genus = Quercus
@@ -18,7 +18,7 @@ The attribute size can be adjusted up to 10,000 records.
 
 Can be executed from the browser simply as: https://biscicol.org/api/v1/query/_search?pretty&size=1&q=genus:Quercus
 ```
-curl 'http://biscicol.org/v1/query/_search?pretty&size=1&q=genus:Quercus'
+curl 'http://biscicol.org/api/v1/query/_search?pretty&size=1&q=genus:Quercus'
 ```
 
 # Query by sending JSON request
