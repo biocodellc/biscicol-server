@@ -6,13 +6,6 @@ Note that most requests and all responses to this service require packaging in J
 
 Following are some examples of interacting with the endpoint using [curl](https://curl.haxx.se/).   Note that the requests below mainly offer methods of retrieving results of less than 10,000 records.   See the [section on es2csv](https://github.com/biocodellc/ppo-data-server#fetch-a-large-number-of-records-using-es2csv) to retrieve more than 10,000 records or to return results as CSV.
 
-# Get list of indices:
-This query shows the available indices at this endpoint
-Can be executed from the browser simply as: https://biscicol.org/api/v1/query/_cat/indices?pretty
-```
-curl 'https://biscicol.org/futresapi/v1/query/_cat/indices?pretty'
-```
-
 # Query examples
 Note that the attribute size can be adjusted up to 10,000 records.
 
