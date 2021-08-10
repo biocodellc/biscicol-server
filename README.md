@@ -6,12 +6,14 @@ Query functions return instance data run through a node.js reverse proxy to an e
 
 The URL endpoint prefix for all services is at `https://biscicol.org/`  Following are the services that live below this endpoint.  Please note the versions of the service endpoints below which contain different current versions, indicated by `v1` or `v2`.  It is important to reference the correct version for each service to return the documented responses:
 
-FuTRES Endpoints
+[api/v1/query/{INDEX}/](docs/es_futres_proxy.md) Query the data store
+
+FuTRES Specific Endpoints
   *  [futresapi/v3/download](docs/download_futres_proxy.md) Query the Futres data store download_futres_proxy.md
   *  [futresapi/v1/query](docs/es_futres_proxy.md) Query the Futres data store 
   *  [futresapi/v2/fovt](docs/futres_ontology_proxy.md) Lookup terms from the FOVT ontology
 
-Plant Phenology Endpoints
+Plant Phenology Ontology Specific Endpoints
   *  [api/v1/query](docs/es_proxy.md) Query the PPO data store 
   *  [api/v3/download](docs/download_proxy.md) Downlaod results as a package from data store
   *  [api/v2/ppo](docs/ontology_proxy.md)  Lookup terms from the PPO ontology
