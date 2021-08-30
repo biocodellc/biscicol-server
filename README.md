@@ -10,6 +10,7 @@ The URL endpoint prefix for all services is at `https://biscicol.org/`  Followin
 
 FuTRES Specific Endpoints
   *  [futresapi/v3/download](docs/download_futres_proxy.md) Query the Futres data store download_futres_proxy.md
+  *  [futresapi/downloadable](https://biscicol.org/futresapi/downloadable/)  Directory containing a single zip file of ALL FuTRES data
   *  [futresapi/v2/fovt](docs/futres_ontology_proxy.md) Lookup terms from the FOVT ontology
   *  [api/v1/query/futres/](docs/es_futres_proxy.md) Query the Futres data store 
 
