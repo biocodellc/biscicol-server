@@ -142,6 +142,18 @@ var search = function runSearch(source, query, limit, callback) {
                     else   
                         writerRequestObject.projectID = "https://geome-db.org/workbench/project-overview?projectId="+hit._source.projectID 
                 }
+                if (typeof hit._source.mapped_traits !== 'undefined') {
+		   mapped_traits = hit._source.mapped_traits
+		   mapped_traits_string = ''
+		   for(var i=0;i<mapped_traits.length;i++){
+			if (i > 0) {
+		 		mapped_traits_string += '|'
+			}
+			mapped_traits_string += mapped_traits[i]
+		    }
+                    writerRequestObject.inferred_traits = mapped_traits_string
+		}
+
 
                 // Use csv-write-stream tool to convert JSON to CSV
                 writer.write(writerRequestObject)
