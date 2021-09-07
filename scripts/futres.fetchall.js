@@ -110,6 +110,14 @@ var search = function runSearch(source, query, limit, callback) {
                     writerRequestObject.basisOfRecord = hit._source.basisOfRecord
                 if (typeof hit._source.scientificName !== 'undefined')
                     writerRequestObject.scientificName = hit._source.scientificName
+                if (typeof hit._source.genus!== 'undefined')
+                    writerRequestObject.genus= hit._source.genus
+                if (typeof hit._source.family!== 'undefined')
+                    writerRequestObject.family= hit._source.family
+                if (typeof hit._source.order!== 'undefined')
+                    writerRequestObject.order= hit._source.order
+                if (typeof hit._source.class!== 'undefined')
+                    writerRequestObject.class= hit._source.class
                 if (typeof hit._source.measurementMethod !== 'undefined')
                     writerRequestObject.measurementMethod = hit._source.measurementMethod 
                 if (typeof hit._source.measurementUnit !== 'undefined')
