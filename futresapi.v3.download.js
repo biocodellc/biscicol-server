@@ -83,6 +83,8 @@ var search = function runSearch(source, query, limit, callback) {
         fetchSize = limit
     }
 
+    console.log('starting elasticsearch query...')
+	console.log(query);
     //  Execute client search with scrolling
     client.search({
         index: 'futres',
@@ -99,48 +101,27 @@ var search = function runSearch(source, query, limit, callback) {
             response.hits.hits.forEach(function(hit) {
                 var writerRequestObject = new Object()
                 // Handle expected field names from FOVT server
-                if (typeof hit._source.materialSampleID !== 'undefined')
-                    writerRequestObject.materialSampleID = hit._source.materialSampleID
-                if (typeof hit._source.individualID !== 'undefined')
-                    writerRequestObject.individualID = hit._source.individualID
-                if (typeof hit._source.country !== 'undefined')
-                    writerRequestObject.country = hit._source.country
-                if (typeof hit._source.locality !== 'undefined')
-                    writerRequestObject.locality = hit._source.locality
-                if (typeof hit._source.yearCollected !== 'undefined')
-                    writerRequestObject.yearCollected = hit._source.yearCollected
-                if (typeof hit._source.samplingProtocol !== 'undefined')
-                    writerRequestObject.samplingProtocol = hit._source.samplingProtocol
-                if (typeof hit._source.basisOfRecord !== 'undefined')
-                    writerRequestObject.basisOfRecord = hit._source.basisOfRecord
-                if (typeof hit._source.scientificName !== 'undefined')
-                    writerRequestObject.scientificName = hit._source.scientificName
-		if (typeof hit._source.genus!== 'undefined')
-                    writerRequestObject.genus= hit._source.genus
-                if (typeof hit._source.family!== 'undefined')
-                    writerRequestObject.family= hit._source.family
-                if (typeof hit._source.order!== 'undefined')
-                    writerRequestObject.order= hit._source.order
-                if (typeof hit._source.class!== 'undefined')
-                    writerRequestObject.class= hit._source.class
-                if (typeof hit._source.measurementMethod !== 'undefined')
-                    writerRequestObject.measurementMethod = hit._source.measurementMethod 
-                if (typeof hit._source.measurementUnit !== 'undefined')
-                    writerRequestObject.measurementUnit = hit._source.measurementUnit
-                if (typeof hit._source.measurementType !== 'undefined')
-                    writerRequestObject.measurementType = hit._source.measurementType
-                if (typeof hit._source.measurementValue !== 'undefined')
-                    writerRequestObject.measurementValue = hit._source.measurementValue
-                if (typeof hit._source.lifeStage !== 'undefined')
-                    writerRequestObject.lifeStage = hit._source.lifeStage
-                if (typeof hit._source.sex !== 'undefined')
-                    writerRequestObject.sex = hit._source.sex
-                if (typeof hit._source.mapped_project !== 'undefined')
-                    writerRequestObject.mapped_project = hit._source.mapped_project
-                if (typeof hit._source.decimalLatitude !== 'undefined')
-                    writerRequestObject.decimalLatitude = hit._source.decimalLatitude
-                if (typeof hit._source.decimalLongitude !== 'undefined')
-                    writerRequestObject.decimalLongitude = hit._source.decimalLongitude
+                writerRequestObject.materialSampleID = hit._source.materialSampleID
+                writerRequestObject.individualID = hit._source.individualID
+                writerRequestObject.country = hit._source.country
+                writerRequestObject.locality = hit._source.locality
+                writerRequestObject.yearCollected = hit._source.yearCollected
+                writerRequestObject.samplingProtocol = hit._source.samplingProtocol
+                writerRequestObject.basisOfRecord = hit._source.basisOfRecord
+                writerRequestObject.scientificName = hit._source.scientificName
+                writerRequestObject.genus= hit._source.genus
+                writerRequestObject.family= hit._source.family
+                writerRequestObject.order= hit._source.order
+                writerRequestObject.class= hit._source.class
+                writerRequestObject.measurementMethod = hit._source.measurementMethod 
+                writerRequestObject.measurementUnit = hit._source.measurementUnit
+                writerRequestObject.measurementType = hit._source.measurementType
+                writerRequestObject.measurementValue = hit._source.measurementValue
+                writerRequestObject.lifeStage = hit._source.lifeStage
+                writerRequestObject.sex = hit._source.sex
+                writerRequestObject.mapped_project = hit._source.mapped_project
+                writerRequestObject.decimalLatitude = hit._source.decimalLatitude
+                writerRequestObject.decimalLongitude = hit._source.decimalLongitude
                 if (typeof hit._source.projectID !== 'undefined') {
                     if (hit._source.projectID == "Vertnet")
                         writerRequestObject.projectID = hit._source.projectID 
