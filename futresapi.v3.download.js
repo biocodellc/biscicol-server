@@ -112,7 +112,7 @@ var search = function runSearch(source, query, limit, callback) {
                 writerRequestObject.genus= hit._source.genus
                 writerRequestObject.family= hit._source.family
                 writerRequestObject.order= hit._source.order
-                writerRequestObject.class= hit._source.class
+                writerRequestObject.class = hit._source.class
                 writerRequestObject.measurementMethod = hit._source.measurementMethod 
                 writerRequestObject.measurementUnit = hit._source.measurementUnit
                 writerRequestObject.measurementType = hit._source.measurementType
@@ -122,10 +122,10 @@ var search = function runSearch(source, query, limit, callback) {
                 writerRequestObject.mapped_project = hit._source.mapped_project
                 writerRequestObject.decimalLatitude = hit._source.decimalLatitude
                 writerRequestObject.decimalLongitude = hit._source.decimalLongitude
-                writerRequestObject.minimumChronmetricAge = hit._source.minimumChronmetricAge
-                writerRequestObject.minimumChronmetricAgeReferenceSystem = hit._source.minimumChronmetricAgeReferenceSystem
-                writerRequestObject.maximumChronometricAge= hit._source.maximumChronometricAge
-                writerRequestObject.maximumChronometricAgeReferenceSystem= hit._source.maximumChronometricAgeReferenceSystem
+                writerRequestObject.minimumChronometricAge = hit._source.minimumChronometricAge
+                writerRequestObject.minimumChronometricAgeReferenceSystem = hit._source.minimumChronometricAgeReferenceSystem
+                writerRequestObject.maximumChronometricAge = hit._source.maximumChronometricAge
+                writerRequestObject.maximumChronometricAgeReferenceSystem = hit._source.maximumChronometricAgeReferenceSystem
                 if (typeof hit._source.projectID !== 'undefined') {
                     if (hit._source.projectID == "Vertnet")
                         writerRequestObject.projectID = hit._source.projectID 
