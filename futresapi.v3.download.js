@@ -122,6 +122,10 @@ var search = function runSearch(source, query, limit, callback) {
                 writerRequestObject.mapped_project = hit._source.mapped_project
                 writerRequestObject.decimalLatitude = hit._source.decimalLatitude
                 writerRequestObject.decimalLongitude = hit._source.decimalLongitude
+                writerRequestObject.minimumChronmetricAge = hit._source.minimumChronmetricAge
+                writerRequestObject.minimumChronmetricAgeReferenceSystem = hit._source.minimumChronmetricAgeReferenceSystem
+                writerRequestObject.maximumChronometricAge= hit._source.maximumChronometricAge
+                writerRequestObject.maximumChronometricAgeReferenceSystem= hit._source.maximumChronometricAgeReferenceSystem
                 if (typeof hit._source.projectID !== 'undefined') {
                     if (hit._source.projectID == "Vertnet")
                         writerRequestObject.projectID = hit._source.projectID 
