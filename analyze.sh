@@ -5,12 +5,12 @@ echo "************************************************"
 echo "* Counting search requests. "
 echo "* each source counted as a unique request"
 echo "************************************************"
-files=($(ls -1  ../../.pm2/logs/es-proxy-out.log))
+files=($(ls -1  ../../.pm2/logs/api.v1.query-out.log))
 for i in "${files[@]}"
 do
-    creation_date_seconds=$(date -d "2018-04-02" '+%s')
+    creation_date_seconds=$(date -d "2021-08-04" '+%s')
     mod_date_seconds=$(date -r $i '+%s')
-    creation_date=$(date -d "2018-04-02" +%F)
+    creation_date=$(date -d "2021-08-04" +%F)
     mod_date=$(date +%F -r $i)
     diff_days=$(( ($mod_date_seconds - $creation_date_seconds)/(60*60*24) ))
     total_files_sent=$(cat $i |  grep "_search" | wc -l)
@@ -37,12 +37,12 @@ echo ""
 echo "************************************************"
 echo "* Counting download requests"
 echo "************************************************"
-files=($(ls -1  ../../.pm2/logs/download-proxy-v2-out.log))
+files=($(ls -1  ../../.pm2/logs/api.v3.download-out.log))
 for i in "${files[@]}"
 do
-    creation_date_seconds=$(date -d "2018-04-02" '+%s')
+    creation_date_seconds=$(date -d "2021-08-04" '+%s')
     mod_date_seconds=$(date -r $i '+%s')
-    creation_date=$(date -d "2018-04-02" +%F)
+    creation_date=$(date -d "2021-08-04" +%F)
     mod_date=$(date +%F -r $i)
     diff_days=$(( ($mod_date_seconds - $creation_date_seconds)/(60*60*24) ))
     files_sent=$(cat $i |  grep sent: | sort | uniq | wc -l)
