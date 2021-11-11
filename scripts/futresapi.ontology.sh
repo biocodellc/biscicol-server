@@ -1,5 +1,5 @@
 /*
-A service to parse the plant phenology ontology and return relevant parts
+A service to parse the FOVT ontology and return relevant parts
 */
 var fs = require('fs')
 var $rdf = require('rdflib');
@@ -17,7 +17,7 @@ var store=$rdf.graph();
 
 // This is the ontology file to read. To save IO i've checked out the file
 // to the local filesystem, poining to a specific release
-var rdfData=fs.readFileSync('../fovt/fovt.owl').toString();
+var rdfData=fs.readFileSync('/home/jdeck/code/fovt/fovt.owl').toString();
 
 var contentType='application/rdf+xml';
 var baseUrl="http://futres.org/";
@@ -36,10 +36,32 @@ allClasses = classWalker(sizeClasses,'http://purl.obolibrary.org/obo/PATO_000103
 allClasses = deDuplicate(allClasses,'termID');
 
 // Write long form of JSON files
-writeFile("futres_data/all.json",allClasses);
+var allFile = "/home/jdeck/code/biscicol-server/futres_data/all.json"
+console.log("writing " + allFile)
+writeFile(allFile,allClasses);
 
 // Write short form of JSON files
-writeFile("futres_data/all_short.json",createShortFile(allClasses))
+var allShortFile = "/home/jdeck/code/biscicol-server/futres_data/all_short.json"
+console.log("writing " + allShortFile)
+writeFile(allShortFile,createShortFile(allClasses))
+
+// Write GEOME list format 
+var allGeomeFile = "/home/jdeck/code/biscicol-server/futres_data/all_geome.json"
+console.log("writing " + allGeomeFile)
+writeFile(allGeomeFile,createGeomeFile(allClasses))
+
+// Create geome form of of classes (just label and ID)
+function createGeomeFile(traitClass) {
+    var shortFormArray = [] 
+    for(var item of traitClass) { 
+    	var shortForm = {}
+        shortForm['value'] = item.label
+        shortForm['definedBy'] = item.uri
+	shortFormArray.push(shortForm)
+    }
+    return shortFormArray;
+}
+
 
 // Create short form of classes (just label and ID)
 function createShortFile(traitClass) {
@@ -75,13 +97,13 @@ function classWalker(results, startingClass,filter) {
     allTriples.forEach(function(triple) {
         var termID = triple.subject.uri
         if (termID) {
-            console.log(triple.subject.uri)
+            //console.log(triple.subject.uri)
             // populate a labelTriple to hold the information for the rdfsLabel
             var labelTriple = store.any($rdf.sym(triple.subject.uri), rdfsLabel, undefined)
-            console.log("   labelTriple="+labelTriple)
+            //console.log("   labelTriple="+labelTriple)
             // populate a definitionTriple to hold the information for the definition
             var definitionTriple = store.any($rdf.sym(triple.subject.uri), definitionLabel, undefined)
-            console.log("   defTriple="+definitionTriple)
+            //console.log("   defTriple="+definitionTriple)
             // Create a plantStage object to hold the JSON attributes for each stage
             var plantStage = {}
             // the default URI will be the abbreviated version, this is because this is what is stored in ES datastore
