@@ -120,6 +120,7 @@ var search = function runSearch(source, query, limit, callback) {
                 writerRequestObject.lifeStage = hit._source.lifeStage
                 writerRequestObject.sex = hit._source.sex
                 writerRequestObject.mapped_project = hit._source.mapped_project
+                writerRequestObject.catalogNumber = hit._source.catalogNumber
                 writerRequestObject.decimalLatitude = hit._source.decimalLatitude
                 writerRequestObject.decimalLongitude = hit._source.decimalLongitude
                 writerRequestObject.minimumChronometricAge = hit._source.minimumChronometricAge

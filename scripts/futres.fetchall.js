@@ -132,6 +132,8 @@ var search = function runSearch(source, query, limit, callback) {
                     writerRequestObject.sex = hit._source.sex
                 if (typeof hit._source.mapped_project !== 'undefined')
                     writerRequestObject.mapped_project = hit._source.mapped_project
+                if (typeof hit._source.catalogNumber !== 'undefined')
+                    writerRequestObject.catalogNumbmer = hit._source.catalogNumber
                 if (typeof hit._source.decimalLatitude !== 'undefined')
                     writerRequestObject.decimalLatitude = hit._source.decimalLatitude
                 if (typeof hit._source.decimalLongitude !== 'undefined')
