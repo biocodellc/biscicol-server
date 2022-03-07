@@ -193,8 +193,11 @@ function runSearch(source, query, limit, callback) {
             }
             // While the count of records is less than the total hits, continue
             // OR the limit is less than the response hits
-            if ((countRecords < response.hits.total.value && limit == 0) || (countRecords < limit && limit < response.hits.total.value)) {
-                //console.log(countRecords + " of " + response.hits.total)
+		//console.log('countRecords' + countRecords)
+		//console.log('totalvalue:'+response.hits.total.value)
+		//console.log('limit'+limit)
+            if ((countRecords < response.hits.total.value && limit == 0) || (countRecords < limit &&  countRecords < response.hits.total.value  )) {
+                console.log(countRecords + " of " + response.hits.total.value)
                 // Ask elasticsearch for the next set of hits from this search
                 client.scroll({
                     scrollId: response._scroll_id,
