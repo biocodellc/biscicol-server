@@ -1,14 +1,11 @@
-/* ppo.fetchall.js
-   A node script for fetching the entire FuTRES project for storing in a
-   web accessible location.  
+/* ppo.custom.fetchall.js
+   A node script for fetching custom result sets for PPO
+*/
 
-   By default we query _all indexes, and use scrolling to get ALL results, in increments
-   of 10,000
 
-   Queries are handled by looking at lucene-type queries in the GET Parameters looking
-   for q= and source requests are handled looking at _source= variable
-   */
-
+// Here is the where the custom query  goes
+var myquery = 'subSource:"ADF Nature Log" AND mapped_traits:"abscised fruits or seeds present"';
+// Output is written to data/downloadable/custom.ppo.[shortID].zip
 
 // load required libraries
 var mkdirp = require('mkdirp');
@@ -39,34 +36,16 @@ var citationAndDataUsePoliciesFile = 'citation_and_data_use_policies.txt'
 var archiver = require('archiver');
 
 //var returnedArchiveFile = 'futres_download.tar.gz'
-var returnedArchiveFile = 'ppo.zip'
+var returnedArchiveFile = 'custom.ppo.'+shortID+'.zip'
 var compressedArchiveLocation = '../data/downloadable/' + returnedArchiveFile
 
 // The client connection parameter, reading settings from connection.js
 var client = require('../connection.js');
-// set the default port
-//var port = Number(process.env.PORT || 3026);
 
-// @see https://github.com/evilpacket/helmet
-// you should activate even more headers provided by helmet
-/*
-app.use(csp({
-    directives: {
-        defaultSrc: ["'self'", 'www.biscicol.org'],
-        scriptSrc: ["'self'"],
-        styleSrc: ["'self'"],
-        imgSrc: ["'self'"],
-        connectSrc: ["'self'"],
-        fontSrc: ["'self'"],
-        objectSrc: ["'none'"],
-        mediaSrc: ["'self'"],
-        frameSrc: ["'none'"],
-    }
-}));
-*/
 
 /* runSearch command calls elasticsearch */
 var search = function runSearch(source, query, limit, callback) {
+    query = myquery
     var writer = csvWriter()
     var writeStream = fs.createWriteStream(outputDataFile)
 
@@ -109,17 +88,18 @@ var search = function runSearch(source, query, limit, callback) {
                 if (typeof hit._source.longitude !== 'undefined')
                     writerRequestObject.longitude = hit._source.longitude
 		// Re-write plantStructurePresenceTypes to termID, to match usage
+                //if (typeof hit._source.plantStructurePresenceTypes !== 'undefined')
+                 //   writerRequestObject.termID = hit._source.plantStructurePresenceTypes
                 if (typeof hit._source.source !== 'undefined') {
                     var source = hit._source.source
                     // quick hack to change NPN to USA-NPN until pipeline code is updated
                     if (source == "NPN") source = "USA-NPN"
                     writerRequestObject.source = source
                 }
-                if (typeof hit._source.plantStructurePresenceTypes !== 'undefined')
-                    writerRequestObject.termID = hit._source.plantStructurePresenceTypes
                 if (typeof hit._source.eventId !== 'undefined')
                     writerRequestObject.eventId = hit._source.eventId
-		             if (typeof hit._source.mapped_traits !== 'undefined') {
+
+		if (typeof hit._source.mapped_traits !== 'undefined') {
                    mapped_traits = hit._source.mapped_traits
                    mapped_traits_string = ''
                    for(var i=0;i<mapped_traits.length;i++){
@@ -130,7 +110,6 @@ var search = function runSearch(source, query, limit, callback) {
                     }
                     writerRequestObject.inferred_traits = mapped_traits_string
                 }
-
                 // Use csv-write-stream tool to convert JSON to CSV
                 writer.write(writerRequestObject)
                 countRecords++;
@@ -212,7 +191,6 @@ function createDownloadMetadataFile(query, limit, totalPossible, totalReturned, 
 
     var source = null
     var query = null
-    var limit =0
 
     // Create the output Directory
     mkdirp(outputDir, function(err) {

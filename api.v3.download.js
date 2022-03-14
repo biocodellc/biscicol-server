@@ -35,7 +35,7 @@ var archiver = require('archiver');
 var csvWriter = require('csv-write-stream')
 // Create output diretory to hold contents of this processing
 var shortID = shortid.generate()
-var outputDir = '/tmp/' + shortID + '/'
+var outputDir = '/home/exouser/data/tmp/' + shortID + '/'
 var dataFile = 'data.csv'
 var outputDataFile = outputDir + dataFile
 // Location of data and citation policies files (stored in repository and
@@ -79,6 +79,7 @@ app.use(cors({
     var source = req.query.source
     var query = req.query.q
     var limit = req.query.limit
+	console.log('query = ' + query)
 
     // replace incoming termID request with plantStructurePresenceTypes
     query = query.replace('termID', 'plantStructurePresenceTypes')
