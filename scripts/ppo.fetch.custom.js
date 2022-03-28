@@ -4,8 +4,11 @@
 
 
 // Here is the where the custom query  goes
-var myquery = 'subSource:"ADF Nature Log" AND mapped_traits:"abscised fruits or seeds present"';
+//var myquery = 'subSource:"ADF Nature Log" AND mapped_traits:"abscised fruits or seeds present"';
+// query for Rob on march 14, 2022
+var myquery = 'scientificName:"hippocastanum" AND genus:"Aesculus" AND source:"PEP725"  AND  status:"present"  AND  mapped_traits:"flowers present"'
 // Output is written to data/downloadable/custom.ppo.[shortID].zip
+var limit = 0
 
 // load required libraries
 var mkdirp = require('mkdirp');

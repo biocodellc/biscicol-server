@@ -5,7 +5,7 @@ echo "************************************************"
 echo "* Counting search requests. "
 echo "* each source counted as a unique request"
 echo "************************************************"
-files=($(ls -1  ../../.pm2/logs/api.v1.query-out.log))
+files=($(ls -1  /home/exouser/.pm2/logs/futresapi.v1.query-out.log))
 for i in "${files[@]}"
 do
     creation_date_seconds=$(date -d "2021-08-03" '+%s')
@@ -29,7 +29,7 @@ echo ""
 echo "************************************************"
 echo "* Counting download requests"
 echo "************************************************"
-files=($(ls -1  ../../.pm2/logs/futresapi.v3.download-out.log))
+files=($(ls -1  /home/exouser/.pm2/logs/futresapi.v3.download-out.log))
 for i in "${files[@]}"
 do
     creation_date_seconds=$(date -d "2021-08-04" '+%s')
