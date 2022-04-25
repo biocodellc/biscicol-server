@@ -94,50 +94,51 @@ var search = function runSearch(source, query, limit, callback) {
             response.hits.hits.forEach(function(hit) {
                 var writerRequestObject = new Object()
                 // Handle expected field names from FOVT server
-                if (typeof hit._source.materialSampleID !== 'undefined')
-                    writerRequestObject.materialSampleID = hit._source.materialSampleID
-                if (typeof hit._source.individualID !== 'undefined')
-                    writerRequestObject.individualID = hit._source.individualID
-                if (typeof hit._source.country !== 'undefined')
-                    writerRequestObject.country = hit._source.country
-                if (typeof hit._source.locality !== 'undefined')
-                    writerRequestObject.locality = hit._source.locality
-                if (typeof hit._source.yearCollected !== 'undefined')
-                    writerRequestObject.yearCollected = hit._source.yearCollected
-                if (typeof hit._source.samplingProtocol !== 'undefined')
-                    writerRequestObject.samplingProtocol = hit._source.samplingProtocol
-                if (typeof hit._source.basisOfRecord !== 'undefined')
-                    writerRequestObject.basisOfRecord = hit._source.basisOfRecord
-                if (typeof hit._source.scientificName !== 'undefined')
-                    writerRequestObject.scientificName = hit._source.scientificName
-                if (typeof hit._source.genus!== 'undefined')
-                    writerRequestObject.genus= hit._source.genus
-                if (typeof hit._source.family!== 'undefined')
-                    writerRequestObject.family= hit._source.family
-                if (typeof hit._source.order!== 'undefined')
-                    writerRequestObject.order= hit._source.order
-                if (typeof hit._source.class!== 'undefined')
-                    writerRequestObject.class= hit._source.class
-                if (typeof hit._source.measurementMethod !== 'undefined')
-                    writerRequestObject.measurementMethod = hit._source.measurementMethod 
-                if (typeof hit._source.measurementUnit !== 'undefined')
-                    writerRequestObject.measurementUnit = hit._source.measurementUnit
-                if (typeof hit._source.measurementType !== 'undefined')
-                    writerRequestObject.measurementType = hit._source.measurementType
-                if (typeof hit._source.measurementValue !== 'undefined')
-                    writerRequestObject.measurementValue = hit._source.measurementValue
-                if (typeof hit._source.lifeStage !== 'undefined')
-                    writerRequestObject.lifeStage = hit._source.lifeStage
-                if (typeof hit._source.sex !== 'undefined')
-                    writerRequestObject.sex = hit._source.sex
-                if (typeof hit._source.mapped_project !== 'undefined')
-                    writerRequestObject.mapped_project = hit._source.mapped_project
-                if (typeof hit._source.catalogNumber !== 'undefined')
-                    writerRequestObject.catalogNumbmer = hit._source.catalogNumber
-                if (typeof hit._source.decimalLatitude !== 'undefined')
-                    writerRequestObject.decimalLatitude = hit._source.decimalLatitude
-                if (typeof hit._source.decimalLongitude !== 'undefined')
-                    writerRequestObject.decimalLongitude = hit._source.decimalLongitude
+		if (typeof hit._source.basisOfRecord !== 'undefined') writerRequestObject.basisOfRecord = hit._source.basisOfRecord
+                if (typeof hit._source.catalogNumber !== 'undefined') writerRequestObject.catalogNumbmer = hit._source.catalogNumber
+                if (typeof hit._source.class!== 'undefined') writerRequestObject.class= hit._source.class
+                if (typeof hit._source.collectionCode !== 'undefined') writerRequestObject.collectionCode = hit._source.collectionCode
+                if (typeof hit._source.country !== 'undefined') writerRequestObject.country = hit._source.country
+                if (typeof hit._source.decimalLatitude !== 'undefined') writerRequestObject.decimalLatitude = hit._source.decimalLatitude
+                if (typeof hit._source.decimalLongitude !== 'undefined') writerRequestObject.decimalLongitude = hit._source.decimalLongitude
+                if (typeof hit._source.diagnosticID !== 'undefined') writerRequestObject.diagnosticID = hit._source.diagnosticID
+                if (typeof hit._source.eventID !== 'undefined') weiterRequestObject.eventID = hit._source.eventID
+                if (typeof hit._source.family!== 'undefined') writerRequestObject.family= hit._source.family
+                if (typeof hit._source.genus!== 'undefined') writerRequestObject.genus= hit._source.genus
+                if (typeof hit._source.individualID !== 'undefined') writerRequestObject.individualID = hit._source.individualID
+                if (typeof hit._source.institutionCode !== 'undefined') writerRequestObject.institutionCode = hit._source.institutionCode
+                if (typeof hit._source.lifeStage !== 'undefined') writerRequestObject.lifeStage = hit._source.lifeStage
+                if (typeof hit._source.locality !== 'undefined') writerRequestObject.locality = hit._source.locality
+                if (typeof hit._source.mapped_project !== 'undefined') writerRequestObject.mapped_project = hit._source.mapped_project
+                if (typeof hit._source.materialSampleID !== 'undefined') writerRequestObject.materialSampleID = hit._source.materialSampleID
+                if (typeof hit._source.maximumChronometricAge !== 'undefined') writerRequestObject.maximumChronometricAge = hit._source.maximumChronometricAge
+                if (typeof hit._source.maximumChronometricAgeReferenceSystem !== 'undefined') writerRequestObject.maximumChronometricAgeReferenceSystem = hit._source.maximumChronometricAgeReferenceSystem
+                if (typeof hit._source.maximumElevationInMeters !== 'undefined') writerRequestObject.maximumElevationInMeters = hit._source.maximumElevationInMeters
+                if (typeof hit._source.measurementMethod !== 'undefined') writerRequestObject.measurementMethod = hit._source.measurementMethod
+                if (typeof hit._source.measurementSide !== 'undefined') writerRequestObject.measurementSide = hit._source.measurementSide
+                if (typeof hit._source.measurementType !== 'undefined') writerRequestObject.measurementType = hit._source.measurementType
+                if (typeof hit._source.measurementUnit !== 'undefined') writerRequestObject.measurementUnit = hit._source.measurementUnit
+                if (typeof hit._source.measurementValue !== 'undefined') writerRequestObject.measurementValue = hit._source.measurementValue
+                if (typeof hit._source.minimumChronometricAge !== 'undefined') writerRequestObject.minimumChronometricAge = hit._source.minimumChronometricAge
+                if (typeof hit._source.minimumChronometricAgeReferenceSystem !== 'undefined') writerRequestObject.minimumChronometricAgeReferenceSystem = hit._source.minimumChronometricAgeReferenceSystem
+                if (typeof hit._source.minimumElevationInMeters !== 'undefined') writerRequestObject.minimumElevationInMeters = hit._source.minimumElevationInMeters
+                if (typeof hit._source.observationID !== 'undefined') writerRequestObject.observationID = hit._source.observationID
+                if (typeof hit._source.occurrenceID != 'undefined') writerRequestObject.occurrenceID = hit._source.occurrenceID
+                if (typeof hit._source.occurrenceRemarks !== 'undefined') writerRequestObject.occurrenceRemarks = hit._source.occurrenceRemarks
+                if (typeof hit._source.order!== 'undefined') writerRequestObject.order= hit._source.order
+                if (typeof hit._source.reproductiveCondition !== 'undefined') writerRequestObject.reproductiveCondition = hit._source.reproductiveCondition
+                if (typeof hit._source.samplingProtocol !== 'undefined') writerRequestObject.samplingProtocol = hit._source.samplingProtocol
+                if (typeof hit._source.scientificName !== 'undefined') writerRequestObject.scientificName = hit._source.scientificName
+                if (typeof hit._source.sex !== 'undefined') writerRequestObject.sex = hit._source.sex
+                if (typeof hit._source.specificEpithet !== 'undefined') writerRequestObject.specificEpithet = hit._source.specificEpithet
+                if (typeof hit._source.stateProvince !== 'undefined') writerRequestObject.stateProvince = hit._source.stateProvince
+                if (typeof hit._source.verbatimElevation !== 'undefined') writerRequestObject.verbatimElevation = hit._source.verbatimElevation
+                if (typeof hit._source.verbatimEventDate !== 'undefined') writerRequestObject.verbatimEventDate = hit._source.verbatimEventDate
+                if (typeof hit._source.verbatimLatitude !== 'undefined') writerRequestObject.verbatimLatitude = hit._source.verbatimLatitude
+                if (typeof hit._source.verbatimLocality !== 'undefined') writerRequestObject.verbatimLocality = hit._source.verbatimLocality
+                if (typeof hit._source.verbatimLongitude !== 'undefined') writerRequestObject.verbatimLongitude = hit._source.verbatimLongitude
+                if (typeof hit._source.verbatimMeasurementUnit !== 'undefined') writerRequestObject.verbatimMeasurementUnit = hit._source.verbatimMeasurementUnit
+                if (typeof hit._source.yearCollected !== 'undefined') writerRequestObject.yearCollected = hit._source.yearCollected
                 if (typeof hit._source.projectID !== 'undefined') {
                     if (hit._source.projectID == "Vertnet")
                         writerRequestObject.projectID = hit._source.projectID 
