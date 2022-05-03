@@ -98,26 +98,14 @@ var search = function runSearch(source, query, limit, callback) {
             response.hits.hits.forEach(function(hit) {
                 var writerRequestObject = new Object()
                 // Handle expected field names from FOVT server
-                if (typeof hit._source.materialSampleID !== 'undefined')
-                    writerRequestObject.materialSampleID = hit._source.materialSampleID
-                if (typeof hit._source.country !== 'undefined')
-                    writerRequestObject.country = hit._source.country
-                if (typeof hit._source.locality !== 'undefined')
-                    writerRequestObject.locality = hit._source.locality
-                if (typeof hit._source.yearCollected !== 'undefined')
-                    writerRequestObject.yearCollected = hit._source.yearCollected
-                if (typeof hit._source.basisOfRecord !== 'undefined')
-                    writerRequestObject.basisOfRecord = hit._source.basisOfRecord
-                if (typeof hit._source.genus!== 'undefined')
-                    writerRequestObject.genus= hit._source.genus
-                if (typeof hit._source.specificEpithet!== 'undefined')
-                    writerRequestObject.specificEpithet = hit._source.specificEpithet
-                if (typeof hit._source.decimalLatitude !== 'undefined')
-                    writerRequestObject.decimalLatitude = hit._source.decimalLatitude
-                if (typeof hit._source.decimalLongitude !== 'undefined')
-                    writerRequestObject.decimalLongitude = hit._source.decimalLongitude
-                if (typeof hit._source.Sample_bcid!== 'undefined')
-                    writerRequestObject.Sample_bcid= hit._source.Sample_bcid
+ 		const array = ['materialSampleID', 'principalInvestigator', 'diseaseTested', 'diseaseDetected', 'country', 'basisOfRecord', 'order', 'family', 'genus', 'specificEpithet', 'scientificName', 'verbatimScientificName', 'fatal', 'habitat', 'sampleType', 'institutionCode', 'collectionCode', 'catalogNumber', 'decimalLatitude', 'decimalLongitude', 'coordinateUncertaintyInMeters', 'horizontalDatum', 'continentOcean', 'stateProvince', 'municipality', 'county', 'locationRemarks', 'habitat', 'eventRemarks', 'georeferenceProtocol', 'minimumElevationInMeters', 'maximumElevationInMeters', 'minimumDepthInMeters', 'maximumDepthInMeters', 'locationID', 'locality', 'location', 'yearCollected', 'monthCollected', 'dayCollected', 'verbatimEventDate', 'collectorList', 'Sample_bcid', 'occurrenceID', 'otherCatalogNumbers', 'fieldNumber', 'associatedReferences', 'occurrenceRemarks', 'infraspecificEpithet', 'taxonRemarks', 'lifeStage', 'establishmentMeans', 'sex', 'individualCount', 'weightUnits', 'weight', 'lengthUnits', 'length', 'diseaseLineage', 'genotypeMethod', 'testMethod', 'diseaseTestedPositiveCount', 'specimenDisposition', 'quantityDetected', 'dilutionFactor', 'cycleTimeFirstDetection', 'zeScore', 'diagnosticLab', 'projectId', 'projectURL']
+                for (let i=0; i < array.length; i++) {
+               		if (typeof hit._source[array[i]]!== 'undefined')
+                    		writerRequestObject[array[i]]= hit._source[array[i]]
+                        else 
+				writerRequestObject[array[i]] = ''
+                }
+
 
                 // Use csv-write-stream tool to convert JSON to CSV
                 writer.write(writerRequestObject)

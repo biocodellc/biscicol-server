@@ -73,173 +73,134 @@ var search = function runSearch(source, query, limit, callback) {
     writer.pipe(writeStream)
     // Counter
     var countRecords = 0
-    var fetchSize = 10000 // size should be set to a large value.. by default is 10,0000
-    if (limit > 0 && fetchSize > limit) {
-        fetchSize = limit
-    }
+	var fetchSize = 10000 // size should be set to a large value.. by default is 10,0000
+	if (limit > 0 && fetchSize > limit) {
+		fetchSize = limit
+	}
 
-    //  Execute client search with scrolling
-    client.search({
-        index: 'futres',
-        size: fetchSize,
-        scroll: '60s', // keep the search results "scrollable" for 30 seconds
-        //        _source: source, // filter the source to only include the title field
-        //        body: body
-        q: query
-    }, function getMoreUntilDone(error, response) {
-        if (error) {
-            console.log("search error: " + error)
-        } else {
-            // Loop the response (the number of loops equals the size request)
-            response.hits.hits.forEach(function(hit) {
-                var writerRequestObject = new Object()
-                // Handle expected field names from FOVT server
-		if (typeof hit._source.basisOfRecord !== 'undefined') writerRequestObject.basisOfRecord = hit._source.basisOfRecord
-                if (typeof hit._source.catalogNumber !== 'undefined') writerRequestObject.catalogNumbmer = hit._source.catalogNumber
-                if (typeof hit._source.class!== 'undefined') writerRequestObject.class= hit._source.class
-                if (typeof hit._source.collectionCode !== 'undefined') writerRequestObject.collectionCode = hit._source.collectionCode
-                if (typeof hit._source.country !== 'undefined') writerRequestObject.country = hit._source.country
-                if (typeof hit._source.decimalLatitude !== 'undefined') writerRequestObject.decimalLatitude = hit._source.decimalLatitude
-                if (typeof hit._source.decimalLongitude !== 'undefined') writerRequestObject.decimalLongitude = hit._source.decimalLongitude
-                if (typeof hit._source.diagnosticID !== 'undefined') writerRequestObject.diagnosticID = hit._source.diagnosticID
-                if (typeof hit._source.eventID !== 'undefined') weiterRequestObject.eventID = hit._source.eventID
-                if (typeof hit._source.family!== 'undefined') writerRequestObject.family= hit._source.family
-                if (typeof hit._source.genus!== 'undefined') writerRequestObject.genus= hit._source.genus
-                if (typeof hit._source.individualID !== 'undefined') writerRequestObject.individualID = hit._source.individualID
-                if (typeof hit._source.institutionCode !== 'undefined') writerRequestObject.institutionCode = hit._source.institutionCode
-                if (typeof hit._source.lifeStage !== 'undefined') writerRequestObject.lifeStage = hit._source.lifeStage
-                if (typeof hit._source.locality !== 'undefined') writerRequestObject.locality = hit._source.locality
-                if (typeof hit._source.mapped_project !== 'undefined') writerRequestObject.mapped_project = hit._source.mapped_project
-                if (typeof hit._source.materialSampleID !== 'undefined') writerRequestObject.materialSampleID = hit._source.materialSampleID
-                if (typeof hit._source.maximumChronometricAge !== 'undefined') writerRequestObject.maximumChronometricAge = hit._source.maximumChronometricAge
-                if (typeof hit._source.maximumChronometricAgeReferenceSystem !== 'undefined') writerRequestObject.maximumChronometricAgeReferenceSystem = hit._source.maximumChronometricAgeReferenceSystem
-                if (typeof hit._source.maximumElevationInMeters !== 'undefined') writerRequestObject.maximumElevationInMeters = hit._source.maximumElevationInMeters
-                if (typeof hit._source.measurementMethod !== 'undefined') writerRequestObject.measurementMethod = hit._source.measurementMethod
-                if (typeof hit._source.measurementSide !== 'undefined') writerRequestObject.measurementSide = hit._source.measurementSide
-                if (typeof hit._source.measurementType !== 'undefined') writerRequestObject.measurementType = hit._source.measurementType
-                if (typeof hit._source.measurementUnit !== 'undefined') writerRequestObject.measurementUnit = hit._source.measurementUnit
-                if (typeof hit._source.measurementValue !== 'undefined') writerRequestObject.measurementValue = hit._source.measurementValue
-                if (typeof hit._source.minimumChronometricAge !== 'undefined') writerRequestObject.minimumChronometricAge = hit._source.minimumChronometricAge
-                if (typeof hit._source.minimumChronometricAgeReferenceSystem !== 'undefined') writerRequestObject.minimumChronometricAgeReferenceSystem = hit._source.minimumChronometricAgeReferenceSystem
-                if (typeof hit._source.minimumElevationInMeters !== 'undefined') writerRequestObject.minimumElevationInMeters = hit._source.minimumElevationInMeters
-                if (typeof hit._source.observationID !== 'undefined') writerRequestObject.observationID = hit._source.observationID
-                if (typeof hit._source.occurrenceID != 'undefined') writerRequestObject.occurrenceID = hit._source.occurrenceID
-                if (typeof hit._source.occurrenceRemarks !== 'undefined') writerRequestObject.occurrenceRemarks = hit._source.occurrenceRemarks
-                if (typeof hit._source.order!== 'undefined') writerRequestObject.order= hit._source.order
-                if (typeof hit._source.reproductiveCondition !== 'undefined') writerRequestObject.reproductiveCondition = hit._source.reproductiveCondition
-                if (typeof hit._source.samplingProtocol !== 'undefined') writerRequestObject.samplingProtocol = hit._source.samplingProtocol
-                if (typeof hit._source.scientificName !== 'undefined') writerRequestObject.scientificName = hit._source.scientificName
-                if (typeof hit._source.sex !== 'undefined') writerRequestObject.sex = hit._source.sex
-                if (typeof hit._source.specificEpithet !== 'undefined') writerRequestObject.specificEpithet = hit._source.specificEpithet
-                if (typeof hit._source.stateProvince !== 'undefined') writerRequestObject.stateProvince = hit._source.stateProvince
-                if (typeof hit._source.verbatimElevation !== 'undefined') writerRequestObject.verbatimElevation = hit._source.verbatimElevation
-                if (typeof hit._source.verbatimEventDate !== 'undefined') writerRequestObject.verbatimEventDate = hit._source.verbatimEventDate
-                if (typeof hit._source.verbatimLatitude !== 'undefined') writerRequestObject.verbatimLatitude = hit._source.verbatimLatitude
-                if (typeof hit._source.verbatimLocality !== 'undefined') writerRequestObject.verbatimLocality = hit._source.verbatimLocality
-                if (typeof hit._source.verbatimLongitude !== 'undefined') writerRequestObject.verbatimLongitude = hit._source.verbatimLongitude
-                if (typeof hit._source.verbatimMeasurementUnit !== 'undefined') writerRequestObject.verbatimMeasurementUnit = hit._source.verbatimMeasurementUnit
-                if (typeof hit._source.yearCollected !== 'undefined') writerRequestObject.yearCollected = hit._source.yearCollected
-                if (typeof hit._source.projectID !== 'undefined') {
-                    if (hit._source.projectID == "Vertnet")
-                        writerRequestObject.projectID = hit._source.projectID 
-                    else   
-                        writerRequestObject.projectID = "https://geome-db.org/workbench/project-overview?projectId="+hit._source.projectID 
-                }
-                if (typeof hit._source.mapped_traits !== 'undefined') {
-		   mapped_traits = hit._source.mapped_traits
-		   mapped_traits_string = ''
-		   for(var i=0;i<mapped_traits.length;i++){
-			if (i > 0) {
-		 		mapped_traits_string += '|'
+	//  Execute client search with scrolling
+	client.search({
+		index: 'futres',
+		size: fetchSize,
+		scroll: '60s', // keep the search results "scrollable" for 30 seconds
+		//        _source: source, // filter the source to only include the title field
+		//        body: body
+		q: query
+	}, function getMoreUntilDone(error, response) {
+		if (error) {
+			console.log("search error: " + error)
+		} else {
+			// Loop the response (the number of loops equals the size request)
+			response.hits.hits.forEach(function(hit) {
+				var writerRequestObject = new Object()
+				const array = ['basisOfRecord', 'catalogNumber', 'class', 'collectionCode', 'country', 'decimalLatitude', 'decimalLongitude', 'diagnosticID', 'eventID', 'family', 'genus', 'individualID', 'institutionCode', 'lifeStage', 'locality', 'mapped_project', 'materialSampleID', 'maximumChronometricAge', 'maximumChronometricAgeReferenceSystem', 'maximumElevationInMeters', 'measurementMethod', 'measurementSide', 'measurementType', 'measurementUnit', 'measurementValue', 'minimumChronometricAge', 'minimumChronometricAgeReferenceSystem', 'minimumElevationInMeters', 'observationID', 'occurrenceID', 'occurrenceRemarks', 'order', 'reproductiveCondition', 'samplingProtocol', 'scientificName', 'sex', 'specificEpithet', 'stateProvince', 'verbatimElevation', 'verbatimEventDate', 'verbatimLatitude', 'verbatimLocality', 'verbatimLongitude', 'verbatimMeasurementUnit', 'yearCollected']
+				for (let i=0; i < array.length; i++) {
+					if (typeof hit._source[array[i]] !== 'undefined') writerRequestObject[array[i]] = hit._source[array[i]]
+					else writerRequestObject[array[i]] = ''
+				}
+				//jkhconsole.log(hit._source.yearCollected)
+				//console.log(hit._source.measurementSide)
+				if (typeof hit._source.projectID !== 'undefined') {
+					if (hit._source.projectID == "Vertnet")
+						writerRequestObject.projectID = hit._source.projectID 
+					else   
+						writerRequestObject.projectID = "https://geome-db.org/workbench/project-overview?projectId="+hit._source.projectID 
+				}
+				if (typeof hit._source.mapped_traits !== 'undefined') {
+					mapped_traits = hit._source.mapped_traits
+					mapped_traits_string = ''
+					for(var i=0;i<mapped_traits.length;i++){
+						if (i > 0) {
+							mapped_traits_string += '|'
+						}
+						mapped_traits_string += mapped_traits[i]
+					}
+					writerRequestObject.inferred_traits = mapped_traits_string
+				}
+
+
+				// Use csv-write-stream tool to convert JSON to CSV
+				writer.write(writerRequestObject)
+				countRecords++;
+				writeRequestObject = null;
+			});
+
+			if (countRecords < 1) {
+				return callback(null); 
 			}
-			mapped_traits_string += mapped_traits[i]
-		    }
-                    writerRequestObject.inferred_traits = mapped_traits_string
+			// While the count of records is less than the total hits, continue
+			// OR the limit is less than the response hits
+			if ((countRecords < response.hits.total.value && limit == 0) || (countRecords < limit && limit < response.hits.total.value)) {
+				console.log(countRecords + " of " + response.hits.total.value)
+				// Ask elasticsearch for the next set of hits from this search
+				client.scroll({
+					scrollId: response._scroll_id,
+					scroll: '60s'
+				}, getMoreUntilDone);
+			} else {
+				writer.end()
+				//
+				// wait for writeStream to finish before calling everything here
+				writeStream.on('finish', function() {
+					// Create Policies Files
+					createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords, source);
+					createCitationAndDataUsePoliciesFile();
+
+					console.log("zipping results");
+					const archive = archiver('zip', {
+						zlib: { level: 9 } // Sets the compression level.
+					});
+					console.log("archive location " + compressedArchiveLocation)
+					const output = fs.createWriteStream(compressedArchiveLocation);
+
+					// listen for all archive data to be written 'close' event is fired only when a file descriptor is involved
+					output.on('close', function() {
+						console.log(archive.pointer() + ' total bytes');
+						console.log('archiver has been finalized and the output file descriptor has closed.');
+						//return callback(compressedArchiveLocation);
+					});
+
+					console.log("output")
+					archive.pipe(output);
+					console.log("directory to zip = " + outputDir)
+					archive.directory(outputDir, false);
+					console.log("finalizing")
+					archive.finalize();
+				});
+			}
 		}
-
-
-                // Use csv-write-stream tool to convert JSON to CSV
-                writer.write(writerRequestObject)
-                countRecords++;
-                writeRequestObject = null;
-            });
-
-            if (countRecords < 1) {
-                return callback(null); 
-            }
-            // While the count of records is less than the total hits, continue
-            // OR the limit is less than the response hits
-            if ((countRecords < response.hits.total.value && limit == 0) || (countRecords < limit && limit < response.hits.total.value)) {
-                console.log(countRecords + " of " + response.hits.total.value)
-                // Ask elasticsearch for the next set of hits from this search
-                client.scroll({
-                    scrollId: response._scroll_id,
-                    scroll: '60s'
-                }, getMoreUntilDone);
-            } else {
-                writer.end()
-		    //
-                // wait for writeStream to finish before calling everything here
-                writeStream.on('finish', function() {
-                    // Create Policies Files
-                    createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords, source);
-                    createCitationAndDataUsePoliciesFile();
-
-		    console.log("zipping results");
-		    const archive = archiver('zip', {
-  			zlib: { level: 9 } // Sets the compression level.
-		    });
-		    console.log("archive location " + compressedArchiveLocation)
- 		    const output = fs.createWriteStream(compressedArchiveLocation);
-			
-		    // listen for all archive data to be written 'close' event is fired only when a file descriptor is involved
-		    output.on('close', function() {
-  		        console.log(archive.pointer() + ' total bytes');
-  		        console.log('archiver has been finalized and the output file descriptor has closed.');
-                        //return callback(compressedArchiveLocation);
-		    });
-
-		    console.log("output")
-		    archive.pipe(output);
-		    console.log("directory to zip = " + outputDir)
-		    archive.directory(outputDir, false);
-		    console.log("finalizing")
-		    archive.finalize();
-                });
-            }
-        }
-    });
+	});
 }
 
 // Create the citation file
 function createCitationAndDataUsePoliciesFile() {
-    fs.copySync('../futres_data/' +citationAndDataUsePoliciesFile, outputDir + citationAndDataUsePoliciesFile);
+	fs.copySync('../futres_data/' +citationAndDataUsePoliciesFile, outputDir + citationAndDataUsePoliciesFile);
 }
 
 // Create the metadata File
 function createDownloadMetadataFile(query, limit, totalPossible, totalReturned, source) {
-    // Create the data-download_metadata file
-    // turn obo: into a hyperlink so users can click through to
-    // figure out what we are talking about by "obo:"
-    //query = query.replace(/obo:/g, 'http://purl.obolibrary.org/obo/')
-    dataDownloadMetadataText = "data file = " + dataFile + "\n";
-    dataDownloadMetadataText += "date query ran = " + new Date() + "\n"
-    dataDownloadMetadataText += "query = " + query + "\n"
-    //dataDownloadMetadataText += "fields returned = dayOfYear,year,genus,specificEpithet,latitude,longitude,source,eventId\n"
-    if (limit != 0) {
-        dataDownloadMetadataText += "user specified limit = " + limit + "\n"
-    }
-    dataDownloadMetadataText += "total results possible = " + Number(totalPossible).toLocaleString() + "\n"
-    dataDownloadMetadataText += "total results returned = " + Number(totalReturned).toLocaleString() + "\n"
-    // copy file to outputDir
-    fs.copySync('../futres_data/' +dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
-    // append file synchronously
-    fs.appendFileSync(outputDir + dataDownloadMetadataFile, dataDownloadMetadataText);
+	// Create the data-download_metadata file
+	// turn obo: into a hyperlink so users can click through to
+	// figure out what we are talking about by "obo:"
+	//query = query.replace(/obo:/g, 'http://purl.obolibrary.org/obo/')
+	dataDownloadMetadataText = "data file = " + dataFile + "\n";
+	dataDownloadMetadataText += "date query ran = " + new Date() + "\n"
+	dataDownloadMetadataText += "query = " + query + "\n"
+	//dataDownloadMetadataText += "fields returned = dayOfYear,year,genus,specificEpithet,latitude,longitude,source,eventId\n"
+	if (limit != 0) {
+		dataDownloadMetadataText += "user specified limit = " + limit + "\n"
+	}
+	dataDownloadMetadataText += "total results possible = " + Number(totalPossible).toLocaleString() + "\n"
+	dataDownloadMetadataText += "total results returned = " + Number(totalReturned).toLocaleString() + "\n"
+	// copy file to outputDir
+	fs.copySync('../futres_data/' +dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
+	// append file synchronously
+	fs.appendFileSync(outputDir + dataDownloadMetadataFile, dataDownloadMetadataText);
 }
 
-    var source = null
-    var query = null
-    var limit =0
+var source = null
+var query = null
+var limit = 0
 
     // Create the output Directory
     mkdirp(outputDir, function(err) {

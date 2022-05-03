@@ -17,7 +17,7 @@ var store=$rdf.graph();
 
 // This is the ontology file to read. To save IO i've checked out the file
 // to the local filesystem, poining to a specific release
-var rdfData=fs.readFileSync('/home/jdeck/code/fovt/fovt.owl').toString();
+var rdfData=fs.readFileSync('/home/exouser/code/fovt/fovt.owl').toString();
 
 var contentType='application/rdf+xml';
 var baseUrl="http://futres.org/";
@@ -36,17 +36,17 @@ allClasses = classWalker(sizeClasses,'http://purl.obolibrary.org/obo/PATO_000103
 allClasses = deDuplicate(allClasses,'termID');
 
 // Write long form of JSON files
-var allFile = "/home/jdeck/code/biscicol-server/futres_data/all.json"
+var allFile = "/home/exouser/code/biscicol-server/futres_data/all.json"
 console.log("writing " + allFile)
 writeFile(allFile,allClasses);
 
 // Write short form of JSON files
-var allShortFile = "/home/jdeck/code/biscicol-server/futres_data/all_short.json"
+var allShortFile = "/home/exouser/code/biscicol-server/futres_data/all_short.json"
 console.log("writing " + allShortFile)
 writeFile(allShortFile,createShortFile(allClasses))
 
 // Write GEOME list format 
-var allGeomeFile = "/home/jdeck/code/biscicol-server/futres_data/all_geome.json"
+var allGeomeFile = "/home/exouser/code/biscicol-server/futres_data/all_geome.json"
 console.log("writing " + allGeomeFile)
 writeFile(allGeomeFile,createGeomeFile(allClasses))
 
