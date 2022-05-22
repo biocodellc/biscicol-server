@@ -127,6 +127,7 @@ var search = function runSearch(source, query, limit, callback) {
                 writerRequestObject.minimumChronometricAgeReferenceSystem = hit._source.minimumChronometricAgeReferenceSystem
                 writerRequestObject.maximumChronometricAge = hit._source.maximumChronometricAge
                 writerRequestObject.maximumChronometricAgeReferenceSystem = hit._source.maximumChronometricAgeReferenceSystem
+                writerRequestObject.occurrenceID = hit._source.occurrenceID
                 if (typeof hit._source.projectID !== 'undefined') {
                     if (hit._source.projectID == "Vertnet")
                         writerRequestObject.projectID = hit._source.projectID 
