@@ -9,3 +9,4 @@ pm2 start futresapi.v2.fovt.js  --max-memory-restart 300M --node-args="--max_old
 pm2 start futresapi.v2.download.js --max-memory-restart 1000M --node-args="--max_old_space_size=1000" --log-date-format="YYYY-MM-DD HH:mm Z" 
 pm2 start futresapi.v3.download.js --max-memory-restart 1000M --node-args="--max_old_space_size=1000" --log-date-format="YYYY-MM-DD HH:mm Z" 
 pm2 start adapi.v3.download.js --max-memory-restart 1000M --node-args="--max_old_space_size=1000" --log-date-format="YYYY-MM-DD HH:mm Z" 
+pm2 start api.v1.inaan.js --max-memory-restart 1000M --node-args="--max_old_space_size=1000" --log-date-format="YYYY-MM-DD HH:mm Z" 
