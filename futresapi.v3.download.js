@@ -102,6 +102,9 @@ var search = function runSearch(source, query, limit, callback) {
                 var writerRequestObject = new Object()
                 // Handle expected field names from FOVT server
                 writerRequestObject.materialSampleID = hit._source.materialSampleID
+                writerRequestObject.institutionCode = hit._source.institutionCode
+                writerRequestObject.collectionCode = hit._source.collectionCode
+                writerRequestObject.catalogNumber = hit._source.catalogNumber
                 writerRequestObject.individualID = hit._source.individualID
                 writerRequestObject.country = hit._source.country
                 writerRequestObject.locality = hit._source.locality
