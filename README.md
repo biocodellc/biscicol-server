@@ -15,9 +15,9 @@ FuTRES Specific Endpoints
   *  [api/v1/query/futres/](docs/es_futres_proxy.md) Query the Futres data store 
 
 Plant Phenology Ontology Specific Endpoints
-  *  [api/v1/query](docs/es_proxy.md) Query the PPO data store 
-  *  [api/v3/download](docs/download_proxy.md) Downlaod results as a package from data store
-  *  [api/v2/ppo](docs/ontology_proxy.md)  Lookup terms from the PPO ontology
+  *  [/ppo/api/v1/query](docs/ppo_query.md) Query the PPO data store 
+  *  [/ppo/api/v3/download](docs/ppo_download.md) Downlaod results as a package from data store
+  *  [/ppo/api/v2/ppo](docs/ppo_ontology.md)  Lookup terms from the PPO ontology
 
 Amphibian Disease Specific Endpoints
   *  adapi/v3/download  See instructions for downloading FuTRES data
