@@ -16,10 +16,13 @@ Plant Phenology Ontology Specific Endpoints
   *  [/ppo/api/v3/download](docs/ppo_download.md) Downlaod results as a package from data store
   *  [/ppo/api/v2/ppo](docs/ppo_ontology.md)  Lookup terms from the PPO ontology
 
+Amphibian Disease Specific Endpoints
+  *  [/amphibian_disease/api/v3/download](docs/amphibian_disease_download.md) Download results as a package from Data Store
+
 Generic Endpoints
   *  [/api/downloadable](https://biscicol.org/api/downloadable/)  Directory containing a single zip file of ALL FuTRES data
+  *  [/api/v1/inaan/ark:/92250/{inline_concept}?info](https://biscicol.org/api/v1/inaan/ark:/92250/oven_temperature?info) Inline NAAN servie
+  *  /geome-projects Redirect service for GEOME minted identifiers (in development)
 
-Amphibian Disease Specific Endpoints
-  *  adapi/v3/download  See instructions for downloading FuTRES data
 
 .
