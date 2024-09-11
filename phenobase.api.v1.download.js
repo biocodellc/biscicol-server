@@ -57,7 +57,6 @@ app.use(
 
     // Handle request parameters
     console.log(req.url);
-    var source = req.query.source;
     var query = req.query.q;
     var limit = parseInt(req.query.limit) || 100000; // Default to 100,000 if not specified
     console.log('query = ' + query);
@@ -70,7 +69,7 @@ app.use(
       } else {
         // Run the search function
         console.log('running search function');
-        runSearch(source, query, limit, function (compressedArchiveResult) {
+        runSearch( query, limit, function (compressedArchiveResult) {
           if (compressedArchiveResult == null) {
             console.log("no results, return 204");
             res.status(204).json({
@@ -101,7 +100,7 @@ app.use(
 );
 
 /* runSearch command calls Elasticsearch */
-function runSearch(source, query, limit = 100000, callback) {
+function runSearch(query, limit = 100000, callback) {
   var writer = csvWriter();
   var writeStream = fs.createWriteStream(outputDataFile);
   writer.pipe(writeStream);
@@ -113,7 +112,7 @@ function runSearch(source, query, limit = 100000, callback) {
   // Execute client search with scrolling
   client.search(
     {
-      index: '_all',
+      index: 'phenobase',
       size: fetchSize,
       scroll: '60s', // Keep the search results "scrollable" for 60 seconds
       q: query,
@@ -125,44 +124,8 @@ function runSearch(source, query, limit = 100000, callback) {
         console.log("fetching data...");
         // Loop through the response
         response.hits.hits.forEach(function (hit) {
-          var writerRequestObject = new Object()
-         
-          writerRequestObject.machine_learning_annotation_id = hit._source.machine_learning_annotation_id
-          writerRequestObject.human_observation_annotation_id = hit._source.human_observation_annotation_id
-          writerRequestObject.datasource = hit._source.datasource
-          writerRequestObject.verbatim_date = hit._source.verbatim_date
-          writerRequestObject.day_of_year = hit._source.day_of_year
-          writerRequestObject.year = hit._source.year
-          writerRequestObject.latitude = hit._source.latitude
-          writerRequestObject.longitude = hit._source.longitude
-          writerRequestObject.coordinate_uncertainty_meters = hit._source.coordinate_uncertainty_meters
-          writerRequestObject.family = hit._source.family
-          writerRequestObject.count_family = hit._source.count_family
-          writerRequestObject.genus = hit._source.genus
-          writerRequestObject.scientific_name = hit._source.scientific_name
-          writerRequestObject.taxon_rank = hit._source.taxon_rank
-          writerRequestObject.basis_of_record = hit._source.basis_of_record
-          writerRequestObject.individual_id = hit._source.individual_id
-          writerRequestObject.occurrence_id = hit._source.occurrence_id
-          writerRequestObject.verbatim_trait = hit._source.verbatim_trait
-          writerRequestObject.trait = hit._source.trait
-          writerRequestObject.observed_image_guid = hit._source.observed_image_guid
-          writerRequestObject.observed_image_url = hit._source.observed_image_url
-          writerRequestObject.observed_metadata_url = hit._source.observed_metadata_url
-          writerRequestObject.certainty = hit._source.certainty
-          writerRequestObject.model_uri = hit._source.model_uri
-          writerRequestObject.error_message = hit._source.error_message
-          writerRequestObject.predition_probability = hit._source.predition_probability
-          writerRequestObject.prediction_class = hit._source.prediction_class
-          writerRequestObject.proportion_certainty_family = hit._source.proportion_certainty_family
-          writerRequestObject.accuracy_excluding_certainty_family = hit._source.accuracy_excluding_certainty_family
-          writerRequestObject.accuracy_family = hit._source.accuracy_family
-          writerRequestObject.mapped_traits = hit._source.mapped_traits
-          //
-          // Use csv-write-stream tool to convert JSON to CSV
-          writer.write(writerRequestObject);
+          writer.write(hit._source);
           countRecords++;
-                          writeRequestObject = null;
         });
 
         if (countRecords < 1) {
@@ -171,7 +134,7 @@ function runSearch(source, query, limit = 100000, callback) {
 
         // Continue fetching until the count matches the limit or the total hits
         if ((countRecords < response.hits.total.value && limit === 0) || (countRecords < limit && countRecords < response.hits.total.value)) {
-          console.log(countRecords + " of " + response.hits.total.value);
+          //console.log(countRecords + " of " + response.hits.total.value);
           client.scroll(
             {
               scrollId: response._scroll_id,
@@ -185,7 +148,7 @@ function runSearch(source, query, limit = 100000, callback) {
           // Wait for the writeStream to finish before archiving and returning the result
           writeStream.on('finish', function () {
             // Create metadata and policy files
-            createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords, source);
+            createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords );
             createCitationAndDataUsePoliciesFile();
 
             // Create the archive
@@ -227,7 +190,7 @@ function createCitationAndDataUsePoliciesFile() {
 }
 
 // Create the metadata File
-function createDownloadMetadataFile(query, limit, totalPossible, totalReturned, source) {
+function createDownloadMetadataFile(query, limit, totalPossible, totalReturned ) {
   // Create the data-download_metadata file
   // Turn obo: into a hyperlink so users can click through to figure out what we are talking about by "obo:"
   //query = query.replace(/obo:/g, 'http://purl.obolibrary.org/obo/');
