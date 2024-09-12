@@ -55,11 +55,11 @@ app.use(
     // Allow connections from JS applications
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Handle request parameters
     console.log(req.url);
-    var query = req.query.q;
+    // Handle request parameters
     var limit = parseInt(req.query.limit) || 100000; // Default to 100,000 if not specified
-    console.log('query = ' + query);
+    console.log(req.query.q)
+    var query = req.query.q;
 
     // Create the output directory
     console.log('output directory ' + outputDir);
@@ -108,6 +108,8 @@ function runSearch(query, limit = 100000, callback) {
   // Counter
   var countRecords = 0;
   var fetchSize = Math.min(10000, limit); // Fetch size is capped by the limit
+ const luceneQuery = query && query.trim() !== '' ? query : '*';
+
 
   // Execute client search with scrolling
   client.search(
@@ -115,7 +117,7 @@ function runSearch(query, limit = 100000, callback) {
       index: 'phenobase',
       size: fetchSize,
       scroll: '60s', // Keep the search results "scrollable" for 60 seconds
-      q: query,
+      q: luceneQuery,
     },
     function getMoreUntilDone(error, response) {
       if (error) {
