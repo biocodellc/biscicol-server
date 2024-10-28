@@ -25,7 +25,7 @@ var returnedArchiveFile = 'phenobase_download.zip';
 var compressedArchiveLocation = '/tmp/' + shortID + '.zip';
 
 // The client connection parameter, reading settings from connection.js
-var client = require('./connection.js');
+var client = require('./phenobase_connection.js');
 // Set the default port
 var port = Number(process.env.PORT || 3602);
 
