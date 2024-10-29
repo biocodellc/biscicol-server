@@ -5,7 +5,7 @@ var cors = require('cors');
 var app = express();
 
 var port = Number(process.env.PORT || 3601);
-var apiServerHost = ('http://149.165.170.6:80')
+var apiServerHost = ('http://149.165.170.158:80')
 
 // Listen for requests on all endpoints
 //app.use('/', function(req, res, body) {
