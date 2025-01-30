@@ -12,3 +12,4 @@ pm2 restart amphibian_disease.api.v3.download.js --update-env --max-memory-resta
 pm2 restart api.v1.inaan.js --max-memory-restart 1000M --node-args="--max_old_space_size=1000" --log-date-format="YYYY-MM-DD HH:mm Z"
 pm2 restart phenobase.api.v1.query.js --update-env --max-memory-restart 300M --node-args="--max_old_space_size=300"  --log-date-format="YYYY-MM-DD HH:mm Z"
 pm2 restart phenobase.api.v1.download.js --update-env --max-memory-restart 300M --node-args="--max_old_space_size=300"  --log-date-format="YYYY-MM-DD HH:mm Z"
+pm2 restart ../dff/scripts/server.js --max-memory-restart 300M --node-args="--max_old_space_size=300"  --log-date-format="YYYY-MM-DD HH:mm Z"
