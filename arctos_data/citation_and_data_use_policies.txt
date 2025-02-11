@@ -1,0 +1,3 @@
+The arctos data store contains data from member projects
+Please refer to the following data usage and citation policies for each data source when using this data in your research.
+
