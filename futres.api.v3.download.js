@@ -215,13 +215,15 @@ app.use(cors({
         limit = 0;
     }
 
-    // Create the output Directory
-    mkdirp(outputDir, function(err) {
-        if (err) {
-            console.error(err)
-        } else {
-            // Run the Search Function
-            search(source, query, limit, function(compressedArchiveResult) {
+ // Ensure directory exists before running mkdirp
+fs.ensureDirSync(outputDir);
+
+mkdirp(outputDir, function(err) {
+    if (err && err.code !== 'EEXIST') {  // Ignore if directory already exists
+        console.error('Error creating directory:', err);
+    } else {
+        // Run the Search Function
+        search(source, query, limit, function(compressedArchiveResult) {
                 if (compressedArchiveResult == null) {
                     console.log("no results, return 204")
                     res.json(204, {
