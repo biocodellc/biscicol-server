@@ -14,4 +14,4 @@ pm2 restart phenobase.api.v1.query.js --update-env --max-memory-restart 300M --n
 pm2 restart phenobase.api.v1.download.js --update-env --max-memory-restart 300M --node-args="--max_old_space_size=300"  --log-date-format="YYYY-MM-DD HH:mm Z"
 pm2 restart arctos.api.v1.query.js --update-env --max-memory-restart 300M --node-args="--max_old_space_size=300"  --log-date-format="YYYY-MM-DD HH:mm Z"
 pm2 restart arctos.api.v1.download.js --update-env --max-memory-restart 300M --node-args="--max_old_space_size=300"  --log-date-format="YYYY-MM-DD HH:mm Z"
-pm2 restart ../dff/scripts/dff.v1.inventory.js --max-memory-restart 300M --node-args="--max_old_space_size=300"  --log-date-format="YYYY-MM-DD HH:mm Z"
+pm2 restart ../dff/dff.v1.inventory.js --max-memory-restart 300M --node-args="--max_old_space_size=300"  --log-date-format="YYYY-MM-DD HH:mm Z"
