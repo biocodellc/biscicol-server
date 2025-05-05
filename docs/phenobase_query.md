@@ -1,4 +1,4 @@
-# Phenobase Query API v1 – Quick Reference (single section)
+# Phenobase Query API v1 – Quick Reference 
 
 Run (almost) raw Elasticsearch queries through a CORS‑friendly proxy.
 
