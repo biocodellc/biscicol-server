@@ -2,7 +2,7 @@ var elasticsearch=require('elasticsearch');
 
 var client = new elasticsearch.Client( {  
   hosts: [
-    'http://128.196.254.92:80/'
+    'http://149.165.170.158:8081/'
   ]
 });
 
