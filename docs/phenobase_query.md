@@ -5,7 +5,7 @@ Run (almost) raw Elasticsearch queries through a CORS‑friendly proxy.
 **Base URL**
 
 ```
-http(s)://biscicol.org/phenobase/api/v1/query/
+https://biscicol.org/phenobase/api/v1/query/
 ```
 
 **Auth & CORS**
