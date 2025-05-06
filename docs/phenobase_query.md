@@ -5,9 +5,8 @@ Run (almost) raw Elasticsearch queries through a CORS‑friendly proxy.
 **Base URL**
 
 ```
-http(s)://<your‑host>:3601/phenobase/api/v1/query/
+http(s)://biscicol.org/phenobase/api/v1/query/
 ```
-(Locally: `http://localhost:3601` → forwards to `http://149.165.170.158:8081`)
 
 **Auth & CORS**
 
