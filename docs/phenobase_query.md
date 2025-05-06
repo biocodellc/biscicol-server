@@ -8,6 +8,26 @@ Run (almost) raw Elasticsearch queries through a CORS‑friendly proxy.
 https://biscicol.org/phenobase/api/v1/query/
 ```
 
+Example query to search for a specific machine_learning_annotation_id:
+```
+curl -L -X POST "https://biscicol.org/phenobase/api/v1/query//phenobase/_search" \
+  -H "Origin: https://phenobase.netlify.app" \
+  -H "Referer: https://phenobase.netlify.app/" \
+  -H "User-Agent: Mozilla/5.0" \
+  -H "Accept: application/json, text/javascript, */*; q=0.01" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": {
+      "query_string": {
+        "default_field": "machine_learning_annotation_id",
+        "query": "\"a3551e3a-47b8-4cf4-b972-d45c6091df17\"",
+        "analyze_wildcard": true
+      }
+    },
+    "size": 5
+  }'
+```
+
 **Auth & CORS**
 
 * External callers: no auth needed (proxy injects Basic‑Auth to ES).
