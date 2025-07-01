@@ -19,7 +19,7 @@ var dataFile = 'data.csv';
 var outputDataFile = outputDir + dataFile;
 
 // Location of data and citation policies files (stored in repository and copied to temporary directory that is archived and returned to client)
-var dataDownloadMetadataFile = 'README.txt';
+var dataDownloadMetadataFile = 'ARCTOS_README.txt';
 var citationAndDataUsePoliciesFile = 'citation_and_data_use_policies.txt';
 var returnedArchiveFile = 'arctos_download.zip';
 var compressedArchiveLocation = '/tmp/' + shortID + '.zip';
@@ -206,7 +206,7 @@ function createDownloadMetadataFile(query, limit, totalPossible, totalReturned )
   dataDownloadMetadataText += "total results possible = " + Number(totalPossible).toLocaleString() + "\n";
   dataDownloadMetadataText += "total results returned = " + Number(totalReturned).toLocaleString() + "\n";
   // Copy file to outputDir
-  fs.copySync('data/' + dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
+  fs.copySync('arctos_data/' + dataDownloadMetadataFile, outputDir + dataDownloadMetadataFile);
   // Append file synchronously
   fs.appendFileSync(outputDir + dataDownloadMetadataFile, dataDownloadMetadataText);
 }
