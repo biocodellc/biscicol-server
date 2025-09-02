@@ -114,7 +114,7 @@ function runSearch(query, limit = 100000, callback) {
   // Execute client search with scrolling
   client.search(
     {
-      index: 'phenobase',
+      index: 'phenobase2',
       size: fetchSize,
       scroll: '60s', // Keep the search results "scrollable" for 60 seconds
       q: luceneQuery,
