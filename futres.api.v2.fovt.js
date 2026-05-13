@@ -5,10 +5,11 @@ var fs = require('fs')
 var express = require('express');
 var request = require('request');
 var cors = require('cors');
+var services = require('./config/services');
 var app = express();
 
 // define the port
-var port = Number(process.env.PORT || 3025);
+var port = Number(process.env.PORT || services.futresFovtV2.port);
 
 // Spin up application and handle requests
 app.use(cors({origin: '*'}), function(req, res, body) {

@@ -11,6 +11,7 @@ var helmet = require('helmet');
 var csp = require('helmet-csp');
 var archiver = require('archiver');
 var csvWriter = require('csv-write-stream'); // For turning JSON into CSV
+var services = require('./config/services');
 
 // Create output directory to hold contents of this processing
 var shortID = shortid.generate();
@@ -27,7 +28,7 @@ var compressedArchiveLocation = '/tmp/' + shortID + '.zip';
 // The client connection parameter, reading settings from connection.js
 var client = require('./phenobase_connection.js');
 // Set the default port
-var port = Number(process.env.PORT || 3602);
+var port = Number(process.env.PORT || services.phenobaseDownloadV1.port);
 
 // Security headers using Helmet and CSP
 app.use(
@@ -215,4 +216,3 @@ function createDownloadMetadataFile(query, limit, totalPossible, totalReturned )
 app.listen(port, function () {
   console.log('App server is running on http://localhost:' + port);
 });
-

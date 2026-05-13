@@ -18,7 +18,7 @@ server {
  	listen 80;
     	server_name biscicol.org www.biscicol.org;
 
-    	root /home/jdeck/public/ppo-data-interface;
+	root /home/exouser/public/ppo-data-interface;
 
     	location ~ /_cat/ {
         	deny all;
@@ -34,19 +34,18 @@ server {
         	return 301 https://github.com/biocodellc/biscicol-server;
     	}
 
-	# OLD API (before 6/28/2024), redirecting to new API 
-	location /api/v2/download { rewrite ^/api/v2/download$ /ppo/api/v2/download; }
-	location /api/v3/download { rewrite ^/api/v3/download$ /ppo/api/v3/download; }
-	location /api/v1/query { rewrite ^/api/v1/query$ /ppo/api/v1/query; }
-	location /api/v1/ppo { rewrite ^/api/v1/ppo$ /ppo/api/v1/ppo; }
-	location /api/v2/ppo { rewrite ^/api/v2/ppo$ /ppo/api/v2/ppo; }
-	location /futresapi/v1/query { rewrite ^/futresapi/v1/query$ /futres/api/v1/query; }
-	location /futresapi/v2/download { rewrite ^/futresapi/v2/download$ /futres/api/v2/download; }
-	location /futresapi/v3/download { rewrite ^/futresapi/v3/download$ /futres/api/v3/download; }
-	location /futresapi/v2/fovt { rewrite ^/futresapi/v2/fovt$ /futres/api/v2/fovt; }
-	location /adapi/v3/download { rewrite ^/adapi/v3/download$ /amphibian_disease/api/v3/download; }
-	location /phenobase/api/v1 { rewrite ^/phenobase/api/v1$ /phenobase/api/v1/query; }
-	location /api/v1/csv { rewrite ^/api/v1/csv$ /herdlist/api/v1/csv; }
+	# OLD API (before 6/28/2024), redirecting to new API
+	location /api/v2/download { rewrite ^/api/v2/download(.*)$ /ppo/api/v2/download$1; }
+	location /api/v3/download { rewrite ^/api/v3/download(.*)$ /ppo/api/v3/download$1; }
+	location /api/v1/query { rewrite ^/api/v1/query(.*)$ /ppo/api/v1/query$1; }
+	location /api/v1/ppo { rewrite ^/api/v1/ppo(.*)$ /ppo/api/v1/ppo$1; }
+	location /api/v2/ppo { rewrite ^/api/v2/ppo(.*)$ /ppo/api/v2/ppo$1; }
+	location /futresapi/v1/query { rewrite ^/futresapi/v1/query(.*)$ /futres/api/v1/query$1; }
+	location /futresapi/v2/download { rewrite ^/futresapi/v2/download(.*)$ /futres/api/v2/download$1; }
+	location /futresapi/v3/download { rewrite ^/futresapi/v3/download(.*)$ /futres/api/v3/download$1; }
+	location /futresapi/v2/fovt { rewrite ^/futresapi/v2/fovt(.*)$ /futres/api/v2/fovt$1; }
+	location /adapi/v3/download { rewrite ^/adapi/v3/download(.*)$ /amphibian_disease/api/v3/download$1; }
+	location /api/v1/csv { rewrite ^/api/v1/csv(.*)$ /herdlist/api/v1/csv$1; }
 
 	# NEW API (after 6/28/2024)
         location /ppo/api/v2/download {
@@ -107,13 +106,37 @@ server {
 	#	proxy_set_header X-Forwarded-Method $request_method;
         #        include /etc/nginx/snippets/proxy-headers.conf;
 	#}
-        location /phenobase/api/v1/query {
+	location /dff/v1 {
+                proxy_pass              http://localhost:3401;
+                include /etc/nginx/snippets/proxy-headers.conf;
+	}
+	location /killdeer/v2 {
+                proxy_pass              http://localhost:3402;
+                include /etc/nginx/snippets/proxy-headers.conf;
+	}
+        location /phenobase/v1 {
                 proxy_pass              http://localhost:3500;
                 include /etc/nginx/snippets/proxy-headers.conf;
         }
 	location /herdlist {
 		alias /home/exouser/code/csv-viewer/public;
 	}
+        location /phenobase/api/v1/query {
+                proxy_pass              http://localhost:3601;
+                include /etc/nginx/snippets/proxy-headers.conf;
+        }
+        location /phenobase/api/v1/download {
+                proxy_pass              http://localhost:3602;
+                include /etc/nginx/snippets/proxy-headers.conf;
+        }
+        location /arctos/api/v1/query {
+                proxy_pass              http://localhost:3621;
+                include /etc/nginx/snippets/proxy-headers.conf;
+        }
+        location /arctos/api/v1/download {
+                proxy_pass              http://localhost:3622;
+                include /etc/nginx/snippets/proxy-headers.conf;
+        }
 
 
     listen 443 ssl; # managed by Certbot

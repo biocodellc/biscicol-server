@@ -1,10 +1,11 @@
 var express = require('express');
 var request = require('request');
 var cors = require('cors');
+var services = require('./config/services');
 
 var app = express();
 
-var port = Number(process.env.PORT || 3602);
+var port = Number(process.env.PORT || services.phenobaseQueryV2.port);
 var apiServerHost = ('http://149.165.170.158:8081')
 
 // Listen for requests on all endpoints

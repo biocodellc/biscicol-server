@@ -1,10 +1,11 @@
 var express = require('express');
 var request = require('request');
 var cors = require('cors');
+var services = require('./config/services');
 
 var app = express();
 
-var port = Number(process.env.PORT || 3020);
+var port = Number(process.env.PORT || services.futresQueryV1.port);
 var apiServerHost = (process.env.ELASTIC_URL || 'http://149.165.170.158:8081')
 
 // Listen for requests on all endpoints

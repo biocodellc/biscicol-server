@@ -2,6 +2,13 @@
 
 biscicol-server is an API endpoint for accessing annotated biodiversity trait data.  Query functions return instance data run through a node.js reverse proxy to an elasticsearch database service.  The URL endpoint prefix for all services is at `https://biscicol.org/`  Following are the services that live below this endpoint.  Please note the versions of the service endpoints below which contain different current versions, indicated by `v1` or `v2`.  It is important to reference the correct version for each service to return the documented responses:
 
+## Repository Notes
+
+- The deployed port and route map is documented in [PORT_MAP.md](PORT_MAP.md).
+- The checked-in runtime contract is documented in [docs/current_service_contract.md](docs/current_service_contract.md).
+- A no-break cleanup sequence is documented in [docs/repository_cleanup_plan.md](docs/repository_cleanup_plan.md).
+- PPO endpoints listed below are part of the public API surface, but the checked-in live service entrypoints for those routes are not all owned by this repository.
+
 ## FuTRES Endpoints
 The [fovt-data-pipeline](https://github.com/futres/fovt-data-pipeline) processes data for the [Futres query interface](https://futres-data-interface.netlify.app/) and also accessible using the [rfovt package](https://github.com/futres/rfovt).
   *  [https://biscicol.org/futres/api/v1/query](docs/futres_query.md) Query the Futres data store 

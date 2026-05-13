@@ -1,4 +1,5 @@
 const http = require('http');
+const services = require('./config/services');
 
 const server = http.createServer((req, res) => {
 
@@ -109,9 +110,8 @@ more: https://n2t.net/ark:${NAAN}/${Name}?info
     res.end(response);
 });
 
-const port = 3028;
+const port = Number(process.env.PORT || services.inaanV1.port);
 
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}/`);
 });
-

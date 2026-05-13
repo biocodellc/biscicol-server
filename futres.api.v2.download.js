@@ -28,6 +28,7 @@ var tar = require('tar');
 var app = express()
 var helmet = require('helmet');
 var csp = require('helmet-csp');
+var services = require('./config/services');
 // for compression
 //var zlib = require('zlib')
 // for trrning JSON into CSV
@@ -48,7 +49,7 @@ var compressedArchiveLocation = '/tmp/' + shortID + '.tar.gz'
 // The client connection parameter, reading settings from connection.js
 var client = require('./connection.js');
 // set the default port
-var port = Number(process.env.PORT || 3024);
+var port = Number(process.env.PORT || services.futresDownloadV2.port);
 
 // @see https://github.com/evilpacket/helmet
 // you should activate even more headers provided by helmet
