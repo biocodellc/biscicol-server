@@ -1,0 +1,14 @@
+The FuTRES data store contains data from member projects
+Please refer to the following data usage and citation policies for each data source when using this data in your research.
+
+# GEOME data sources
+GEOME projects each have their own data policy.  We have not yet implemented an automated script
+to display individual project information, instead you may refer directly to GEOME and search for individual 
+projects under the GEOME team for particular data usage policies. 
+Website:https://geome-db.org/
+Date of Last Refresh: 2021-02-01
+
+# VertNet
+Vertnet records appearing in GEOME have been extracted from Vertnet using a special processing script, further processed, and then ingested using fovt-data-pipeline processing code.
+Website:http://vertnet.org/
+Date of Last Refresh: 2021-02-01
