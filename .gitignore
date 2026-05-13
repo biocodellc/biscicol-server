@@ -6,3 +6,4 @@ data/downloadable/
 *.swp
 log_history/*
 futres_data/downloadable/
+scripts/xsede.sh
