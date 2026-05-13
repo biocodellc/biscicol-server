@@ -5,4 +5,4 @@ futres_data/downloadable/futres.zip
 data/downloadable/
 *.swp
 log_history/*
-scripts/xsede.sh
+futres_data/downloadable/
