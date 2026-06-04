@@ -13,6 +13,10 @@ var archiver = require('archiver');
 var csvWriter = require('csv-write-stream'); // For turning JSON into CSV
 var services = require('./config/services');
 
+var DEFAULT_LIMIT = 100000;
+var DEFAULT_FETCH_SIZE = 1000;
+var MAX_FETCH_SIZE = 1000;
+
 // Create output directory to hold contents of this processing
 var shortID = shortid.generate();
 var outputDir = '/home/exouser/data/tmp/' + shortID + '/';
@@ -58,7 +62,7 @@ app.use(
 
     console.log(req.url);
     // Handle request parameters
-    var limit = parseInt(req.query.limit) || 100000; // Default to 100,000 if not specified
+    var limit = parseLimit(req.query.limit);
     console.log(req.query.q)
     var query = req.query.q;
 
@@ -73,6 +77,7 @@ app.use(
         runSearch( query, limit, function (compressedArchiveResult) {
           if (compressedArchiveResult == null) {
             console.log("no results, return 204");
+            fs.removeSync(outputDir);
             res.status(204).json({
               error: 'no results found',
             });
@@ -101,16 +106,15 @@ app.use(
 );
 
 /* runSearch command calls Elasticsearch */
-function runSearch(query, limit = 100000, callback) {
+function runSearch(query, limit = DEFAULT_LIMIT, callback) {
   var writer = csvWriter();
   var writeStream = fs.createWriteStream(outputDataFile);
   writer.pipe(writeStream);
 
   // Counter
   var countRecords = 0;
-  var fetchSize = Math.min(10000, limit); // Fetch size is capped by the limit
- const luceneQuery = query && query.trim() !== '' ? query : '*';
-
+  var fetchSize = getFetchSize(limit);
+  const luceneQuery = query && query.trim() !== '' ? query : '*';
 
   // Execute client search with scrolling
   client.search(
@@ -123,58 +127,127 @@ function runSearch(query, limit = 100000, callback) {
     function getMoreUntilDone(error, response) {
       if (error) {
         console.log("search error: " + error);
+        return finishWithoutResults();
       } else {
         console.log("fetching data...");
-        // Loop through the response
-        response.hits.hits.forEach(function (hit) {
-          writer.write(hit._source);
-          countRecords++;
+        var totalPossible = getTotalHits(response);
+
+        writeHits(response.hits.hits, function () {
+          if (countRecords < 1) {
+            return finishWithoutResults();
+          }
+
+          // Continue fetching until the count matches the limit or the total hits.
+          if (shouldFetchMore(countRecords, totalPossible, limit)) {
+            console.log(countRecords + " of " + totalPossible);
+            client.scroll(
+              {
+                scrollId: response._scroll_id,
+                scroll: '60s',
+              },
+              getMoreUntilDone
+            );
+          } else {
+            finishWithArchive(totalPossible);
+          }
         });
-
-        if (countRecords < 1) {
-          return callback(null);
-        }
-
-        // Continue fetching until the count matches the limit or the total hits
-        if ((countRecords < response.hits.total.value && limit === 0) || (countRecords < limit && countRecords < response.hits.total.value)) {
-          //console.log(countRecords + " of " + response.hits.total.value);
-          client.scroll(
-            {
-              scrollId: response._scroll_id,
-              scroll: '60s',
-            },
-            getMoreUntilDone
-          );
-        } else {
-          writer.end();
-
-          // Wait for the writeStream to finish before archiving and returning the result
-          writeStream.on('finish', function () {
-            // Create metadata and policy files
-            createDownloadMetadataFile(query, limit, response.hits.total.value, countRecords );
-            createCitationAndDataUsePoliciesFile();
-
-            // Create the archive
-            const archive = archiver('zip', {
-              zlib: { level: 9 }, // Sets the compression level.
-            });
-            const output = fs.createWriteStream(compressedArchiveLocation);
-
-            // Listen for all archive data to be written 'close' event is fired only when a file descriptor is involved
-            output.on('close', function () {
-              console.log(archive.pointer() + ' total bytes');
-              console.log('archiver has been finalized and the output file descriptor has closed.');
-              return callback(compressedArchiveLocation);
-            });
-
-            archive.pipe(output);
-            archive.directory(outputDir, false);
-            archive.finalize();
-          });
-        }
       }
     }
   );
+
+  function writeHits(hits, done) {
+    var index = 0;
+
+    function writeNext() {
+      while (index < hits.length && (limit === 0 || countRecords < limit)) {
+        var hit = hits[index++];
+        var canContinue = writer.write(hit._source);
+        countRecords++;
+
+        if (!canContinue) {
+          writer.once('drain', writeNext);
+          return;
+        }
+      }
+
+      done();
+    }
+
+    writeNext();
+  }
+
+  function finishWithoutResults() {
+    writeStream.on('finish', function () {
+      return callback(null);
+    });
+    writer.end();
+  }
+
+  function finishWithArchive(totalPossible) {
+    // Wait for the writeStream to finish before archiving and returning the result
+    writeStream.on('finish', function () {
+      // Create metadata and policy files
+      createDownloadMetadataFile(query, limit, totalPossible, countRecords );
+      createCitationAndDataUsePoliciesFile();
+
+      // Create the archive
+      const archive = archiver('zip', {
+        zlib: { level: 9 }, // Sets the compression level.
+      });
+      const output = fs.createWriteStream(compressedArchiveLocation);
+
+      // Listen for all archive data to be written 'close' event is fired only when a file descriptor is involved
+      output.on('close', function () {
+        console.log(archive.pointer() + ' total bytes');
+        console.log('archiver has been finalized and the output file descriptor has closed.');
+        return callback(compressedArchiveLocation);
+      });
+
+      archive.pipe(output);
+      archive.directory(outputDir, false);
+      archive.finalize();
+    });
+
+    writer.end();
+  }
+}
+
+function parseLimit(limit) {
+  if (limit == null || limit === '') {
+    return DEFAULT_LIMIT;
+  }
+
+  var parsedLimit = parseInt(limit, 10);
+  if (isNaN(parsedLimit) || parsedLimit < 0) {
+    return DEFAULT_LIMIT;
+  }
+
+  return parsedLimit;
+}
+
+function getFetchSize(limit) {
+  var configuredFetchSize = parseInt(process.env.PHENOBASE_DOWNLOAD_FETCH_SIZE, 10);
+  var fetchSize = isNaN(configuredFetchSize) || configuredFetchSize < 1 ? DEFAULT_FETCH_SIZE : configuredFetchSize;
+
+  fetchSize = Math.min(fetchSize, MAX_FETCH_SIZE);
+
+  if (limit > 0) {
+    fetchSize = Math.min(fetchSize, limit);
+  }
+
+  return fetchSize;
+}
+
+function getTotalHits(response) {
+  if (typeof response.hits.total === 'number') {
+    return response.hits.total;
+  }
+
+  return response.hits.total.value;
+}
+
+function shouldFetchMore(countRecords, totalPossible, limit) {
+  return countRecords < totalPossible && (limit === 0 || countRecords < limit);
 }
 
 function createResponse(status, body) {
