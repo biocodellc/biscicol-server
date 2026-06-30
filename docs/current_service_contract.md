@@ -1,6 +1,6 @@
 # Current Service Contract
 
-This document freezes the API-facing contract represented by the repository as it exists today. It is intended to be the safety boundary for cleanup work.
+This document freezes the API-facing contract represented by the repository docs as they exist today. It is intended to be the safety boundary for cleanup work.
 
 Primary route and port authority lives in [PORT_MAP.md](../PORT_MAP.md).
 
@@ -13,14 +13,10 @@ Primary route and port authority lives in [PORT_MAP.md](../PORT_MAP.md).
 
 ## Public route to local service map
 
-The table below is derived from the deployed nginx config, [start.sh](../start.sh), [restart.sh](../restart.sh), and the checked-in nginx snapshots under [sites-enabled](../sites-enabled).
+The table below is derived from the currently advertised public API documentation, deployed nginx config, [start.sh](../start.sh), [restart.sh](../restart.sh), and the checked-in nginx snapshots under [sites-enabled](../sites-enabled).
 
 | Public route | Local port in nginx | Entry file in this repo | Default port in file | Notes |
 | --- | --- | --- | --- | --- |
-| `/futres/api/v1/query` | `3020` | `futres.api.v1.query.js` | `3020` | Query proxy to Elasticsearch |
-| `/futres/api/v2/download` | `3024` | `futres.api.v2.download.js` | `3024` | Legacy tar.gz download service |
-| `/futres/api/v2/fovt` | `3025` | `futres.api.v2.fovt.js` | `3025` | Serves prebuilt ontology JSON files |
-| `/futres/api/v3/download` | `3026` | `futres.api.v3.download.js` | `3026` | Zip download service |
 | `/amphibian_disease/api/v3/download` | `3027` | `amphibian_disease.api.v3.download.js` | `3027` | Zip download service |
 | `/api/v1/inaan` | `3028` | `api.v1.inaan.js` | `3028` | Plain Node HTTP server, not Express |
 | `/phenobase/v1` | `3500` | not in this repo | n/a | Legacy Phenobase route |
@@ -34,16 +30,12 @@ The table below is derived from the deployed nginx config, [start.sh](../start.s
 | `/ppo/api/v2/download` | `3007` | not in this repo | n/a | External to this repo |
 | `/ppo/api/v3/download` | `3011` | not in this repo | n/a | External to this repo |
 
-## PM2-managed entry files in this repo
+## PM2-managed entry files for current public API
 
-These are started directly by [start.sh](../start.sh).
+These are current public API entry files started directly by [start.sh](../start.sh).
 
 | Entry file | Service type | Dataset |
 | --- | --- | --- |
-| `futres.api.v1.query.js` | query proxy | FuTRES |
-| `futres.api.v2.fovt.js` | ontology file server | FuTRES |
-| `futres.api.v2.download.js` | download generator | FuTRES |
-| `futres.api.v3.download.js` | download generator | FuTRES |
 | `amphibian_disease.api.v3.download.js` | download generator | Amphibian Disease |
 | `api.v1.inaan.js` | inline identifier service | Generic |
 | `phenobase.api.v1.query.js` | query proxy | Phenobase |
@@ -57,7 +49,6 @@ These are started directly by [start.sh](../start.sh).
 
 These services are near-duplicates and are the safest first extraction target.
 
-- `futres.api.v1.query.js`
 - `phenobase.api.v1.query.js`
 - `phenobase.api.v2.query.js`
 - `arctos.api.v1.query.js`
@@ -81,8 +72,6 @@ Per-service differences today:
 
 These services also share one implementation pattern.
 
-- `futres.api.v2.download.js`
-- `futres.api.v3.download.js`
 - `phenobase.api.v1.download.js`
 - `arctos.api.v1.download.js`
 - `amphibian_disease.api.v3.download.js`
@@ -105,9 +94,8 @@ Per-service differences today:
 
 ### Ontology and generated data assets
 
-- `futres.api.v2.fovt.js` serves `futres_data/all.json` and `futres_data/all_short.json`
-- `scripts/api.ontology.sh`, `scripts/srcapi.ontology.sh`, and `scripts/futresapi.ontology.sh` are JavaScript source files despite their `.sh` extension
-- generated data directories include `data/`, `futres_data/`, `phenobase_data/`, `arctos_data/`, `ad_data/`, and `src_data/`
+- `scripts/api.ontology.sh` and `scripts/srcapi.ontology.sh` are JavaScript source files despite their `.sh` extension
+- generated data directories include `data/`, `phenobase_data/`, `arctos_data/`, `ad_data/`, and `src_data/`
 
 ## Known inconsistencies to preserve carefully during refactor
 

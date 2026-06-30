@@ -1,12 +1,15 @@
 # Port Map
 
-This file is the checked-in source of truth for port and route mappings in this repository.
+This file documents the currently advertised public route mappings in this repository.
+Legacy entrypoints can still exist in checked-in scripts after an endpoint is removed
+from the public API docs.
 
 Authority:
 
 - deployed `biscicol.org` nginx config
 - deployed `plantphenology.org` nginx config
 - checked-in `start.sh` and `restart.sh`
+- current public API documentation
 
 ## Public Route Map
 
@@ -17,10 +20,6 @@ Authority:
 | `/ppo/api/v2/download` | `3007` | PPO download v2 | external to this repo | proxied by `biscicol.org` |
 | `/ppo/api/v2/ppo` | `3008` | PPO ontology v2 | external to this repo | proxied by `biscicol.org` |
 | `/ppo/api/v3/download` | `3011` | PPO download v3 | external to this repo | proxied by `biscicol.org` |
-| `/futres/api/v1/query` | `3020` | FuTRES query | `futres.api.v1.query.js` | started by `start.sh` |
-| `/futres/api/v2/download` | `3024` | FuTRES download v2 | `futres.api.v2.download.js` | started by `start.sh` |
-| `/futres/api/v2/fovt` | `3025` | FuTRES FOVT lookup | `futres.api.v2.fovt.js` | started by `start.sh` |
-| `/futres/api/v3/download` | `3026` | FuTRES download v3 | `futres.api.v3.download.js` | started by `start.sh` |
 | `/amphibian_disease/api/v3/download` | `3027` | Amphibian disease download | `amphibian_disease.api.v3.download.js` | started by `start.sh` |
 | `/api/v1/inaan` | `3028` | Inline NAAN service | `api.v1.inaan.js` | started by `start.sh` |
 | `/herdlist/api/v1/csv` | `3300` | Herdlist CSV service | external to this repo | proxied by `biscicol.org` |
@@ -43,10 +42,6 @@ These routes are still accepted and rewritten by `biscicol.org`.
 | `/api/v1/query` | `/ppo/api/v1/query` |
 | `/api/v1/ppo` | `/ppo/api/v1/ppo` |
 | `/api/v2/ppo` | `/ppo/api/v2/ppo` |
-| `/futresapi/v1/query` | `/futres/api/v1/query` |
-| `/futresapi/v2/download` | `/futres/api/v2/download` |
-| `/futresapi/v3/download` | `/futres/api/v3/download` |
-| `/futresapi/v2/fovt` | `/futres/api/v2/fovt` |
 | `/adapi/v3/download` | `/amphibian_disease/api/v3/download` |
 | `/api/v1/csv` | `/herdlist/api/v1/csv` |
 
@@ -63,16 +58,11 @@ These routes are still accepted and rewritten by `biscicol.org`.
 | Host route | Redirect target |
 | --- | --- |
 | `https://plantphenology.org/api...` | `https://biscicol.org/api...` |
-| `https://plantphenology.org/futresapi...` | `https://biscicol.org/futresapi...` |
 
-## PM2 Entrypoints In This Repo
+## PM2 Entrypoints For Current Public API
 
 | Port | Entrypoint |
 | --- | --- |
-| `3020` | `futres.api.v1.query.js` |
-| `3024` | `futres.api.v2.download.js` |
-| `3025` | `futres.api.v2.fovt.js` |
-| `3026` | `futres.api.v3.download.js` |
 | `3027` | `amphibian_disease.api.v3.download.js` |
 | `3028` | `api.v1.inaan.js` |
 | `3601` | `phenobase.api.v1.query.js` |

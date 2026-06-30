@@ -63,7 +63,6 @@ Inputs should be configuration only:
 
 Expected outcome:
 
-- `futres.api.v1.query.js`
 - `phenobase.api.v1.query.js`
 - `phenobase.api.v2.query.js`
 - `arctos.api.v1.query.js`
@@ -142,7 +141,6 @@ src/
     elasticsearch-client.js
     http-helpers.js
   datasets/
-    futres.js
     phenobase.js
     arctos.js
     amphibian-disease.js
