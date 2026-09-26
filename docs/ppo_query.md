@@ -1,7 +1,20 @@
 # query instructions
 
-To interact with this service, elasticsearch style GET and POST requests can be sent to this endpoint. 
-Note that most requests and all responses to this service require packaging in JSON formatted text.  The ElasticSearch website offers some help on [Query Syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html).
+To interact with this service, send Elasticsearch-style GET requests with a `q`
+parameter or POST requests with a JSON Query DSL body. Search responses are JSON.
+See [Extending Elasticsearch queries](elasticsearch_queries.md) for Boolean
+operators, ranges, field selection, exact counts, pagination, aggregations, and
+official syntax references. Adapt its examples to PPO's fields and mapping;
+Arctos field names and `.keyword` subfields are not necessarily available here.
+
+For example, combine genus, source, and year filters using the explicit PPO route:
+
+```bash
+curl --get 'https://biscicol.org/ppo/api/v1/query/_search' \
+  --data-urlencode 'q=genus:Quercus AND source:"USA-NPN" AND year:[2010 TO 2020]' \
+  --data-urlencode 'size=5' \
+  --data-urlencode 'pretty=true'
+```
 
 Following are some examples of interacting with the endpoint using [curl](https://curl.haxx.se/).   Note that the requests below mainly offer methods of retrieving results of less than 10,000 records.   See the [section on es2csv](https://github.com/biocodellc/ppo-data-server#fetch-a-large-number-of-records-using-es2csv) to retrieve more than 10,000 records or to return results as CSV.
 

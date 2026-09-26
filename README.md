@@ -10,6 +10,15 @@ biscicol-server is an API endpoint for accessing annotated biodiversity trait da
 - A no-break cleanup sequence is documented in [docs/repository_cleanup_plan.md](docs/repository_cleanup_plan.md).
 - PPO endpoints listed below are part of the public API surface, but the checked-in live service entrypoints for those routes are not all owned by this repository.
 
+## Extending queries
+
+Most query endpoints accept Elasticsearch query-string syntax through `q` and
+JSON Query DSL through POST. See the [shared Elasticsearch query guide](docs/elasticsearch_queries.md)
+for combining filters, year ranges, phrases, field mappings, sorting, exact counts,
+pagination, aggregations, and filtered downloads, with links to Elastic's official
+references. Adapt field names and index paths to the service being queried;
+download endpoints support a smaller set of options than query endpoints.
+
 ## Phenobase Endpoint
   *  [https://biscicol.org/phenobase/api/v1/query](docs/phenobase_query.md) Query the PPO data store 
 

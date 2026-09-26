@@ -2,6 +2,10 @@
 
 Run Elasticsearch queries against the Arctos data store through a CORS-friendly proxy.
 
+For Boolean filters, ranges, phrases, JSON Query DSL, and official syntax references,
+see [Extending Elasticsearch queries](elasticsearch_queries.md). Its examples use
+Arctos v2; use this page's v1 URL when querying the original backend.
+
 **Base URL**
 
 ```
@@ -89,6 +93,8 @@ curl 'https://biscicol.org/arctos/api/v1/query/arctos/_mapping?pretty'
 | `size` | Number of records to return | `size=25` |
 | `from` | Offset for pagination | `from=50` |
 | `_source` | Comma-separated fields to return | `_source=guid_prefix,cat_num,scientific_name` |
+| `sort` | Order by a mapped keyword or numeric field | `sort=year:desc` |
+| `track_total_hits` | Request the exact number of matches | `track_total_hits=true` |
 | `pretty` | Format JSON response for reading | `pretty` |
 
 **Query examples**
@@ -193,6 +199,7 @@ Search responses are Elasticsearch JSON:
 
 **Tips**
 
+* `hits.total.relation: "gte"` is a lower bound; request `track_total_hits=true` for an exact count. This does not increase the pagination window.
 * Use POST for long or structured queries.
 * Use `_source` to reduce response size.
 * Use the download endpoint for CSV exports.

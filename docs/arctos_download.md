@@ -2,6 +2,12 @@
 
 Download Arctos query results as a zip archive containing CSV data and metadata.
 
+Extend `q` with Boolean operators, phrases, ranges, or field-existence checks;
+see [Extending Elasticsearch queries](elasticsearch_queries.md#extend-the-q-filter)
+for examples and official references. This download wrapper reads `q` and `limit`,
+not arbitrary search options such as JSON Query DSL, `_source`, `size`, or `aggs`.
+Use this page's v1 URL and limits when adapting examples from the shared guide.
+
 **Base URL**
 
 ```

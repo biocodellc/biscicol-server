@@ -2,6 +2,11 @@
 
 Run (almost) raw Elasticsearch queries through a CORS‑friendly proxy.
 
+See [Extending Elasticsearch queries](elasticsearch_queries.md) for Boolean
+filters, ranges, phrases, JSON Query DSL, counts, pagination, aggregations, and
+official references. Adapt those Arctos examples to the Phenobase index and mapping;
+field names and `.keyword` subfields are not interchangeable between datasets.
+
 **Base URL**
 
 ```
@@ -38,7 +43,7 @@ curl -L -X POST "https://biscicol.org/phenobase/api/v1/query//phenobase/_search"
 | Method | Use | Notes |
 | ------ | --- | ----- |
 | **GET**  | URL‑encoded queries | Path + query string must equal your ES endpoint. |
-| **POST** | JSON Query DSL / bulk | `Content-Type: application/json`. |
+| **POST** | JSON Query DSL / aggregations | `Content-Type: application/json`. |
 
 _Any other verb →_ `{"error":"<verb> request method is not supported. Use GET or POST."}`
 
@@ -46,7 +51,7 @@ _Any other verb →_ `{"error":"<verb> request method is not supported. Use GET 
 
 | Goal | GET / Query String | POST body snippet |
 | ---- | ------------------ | ----------------- |
-| Free‑text | `q=flower` | `{ "match": { "_all": "flower" }}` |
+| Free‑text | `q=flower` | `{ "query_string": { "query": "flower" }}` |
 | Exact field | `q=species.keyword:Arabidopsis_thaliana` | `{ "term": { "species.keyword": "Arabidopsis_thaliana" }}` |
 | Prefix | `q=species.keyword:Arabidopsis*` | `{ "prefix": { "species.keyword": "Arabidopsis" }}` |
 | Range | — | `{ "range": { "value": { "gte": 10, "lte": 50 }}}` |
@@ -54,12 +59,17 @@ _Any other verb →_ `{"error":"<verb> request method is not supported. Use GET 
 | Sorting | `sort=value:asc` | `"sort":[{"value":"asc"}]` |
 | Aggregations | — | `"aggs":{ … }` |
 
+Place query clauses such as `term`, `prefix`, and `range` inside the body's
+`"query"` property. Pagination, sorting, and `aggs` are top-level properties.
+Fields in this table are illustrative; inspect the selected index's `_mapping`
+before using them.
+
 **Endpoint examples**
 
 ```
 GET  /phenobase/api/v1/query/traits/_search?q=flower
 GET  /phenobase/api/v1/query/traits/_search?q=trait_name:leaf_length&size=20&from=0
-POST /phenobase/api/v1/query/traits/_search  ← full DSL / aggs / bulk, etc.
+POST /phenobase/api/v1/query/traits/_search  ← Query DSL / aggregations
 GET  /phenobase/api/v1/query/traits/_doc/<document‑id>            ← ID lookup
 ```
 

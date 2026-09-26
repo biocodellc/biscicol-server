@@ -2,6 +2,12 @@
 
 Download Arctos v2 query results as a zip archive containing CSV data and metadata.
 
+Use the same `q` filter as the query API to download a matching subset. See
+[Extending Elasticsearch queries](elasticsearch_queries.md#reuse-a-filter-for-downloads)
+for combined filters, URL encoding, and official syntax references. This wrapper
+reads `q` and `limit`; it does not accept arbitrary JSON Query DSL, `_source`,
+`from`, `size`, or aggregations.
+
 **Base URL**
 
 ```
@@ -43,6 +49,15 @@ The response is sent as `arctos_download.zip`.
 | `citation_and_data_use_policies.txt` | Data usage and citation guidance for Arctos data. |
 
 **Download examples**
+
+Combine family, state, and year filters:
+
+```bash
+curl --get 'https://biscicol.org/arctos/api/v2/download/_search' \
+  --data-urlencode 'q=family:Leporidae AND state_prov:(Texas OR Colorado) AND year:[1950 TO 2020]' \
+  --data-urlencode 'limit=1000' \
+  --output arctos_filtered.zip
+```
 
 Download two Leporidae records:
 

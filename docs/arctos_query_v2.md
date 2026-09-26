@@ -2,6 +2,10 @@
 
 Run Elasticsearch queries against the Arctos v2 data store through a CORS-friendly proxy.
 
+See [Extending Elasticsearch queries](elasticsearch_queries.md) for reusable
+query-string and JSON Query DSL examples, field types, sorting, counts, pagination,
+aggregations, and links to Elastic's official references.
+
 **Base URL**
 
 ```
@@ -66,6 +70,31 @@ Inspect the live mapping:
 ```
 curl 'https://biscicol.org/arctos/api/v2/query/arctos/_mapping?pretty'
 ```
+
+**Extend a query**
+
+Combine a family with alternative states and a year range. `--data-urlencode`
+handles spaces, quotes, and brackets:
+
+```bash
+curl --get 'https://biscicol.org/arctos/api/v2/query/arctos/_search' \
+  --data-urlencode 'q=family:Leporidae AND state_prov:(Texas OR Colorado) AND year:[1950 TO 2020]' \
+  --data-urlencode 'size=2' \
+  --data-urlencode '_source=guid_prefix,cat_num,scientific_name,state_prov,year' \
+  --data-urlencode 'sort=year:desc' \
+  --data-urlencode 'track_total_hits=true' \
+  --data-urlencode 'pretty=true'
+```
+
+`size` limits the returned page; `track_total_hits=true` requests the exact number
+of matches. Without it, a total with `relation: "gte"` is only a lower bound.
+See the shared guide for [pagination limits](elasticsearch_queries.md#control-the-result-page-and-total)
+and [structured POST queries](elasticsearch_queries.md#use-json-query-dsl-for-structured-searches).
+
+`family`, `genus`, `country`, and `state_prov` are keyword fields; use their stored
+spelling and case. `scientific_name` is analyzed text and `year` is an integer.
+Additional CSV columns can appear in `_source` without being indexed: check the
+mapping before adding a new searchable field or assuming a `.keyword` subfield.
 
 **Notes**
 
