@@ -62,11 +62,11 @@ The checked-in nginx configuration contains:
 
 ```nginx
 location /arctos/api/v2/query {
-    proxy_pass http://localhost:3623;
+    proxy_pass http://127.0.0.1:3623;
     include /etc/nginx/snippets/proxy-headers.conf;
 }
 location /arctos/api/v2/download {
-    proxy_pass http://localhost:3624;
+    proxy_pass http://127.0.0.1:3624;
     proxy_read_timeout 3600s;
     proxy_buffering off;
     include /etc/nginx/snippets/proxy-headers.conf;
