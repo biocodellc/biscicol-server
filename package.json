@@ -32,7 +32,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:arctos-v2": "node --test tests/arctos-v2.test.js"
   },
   "repository": {
     "type": "git",

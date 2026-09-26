@@ -32,4 +32,10 @@ module.exports = {
   arctosDownloadV1: {
     port: 3622,
   },
+  arctosQueryV2: {
+    port: 3623,
+  },
+  arctosDownloadV2: {
+    port: 3624,
+  },
 };

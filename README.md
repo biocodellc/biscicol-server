@@ -5,6 +5,7 @@ biscicol-server is an API endpoint for accessing annotated biodiversity trait da
 ## Repository Notes
 
 - The deployed port and route map is documented in [PORT_MAP.md](PORT_MAP.md).
+- Arctos v2 deployment and environment settings are documented in [docs/arctos_v2_deployment.md](docs/arctos_v2_deployment.md).
 - The checked-in runtime contract is documented in [docs/current_service_contract.md](docs/current_service_contract.md).
 - A no-break cleanup sequence is documented in [docs/repository_cleanup_plan.md](docs/repository_cleanup_plan.md).
 - PPO endpoints listed below are part of the public API surface, but the checked-in live service entrypoints for those routes are not all owned by this repository.
@@ -15,6 +16,8 @@ biscicol-server is an API endpoint for accessing annotated biodiversity trait da
 ## Arctos Endpoints
   *  [https://biscicol.org/arctos/api/v1/query](docs/arctos_query.md) Query the Arctos data store
   *  [https://biscicol.org/arctos/api/v1/download](docs/arctos_download.md) Download Arctos query results as a zip package
+  *  [https://biscicol.org/arctos/api/v2/query](docs/arctos_query_v2.md) Query the Arctos v2 data store
+  *  [https://biscicol.org/arctos/api/v2/download](docs/arctos_download_v2.md) Download Arctos v2 query results as a zip package
 
 ## Plant Phenology Ontology Specific Endpoints
 The [ppo-data-pipeline](https://github.com/biocodellc/ppo-data-pipeline) processes data for the [PPO data interface](https://plantphenology.org/) and also accessible using the [rppo package](https://github.com/biocodellc/rppo)

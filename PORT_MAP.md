@@ -30,6 +30,8 @@ Authority:
 | `/phenobase/api/v1/download` | `3602` | Phenobase download | `phenobase.api.v1.download.js` | started by `start.sh` |
 | `/arctos/api/v1/query` | `3621` | Arctos query | `arctos.api.v1.query.js` | started by `start.sh` |
 | `/arctos/api/v1/download` | `3622` | Arctos download | `arctos.api.v1.download.js` | started by `start.sh` |
+| `/arctos/api/v2/query` | `3623` | Arctos query v2 | `arctos.api.v2.query.js` | started by `start.sh`; uses `ARCTOS_ELASTIC_URL` |
+| `/arctos/api/v2/download` | `3624` | Arctos download v2 | `arctos.api.v2.download.js` | started by `start.sh`; uses `ARCTOS_ELASTIC_URL` |
 
 ## Legacy Redirect Map
 
@@ -69,8 +71,11 @@ These routes are still accepted and rewritten by `biscicol.org`.
 | `3602` | `phenobase.api.v1.download.js` |
 | `3621` | `arctos.api.v1.query.js` |
 | `3622` | `arctos.api.v1.download.js` |
+| `3623` | `arctos.api.v2.query.js` |
+| `3624` | `arctos.api.v2.download.js` |
 
 ## Notes
 
 - The old `biscicol-server-port-map.xlsx` file was incomplete and stale relative to the deployed nginx config.
 - PPO services are part of the public route map but are not owned by the Node entrypoints in this repository.
+- Arctos v2 services default to `https://huxley.bnhm.berkeley.edu:1113/`; set `ARCTOS_ELASTIC_URL` during deployment to override that backend.

@@ -24,6 +24,8 @@ The table below is derived from the currently advertised public API documentatio
 | `/phenobase/api/v1/download` | `3602` | `phenobase.api.v1.download.js` | `3602` | Download service |
 | `/arctos/api/v1/query` | `3621` | `arctos.api.v1.query.js` | `3621` | Query proxy |
 | `/arctos/api/v1/download` | `3622` | `arctos.api.v1.download.js` | `3622` | Download service |
+| `/arctos/api/v2/query` | `3623` | `arctos.api.v2.query.js` | `3623` | Query proxy backed by `ARCTOS_ELASTIC_URL` |
+| `/arctos/api/v2/download` | `3624` | `arctos.api.v2.download.js` | `3624` | Download service backed by `ARCTOS_ELASTIC_URL` |
 | `/ppo/api/v1/query` | `3001` | not in this repo | n/a | Repo contains docs, not the live service entrypoint |
 | `/ppo/api/v1/ppo` | `3000` | not in this repo | n/a | Repo contains ontology generation scripts only |
 | `/ppo/api/v2/ppo` | `3008` | not in this repo | n/a | External to this repo |
@@ -42,6 +44,8 @@ These are current public API entry files started directly by [start.sh](../start
 | `phenobase.api.v1.download.js` | download generator | Phenobase |
 | `arctos.api.v1.query.js` | query proxy | Arctos |
 | `arctos.api.v1.download.js` | download generator | Arctos |
+| `arctos.api.v2.query.js` | query proxy | Arctos v2 |
+| `arctos.api.v2.download.js` | download generator | Arctos v2 |
 
 ## Internal service families
 
@@ -52,21 +56,22 @@ These services are near-duplicates and are the safest first extraction target.
 - `phenobase.api.v1.query.js`
 - `phenobase.api.v2.query.js`
 - `arctos.api.v1.query.js`
+- `arctos.api.v2.query.js`
 
 Shared behavior today:
 
 - Express + CORS wrapper
 - only `GET` and `POST` are accepted
 - incoming route prefix is stripped from `req.url`
-- remaining request is proxied to Elasticsearch with `request`
-- gzip is disabled via `accept-encoding: none`
+- remaining request is proxied to Elasticsearch (`request` in v1; native HTTP(S) in Arctos v2)
+- the proxy requests uncompressed Elasticsearch responses
 
 Per-service differences today:
 
 - route prefix to strip
 - default port
 - Elasticsearch host formatting
-- auth block present in some files and absent in others
+- Arctos v2 loads a read-only credential from `.env` and verifies the backend TLS certificate
 
 ### Download generators
 
@@ -74,6 +79,7 @@ These services also share one implementation pattern.
 
 - `phenobase.api.v1.download.js`
 - `arctos.api.v1.download.js`
+- `arctos.api.v2.download.js`
 - `amphibian_disease.api.v3.download.js`
 
 Shared behavior today:
